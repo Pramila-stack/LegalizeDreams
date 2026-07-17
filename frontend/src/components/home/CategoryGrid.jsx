@@ -59,7 +59,7 @@ export default function CategoryGrid() {
                   <div className="h-full w-full">
                     {products.length === 1 ? (
                       /* Single product - fill entire box */
-                      <div className="h-full w-full overflow-hidden rounded-lg bg-brand-100">
+                      <div className="h-full w-full overflow-hidden bg-brand-100">
                         {products[0].image && (
                           <img
                             src={
@@ -75,9 +75,34 @@ export default function CategoryGrid() {
                           />
                         )}
                       </div>
+                    ) : products.length === 2 ? (
+                      /* Two products - 1 row, 2 columns (each takes half width) */
+                      <div className="grid grid-cols-2 gap-0 h-full">
+                        {products.slice(0, 2).map((product) => (
+                          <div
+                            key={product.id}
+                            className="relative overflow-hidden bg-brand-100"
+                          >
+                            {product.image ? (
+                              <img
+                                src={
+                                  typeof product.image === 'string' && !product.image.startsWith('http')
+                                    ? `http://localhost:8000${product.image}`
+                                    : product.image
+                                }
+                                alt={product.name}
+                                className="h-full w-full object-cover"
+                                onError={(e) => {
+                                  e.target.style.display = 'none'
+                                }}
+                              />
+                            ) : null}
+                          </div>
+                        ))}
+                      </div>
                     ) : (
-                      /* Multiple products - 4 column grid */
-                      <div className="grid grid-cols-4 gap-0 h-full">
+                      /* Three or more products - 2 rows, 2 columns */
+                      <div className="grid grid-cols-2 grid-rows-2 gap-0 h-full">
                         {products.slice(0, 4).map((product) => (
                           <div
                             key={product.id}

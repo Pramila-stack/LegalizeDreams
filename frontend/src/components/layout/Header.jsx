@@ -47,8 +47,13 @@ export default function Header() {
           </svg>
         </button>
 
-        <Link to="/" className="mr-2 font-display text-2xl font-semibold tracking-wide text-brand-900">
-          LEGALIZE DREAMS
+        <Link to="/" className="mr-2 flex items-center gap-2">
+          <img
+            src="http://localhost:8000/media/logo/logo.png"
+            alt="Legalize Dreams"
+            className="h-10 w-auto"
+          />
+          <span className="hidden font-display text-lg font-semibold tracking-wide text-brand-900 sm:inline">LEGALIZE DREAMS</span>
         </Link>
 
         <nav className="hidden items-center gap-6 lg:flex">
