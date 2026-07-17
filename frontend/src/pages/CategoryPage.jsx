@@ -39,7 +39,7 @@ export default function CategoryPage() {
   if (!loading && category === null) {
     return (
       <div className="mx-auto max-w-7xl px-4 py-24 text-center sm:px-6 lg:px-8">
-        <h1 className="font-display text-2xl font-semibold text-brand-900">Category not found</h1>
+        <h1 className="font-display text-2xl font-semibold text-black">Category not found</h1>
         <Link to="/" className="mt-4 inline-block text-sm font-medium text-brand-600 hover:text-brand-900">
           ← Back to home
         </Link>
@@ -58,7 +58,7 @@ export default function CategoryPage() {
       <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
         <div className="flex items-center gap-3">
           <span className="text-3xl" aria-hidden="true">{category?.icon}</span>
-          <h1 className="font-display text-3xl font-semibold text-brand-900">{category?.name ?? 'Loading...'}</h1>
+          <h1 className="font-display text-3xl font-semibold text-black">{category?.name ?? 'Loading...'}</h1>
         </div>
 
         <label className="flex items-center gap-2 text-sm text-brand-600">

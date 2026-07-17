@@ -8,7 +8,7 @@ export default function CheckoutSuccessPage() {
   return (
     <div className="mx-auto max-w-xl px-4 py-24 text-center sm:px-6 lg:px-8">
       <span className="text-5xl" aria-hidden="true">🎉</span>
-      <h1 className="font-display mt-4 text-2xl font-semibold text-brand-900">Order Placed Successfully!</h1>
+      <h1 className="font-display mt-4 text-2xl font-semibold text-black">Order Placed Successfully!</h1>
       <p className="mt-2 text-brand-600">
         Thanks for shopping with LEGALIZE DREAMS. A confirmation email has been sent to your registered email address.
       </p>

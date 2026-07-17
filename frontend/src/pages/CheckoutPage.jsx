@@ -89,7 +89,7 @@ export default function CheckoutPage() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
-      <h1 className="font-display text-3xl font-semibold text-brand-900">Checkout</h1>
+      <h1 className="font-display text-3xl font-semibold text-black">Checkout</h1>
 
       <div className="mt-8 grid gap-8 lg:grid-cols-3">
         {/* Form Section (2 columns on lg) */}

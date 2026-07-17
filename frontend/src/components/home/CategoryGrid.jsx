@@ -41,7 +41,7 @@ export default function CategoryGrid() {
     <section id="categories" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
       <div className="text-center">
         <p className="text-sm font-semibold uppercase tracking-widest text-blush-400">Explore</p>
-        <h2 className="font-display mt-2 text-3xl font-semibold text-brand-900">All Our Categories</h2>
+        <h2 className="font-display mt-2 text-3xl font-semibold text-black">All Our Categories</h2>
       </div>
 
       <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">

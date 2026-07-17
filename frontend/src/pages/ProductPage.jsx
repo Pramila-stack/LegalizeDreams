@@ -43,7 +43,7 @@ export default function ProductPage() {
   if (product === null) {
     return (
       <div className="mx-auto max-w-7xl px-4 py-24 text-center sm:px-6 lg:px-8">
-        <h1 className="font-display text-2xl font-semibold text-brand-900">Product not found</h1>
+        <h1 className="font-display text-2xl font-semibold text-black">not found</h1>
         <Link to="/" className="mt-4 inline-block text-sm font-medium text-brand-600 hover:text-brand-900">
           ← Back to home
         </Link>
@@ -74,7 +74,7 @@ export default function ProductPage() {
         <ProductImage product={product} size="lg" className="aspect-square w-full" />
 
         <div>
-          <h1 className="font-display text-3xl font-semibold text-brand-900">{product.name}</h1>
+          <h1 className="font-display text-3xl font-semibold text-black">{product.name}</h1>
           <div className="mt-3">
             <StarRating rating={product.rating} reviews={product.reviews} size="md" />
           </div>

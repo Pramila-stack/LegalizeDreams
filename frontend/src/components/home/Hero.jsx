@@ -33,14 +33,21 @@ export default function Hero() {
   }, [])
 
   return (
-    <section className="bg-gradient-to-br from-brand-50 via-blush-50 to-brand-100">
+    <section
+      className="relative bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: 'url(http://localhost:8000/media/logo/flower.jpg)',
+        backgroundBlendMode: 'overlay',
+        backgroundColor: 'rgba(255, 255, 255, 0.85)'
+      }}
+    >
       <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:py-24 lg:px-8">
         <div>
           <p className="text-sm font-semibold uppercase tracking-widest text-blush-400">New Season Edit</p>
-          <h1 className="font-display mt-3 text-4xl font-semibold leading-tight text-brand-900 sm:text-5xl">
+          <h1 className="font-display mt-3 text-4xl font-semibold leading-tight text-black sm:text-5xl">
             Little joys for your everyday glow
           </h1>
-          <p className="mt-4 max-w-md text-brand-600">
+          <p className="mt-4 max-w-md text-gray-700">
             Skincare, makeup and fashion accessories curated in one place — cute, considered, and made to be loved.
           </p>
           <div className="mt-8 flex gap-3">

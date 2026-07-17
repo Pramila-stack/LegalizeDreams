@@ -57,7 +57,7 @@ export default function CartPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
-      <h1 className="font-display text-3xl font-semibold text-brand-900">Your Cart</h1>
+      <h1 className="font-display text-3xl font-semibold text-black">Your Cart</h1>
 
       <div className="mt-8 grid gap-10 lg:grid-cols-3">
         <div className="divide-y divide-brand-100 lg:col-span-2">

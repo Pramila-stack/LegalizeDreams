@@ -26,7 +26,7 @@ export default function FeaturedProducts() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <p className="text-sm font-semibold uppercase tracking-widest text-blush-400">Customer Favorites</p>
-          <h2 className="font-display mt-2 text-3xl font-semibold text-brand-900">Most Loved</h2>
+          <h2 className="font-display mt-2 text-3xl font-semibold text-black">Most Loved</h2>
         </div>
 
         <div className="mt-10 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5">
