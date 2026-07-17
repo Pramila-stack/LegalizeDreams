@@ -5,6 +5,7 @@ import Layout from './components/layout/Layout'
 import HomePage from './pages/HomePage'
 import CategoryPage from './pages/CategoryPage'
 import ProductPage from './pages/ProductPage'
+import ShopPage from './pages/ShopPage'
 import CartPage from './pages/CartPage'
 import CheckoutPage from './pages/CheckoutPage'
 import CheckoutSuccessPage from './pages/CheckoutSuccessPage'
@@ -19,6 +20,7 @@ function App() {
         <Routes>
           <Route element={<Layout />}>
             <Route index element={<HomePage />} />
+            <Route path="shop" element={<ShopPage />} />
             <Route path="category/:slug" element={<CategoryPage />} />
             <Route path="product/:slug" element={<ProductPage />} />
             <Route path="cart" element={<CartPage />} />

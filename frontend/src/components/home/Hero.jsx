@@ -14,7 +14,7 @@ export default function Hero() {
           </p>
           <div className="mt-8 flex gap-3">
             <Link
-              to="/category/makeup"
+              to="/shop"
               className="rounded-full bg-brand-900 px-7 py-3 text-sm font-medium text-white hover:bg-brand-800"
             >
               Shop New Arrivals
