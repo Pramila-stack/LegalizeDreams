@@ -68,23 +68,23 @@ export default function Hero() {
             backgroundAttachment: 'scroll',
           }}
         >
-          <p className="text-sm font-semibold uppercase tracking-widest text-blush-400 animate-on-load">New Season Edit</p>
-          <h1 className="font-display mt-3 text-4xl font-semibold leading-tight text-black sm:text-5xl animate-on-load animate-stagger-1">
+          <p className="text-sm font-semibold uppercase tracking-widest text-blush-400 animate-slow-text" style={{animationDelay: '0s'}}>New Season Edit</p>
+          <h1 className="font-display mt-3 text-4xl font-semibold leading-tight text-black sm:text-5xl animate-slow-text" style={{animationDelay: '0.15s'}}>
             Little joys for your everyday glow
           </h1>
-          <p className="mt-4 max-w-md text-gray-700 animate-on-load animate-stagger-2">
+          <p className="mt-4 max-w-md text-gray-700 animate-slow-text" style={{animationDelay: '0.3s'}}>
             Skincare, makeup and fashion accessories curated in one place — cute, considered, and made to be loved.
           </p>
-          <div className="mt-8 flex gap-3 animate-on-load animate-stagger-3">
+          <div className="mt-8 flex gap-3 animate-slow-text" style={{animationDelay: '0.45s'}}>
             <Link
               to="/shop"
-              className="rounded-full bg-brand-900 px-7 py-3 text-sm font-medium text-white hover:bg-brand-800"
+              className="rounded-full bg-brand-900 px-7 py-3 text-sm font-medium text-white hover:bg-brand-800 transition-colors"
             >
               Shop New Arrivals
             </Link>
             <a
               href="#categories"
-              className="rounded-full border border-brand-800 px-7 py-3 text-sm font-medium text-brand-800 hover:bg-white"
+              className="rounded-full border border-brand-800 px-7 py-3 text-sm font-medium text-brand-800 hover:bg-white transition-colors"
             >
               Browse Categories
             </a>
@@ -92,7 +92,7 @@ export default function Hero() {
         </div>
 
         {/* Video Container */}
-        <div ref={videoRef} className="relative mx-auto w-full max-w-md overflow-hidden rounded-[2rem] bg-gradient-to-br from-blush-100 to-brand-200 shadow-xl border-4 border-white/50 animate-on-load animate-stagger-3">
+        <div ref={videoRef} className="relative mx-auto w-full max-w-md overflow-hidden rounded-[2rem] bg-gradient-to-br from-blush-100 to-brand-200 shadow-xl border-4 border-white/50 animate-slow-text" style={{animationDelay: '0.45s'}}>
           <div className={`relative aspect-square w-full bg-brand-900 ${isTransitioning ? 'video-transitioning' : ''}`}>
             {VIDEOS.map((video, idx) => (
               <div
