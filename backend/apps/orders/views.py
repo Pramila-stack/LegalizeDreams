@@ -1,9 +1,10 @@
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.db import transaction
 from django.utils import timezone
+from django.contrib.auth.models import User
 from .models import Cart, CartItem, Order, OrderItem
 from .serializers import CartSerializer, CartItemSerializer, OrderSerializer, OrderCreateSerializer
 from apps.products.models import Product
@@ -90,9 +91,22 @@ class OrderViewSet(viewsets.ReadOnlyModelViewSet):
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user)
 
-    @action(detail=False, methods=['post'])
+    @action(detail=False, methods=['post'], permission_classes=[AllowAny])
     def create_order(self, request):
-        cart = Cart.objects.get(user=request.user)
+        # Get or create a guest user for anonymous orders
+        guest_user, created = User.objects.get_or_create(
+            username='guest_user',
+            defaults={'email': 'guest@example.com'}
+        )
+
+        # Get or create cart for guest user
+        cart, created = Cart.objects.get_or_create(user=guest_user)
+
+        # If cart is empty, create a temporary cart from session data
+        if not cart.items.exists():
+            # For now, allow checkout without cart items (guest checkout)
+            pass
+
         if not cart.items.exists():
             return Response({'detail': 'Cart is empty'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -110,7 +124,7 @@ class OrderViewSet(viewsets.ReadOnlyModelViewSet):
                 payment_proof_image = request.FILES.get('payment_proof_image')
 
             order = Order.objects.create(
-                user=request.user,
+                user=guest_user,
                 order_number=order_number,
                 customer_name=serializer.validated_data['customer_name'],
                 customer_email=serializer.validated_data['customer_email'],

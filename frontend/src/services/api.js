@@ -73,16 +73,16 @@ export const api = {
 
   async createOrder(formData) {
     const token = localStorage.getItem('access_token')
+    const headers = {}
 
-    if (!token) {
-      throw new Error('You must be logged in to place an order. Please log in first.')
+    // Only add auth header if token exists
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`
     }
 
     const response = await fetch(`${API_BASE_URL}/orders/create/`, {
       method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`
-      },
+      headers,
       body: formData
     })
 
