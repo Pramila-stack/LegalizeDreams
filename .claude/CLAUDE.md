@@ -99,19 +99,24 @@ Both have hot reload. Edit code, save, changes appear instantly.
 | Path | Component | Purpose |
 |------|-----------|---------|
 | `/` | HomePage | Hero, categories, featured, FAQ |
-| `/category/:slug` | CategoryPage | Filtered product list by category |
-| `/product/:slug` | ProductPage | Product detail, add-to-cart, related products |
-| `/cart` | CartPage | Cart review, checkout preparation |
-| `/search` | SearchPage | Full-text search on products |
+| `/category/:slug` | CategoryPage | Filtered product list by category (scrolls to top) |
+| `/product/:slug` | ProductPage | Product detail, add-to-cart, related products (back button to home) |
+| `/cart` | CartPage | Cart review, checkout preparation (empty state) |
+| `/checkout` | CheckoutPage | Shipping form + payment method selection (form validation) |
+| `/order-confirmation/:orderId` | OrderConfirmationPage | Order summary after successful purchase |
+| `/search` | SearchPage | Full-text search on products (no results state) |
 | `*` | NotFoundPage | 404 fallback |
 
 **Component Structure:**
 ```
 frontend/src/components/
-├── common/    # Button, Price, ProductImage, QuantityInput, StarRating, ScrollToTop
-├── home/      # Hero, CategoryGrid, FeaturedProducts, FaqAccordion
-├── layout/    # Header, Footer, Layout (global wrapper)
-└── product/   # ProductCard, ProductCardSkeleton
+├── common/           # Button, Price, ProductImage, QuantityInput, StarRating, ScrollToTop
+│                    # Toast, ToastContainer, ErrorBoundary, OptimizedImage
+│                    # TextSkeleton, ImageSkeleton
+├── home/            # Hero, CategoryGrid, FeaturedProducts, FaqAccordion
+├── layout/          # Header, Footer, Layout (global wrapper)
+├── product/         # ProductCard, ProductCardSkeleton
+└── checkout/        # ShippingForm, PaymentMethodSelector
 ```
 
 ### State Management
@@ -123,15 +128,30 @@ frontend/src/components/
 - Persisted to localStorage (`'lune.cart'` — key unchanged for backwards compatibility)
 - Consumed by: Header (cart badge), CartPage, ProductPage
 
+`frontend/src/context/ToastContext.jsx`:
+- Hook: `useToast()` → `{ showToast(message, type, duration), removeToast(id) }`
+- Types: `'success'` (green), `'error'` (red), `'info'` (blue)
+- Auto-dismisses after 3 seconds (configurable)
+- Wraps entire app in `App.jsx`, rendered via `<ToastContainer />`
+- Used for API errors, form validation, user feedback
+
 ### API Integration
 
-`frontend/src/services/api.js` is **already connected** to the Django backend:
+`frontend/src/services/api.js` is **already connected** to the Django backend with error handling:
 - `getCategories()` → `GET /api/categories/`
 - `getCategory(slug)` → `GET /api/categories/{slug}/`
 - `getProducts({categorySlug, query, limit})` → `GET /api/products/?category=...&search=...`
 - `getFeaturedProducts(limit)` → `GET /api/products/`
 - `getProduct(slug)` → `GET /api/products/{slug}/`
 - `getRelatedProducts(product, limit)` → `GET /api/products/?category={id}`
+- `createOrder(orderData)` → `POST /api/orders/create/` (checkout form submission)
+- `getOrder(orderId)` → `GET /api/orders/{id}/` (order confirmation page)
+
+**Error Handling:**
+- All API errors caught and displayed via toast notifications
+- Standardized error response format from backend: `{ "error": string, "status": number }`
+- API wrapper adds error context logging to browser console
+- Components have try-catch blocks with useToast() for user feedback
 
 **Environment:** `frontend/.env` → `VITE_API_URL=http://localhost:8000/api`
 
@@ -154,29 +174,63 @@ frontend/src/components/
 
 ### Animation System
 
-**Page Load & Scroll Animations:**
-- `animate-on-load` — slides up on page load with staggered delays
-- `animate-on-scroll` — slides up when scrolling into view (via IntersectionObserver in `App.jsx`)
-- Keyframes: `slideUp`, `fadeIn`, `slideDown`, `videoTransition` defined in `index.css`
+**Keyframe Animations** (all defined in `frontend/src/index.css`):
+- `slideUp` (0.7s) — Slide from bottom + fade in
+- `slowSlideUp` (1.2s) — Slow elegant slide (hero, categories, FAQ text)
+- `slideInRight` (0.8s) — Slide in from left (EXPLORE label)
+- `underlineExpand` (0.9s) — Underline grows left-to-right (All Our Categories)
+- `scaleIn` (0.7s) — Zoom from 95% to 100% (category cards)
+- `slideDown`, `fadeIn`, `slowFadeIn`, `videoTransition` (utility animations)
 
-**Component Patterns:**
-- Components pass `index` prop for staggered delays: `animationDelay: ${index * 0.1}s`
-- Used in: CategoryGrid, FeaturedProducts, ProductCard, FaqAccordion
-- Individual product cards receive index to create cascading entrance effect
+**Animation Classes** (applied to components):
+- `animate-on-load` — 0.6s fadeIn, used on hero text
+- `animate-on-scroll` — 0.7s slideUp when scrolling into view (IntersectionObserver in App.jsx)
+- `animate-slow-text` — 1.2s slowSlideUp with precise delays for text cascades
+- `animate-slow-fade` — 1.5s slowFadeIn (FAQ answers)
+- `animate-title` — 0.8s slideInRight (EXPLORE label)
+- `animate-scale-in` — 0.7s scaleIn (category cards)
+
+**Staggered Delay Pattern:**
+- Hero section: 0s, 150ms, 300ms, 450ms between text elements
+- Categories section: 0s, 150ms, 400ms for text; cards 450ms + 80ms between each
+- Featured Products: 0s, 150ms, 300ms for text; cards by index
+- FAQ: 0s, then 150ms + (100ms × question index)
 
 **IntersectionObserver:**
-- `App.jsx` initializes global observer for `.animate-on-scroll` elements
-- Sets `opacity: 0` → animates to `opacity: 1` when visible
-- Also controls Hero video/audio pause/resume on scroll
+- Global observer in `App.jsx` for `.animate-on-scroll` elements
+- Triggers animation when element scrolls into view
+- Also pauses/resumes Hero video carousel based on visibility
 
 ### Media & Image Handling
 
 - **Backend images:** Stored in `backend/media/` directory, served via `/media/` endpoint
 - **Frontend image URLs:** Constructed as `http://localhost:8000{product.image}` (backend returns relative path)
-- **Hero background:** `flower.jpg` positioned left 40% of hero section (left side only, no-repeat)
-- **Video/Audio:** Stored in `/media/products/` (e.g., `lowrise.MP4`, `army.MP4`)
-- Hero video carousel auto-rotates every 5 seconds with fade transition
-- Audio tracks from video files played via hidden `<audio>` element, paused when Hero section scrolls out of view
+- **Image optimization:** `OptimizedImage` component with lazy loading, error fallback, and loading skeleton
+- **Hero background:** `flower.jpg` applied to text div only (not entire section) with `backgroundSize: contain` for responsive scaling
+- **Hero video carousel:** Auto-rotates every 5 seconds with `videoTransition` animation (fade effect)
+- **Responsive design:** Flower background scales appropriately on mobile (375px), tablet (768px), desktop (1024px+)
+
+### Form Validation & Error Handling
+
+**Form Validation Hook** (`frontend/src/hooks/useFormValidation.js`):
+- Hook: `useFormValidation(initialValues, onSubmit, validate)`
+- Returns: `{ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting, setFieldError }`
+- Used in: CheckoutPage (ShippingForm), SearchPage, and other forms
+- Validation functions in `frontend/src/utils/validation.js`: `validateEmail()`, `validatePhone()`, `validateRequired()`, `validatePostalCode()`, etc.
+
+**Error Boundary Component** (`frontend/src/components/common/ErrorBoundary.jsx`):
+- Wraps entire app to catch React errors gracefully
+- Displays friendly error message with development-only error details
+- Prevents white-screen crashes
+
+**Loading States:**
+- `ProductCardSkeleton`, `TextSkeleton`, `ImageSkeleton` — Animate while loading
+- Used in: CategoryPage (products), FeaturedProducts, any async data loading
+
+**Empty States:**
+- CartPage displays icon + message when cart is empty
+- SearchPage shows "No results" message with browse link
+- CategoryPage shows "No products" message when category has no items
 
 ---
 
@@ -283,6 +337,12 @@ apps/
 
 ### API Endpoints (All tested and working)
 
+**Error Response Format** (standardized across all endpoints):
+```json
+{ "error": "string description", "status": 400 }
+```
+Handled by custom exception handler in `backend/config/exception_handler.py`.
+
 **Authentication (Public/Auth as noted):**
 - `POST /api/auth/register/` — Create account → returns access + refresh tokens
 - `POST /api/auth/login/` — Login → returns tokens
@@ -306,11 +366,13 @@ Token lifetimes: Access=15min, Refresh=7days (configured in .env)
 - `DELETE /api/cart/items/<id>/` — Remove item
 - `DELETE /api/cart/clear/` — Clear entire cart
 
-**Orders (Auth required):**
-- `POST /api/orders/create/` — Create order from cart (shipping details in body)
+**Orders (Auth optional, supports guest checkout):**
+- `POST /api/orders/create/` — Create order (guest or auth users)
+  - Body: `{ customer_name, customer_email, customer_phone, shipping_address, city, postal_code, country, total_amount }`
   - Side effects: clears cart, deducts stock, captures product price snapshot
-- `GET /api/orders/` — List user's orders (paginated)
-- `GET /api/orders/<id>/` — Order detail (user can only see own)
+  - Uses `SafeJWTAuthentication` to allow anonymous orders
+- `GET /api/orders/` [Auth] — List user's orders (paginated)
+- `GET /api/orders/<id>/` [Auth] — Order detail (user can only see own)
 
 ### Database Models
 
@@ -401,42 +463,129 @@ JWT_REFRESH_TOKEN_LIFETIME=7            # Days
 
 | File | When to change | Notes |
 |------|----------------|-------|
-| `frontend/src/index.css` | Adding animations or changing color theme | Define keyframes here; colors via `@theme` |
-| `frontend/src/App.jsx` | Adding routes or changing global animations | IntersectionObserver for `.animate-on-scroll` initialized here |
+| `frontend/src/index.css` | Adding animations or changing color theme | Define keyframes here; colors via `@theme`; new animations: slideInRight, underlineExpand, scaleIn |
+| `frontend/src/App.jsx` | Adding routes or changing global animations | IntersectionObserver for `.animate-on-scroll` initialized here; wraps with ErrorBoundary and ToastContainer |
+| `frontend/src/context/CartContext.jsx` | Changing cart logic | Update both context and backend if needed |
+| `frontend/src/context/ToastContext.jsx` | Changing notification behavior | Controls toast duration, types (success/error/info), auto-dismiss |
+| `frontend/src/services/api.js` | Adding new API calls | All errors automatically thrown; use try-catch in components with useToast() |
+| `frontend/src/hooks/useFormValidation.js` | Adding form validation logic | Reusable for all forms; integrates with error display |
+| `frontend/src/utils/validation.js` | Adding form field validators | Add new functions: validateField(value, fieldName) → error message string |
+| `frontend/src/components/common/ErrorBoundary.jsx` | Changing error fallback UI | Wraps entire app; shows user-friendly error message |
+| `frontend/src/components/checkout/ShippingForm.jsx` | Modifying checkout form fields | Uses `useFormValidation` hook; validation defined inline |
+| `frontend/src/pages/CheckoutPage.jsx` | Changing checkout flow | Combines ShippingForm + PaymentMethodSelector; calls `api.createOrder()` |
 | `backend/config/settings.py` | Adding apps, changing DB, updating CORS | Also update `.env` template; uses `SafeJWTAuthentication` by default |
 | `backend/config/auth.py` | Changing auth strategy for public endpoints | `SafeJWTAuthentication` allows AllowAny permission overrides |
+| `backend/config/exception_handler.py` | Changing error response format | Standardizes all API errors to `{ "error": string, "status": int }` |
 | `backend/config/urls.py` | Adding new routes | Keep organized by app |
 | `backend/apps/*/models.py` | Changing schema | Run `makemigrations` → `migrate` |
 | `backend/apps/*/serializers.py` | Changing API response format | Ensure frontend still works |
 | `backend/apps/*/views.py` | Adding/modifying endpoints | Return correct HTTP status; use `get_permissions()` for permission overrides |
-| `frontend/src/services/api.js` | Adding new API calls | Already connected to backend |
-| `frontend/src/context/CartContext.jsx` | Changing cart logic | Update both context and backend if needed |
-| `frontend/src/components/product/ProductCard.jsx` | Changing product card appearance | Receives `index` prop for staggered animations |
-| `backend/apps/products/views.py` | Changing product filtering behavior | Uses custom FilterSet for category slug filtering |
 | `backend/apps/orders/views.py` | Changing order/checkout flow | `create_order()` uses `AllowAny()` permissions for guest checkout |
 
 ---
 
 ## Integration Checklist
 
-✅ **Already Completed:**
-- Frontend connected to Django backend
-- API service (`frontend/src/services/api.js`) calls `/api/*` endpoints
-- Database initialized with migrations
-- Admin account created (admin/admin123)
-- Categories & products can be managed via Django Admin
-- Frontend displays real data from backend (not mock data)
-- Cart state persisted to localStorage (migrated to backend later if needed)
+✅ **Frontend Complete:**
+- Frontend connected to Django backend with error handling
+- API service with standardized error responses and try-catch handling
+- Cart state persisted to localStorage
+- Comprehensive animations (hero, categories, featured, FAQ)
+- Responsive design (mobile, tablet, desktop)
+- Toast notification system for user feedback
+- Error boundaries for graceful error handling
+- Form validation with useFormValidation hook
+- Loading skeletons during async operations
+- Empty states (cart, search, categories)
+- Image optimization with lazy loading
+- Checkout flow with shipping form and payment selection
+- Order confirmation page
+- Back buttons on category/product pages with scroll restoration
+- Mobile navigation with hamburger menu
+
+✅ **Backend Complete:**
+- Django REST Framework API with all CRUD endpoints
+- Standardized error response format
+- JWT authentication with SafeJWTAuthentication for guest checkout
+- Database models for users, products, categories, cart, orders
+- Django Admin interface for content management
+- Production-ready environment configuration
 
 ⏭️ **Future Enhancements (Not in MVP):**
+- Payment gateway integration (Stripe/PayPal)
 - Product reviews/ratings (backend submission)
-- Payment gateway (Stripe/PayPal)
-- Email notifications
+- Email notifications (order confirmation, shipping updates)
 - Advanced filtering (price range, ratings, multiple categories)
-- Wishlists
-- PostgreSQL for production
+- User wishlists/favorites
+- PostgreSQL for production (currently SQLite)
 - Docker containerization
 - CI/CD (GitHub Actions)
+- Rate limiting
+- Caching strategy
+
+---
+
+## Production-Ready Features
+
+### Security & Error Handling
+- **Custom auth class** (`SafeJWTAuthentication`) allows guest checkout without registration
+- **Error boundary** catches React errors and displays user-friendly messages
+- **Standardized error responses** from backend with meaningful messages
+- **CORS protection** configured for frontend/backend communication
+- **CSRF protection** enabled on all state-changing operations
+- **Password hashing** via Django's PBKDF2 (default)
+
+### Performance Optimizations
+- **Lazy loading images** via `OptimizedImage` component
+- **Loading skeletons** prevent layout shift during async operations
+- **CSS animations** (not JS) for smooth 60fps performance
+- **Code splitting** via Vite for production builds
+- **Responsive images** with `backgroundSize: contain` for all devices
+
+### User Experience
+- **Staggered animations** create professional cascade effect
+- **Toast notifications** provide immediate feedback for actions
+- **Empty states** guide users when no data is available
+- **Loading states** indicate ongoing operations
+- **Scroll restoration** maintains page context when navigating
+- **Mobile-optimized** layout with touch-friendly buttons (44px minimum)
+- **Accessible forms** with ARIA labels and keyboard navigation
+
+### Developer Experience
+- **Hot reload** on both frontend (Vite) and backend (Django)
+- **Component library** (Button, Price, ProductImage, etc.) for consistency
+- **Hooks** for logic reuse (useCart, useToast, useFormValidation)
+- **Clear separation** of concerns (components, context, services, utils)
+- **Type hints** from form validation errors without TypeScript
+
+---
+
+## Developer Best Practices
+
+When working on this codebase:
+
+**Frontend Changes:**
+1. Always use `useToast()` for user feedback on errors/success
+2. Wrap API calls in try-catch with error toast fallback
+3. Use `useFormValidation()` hook for all forms
+4. Add staggered animation delays: `animationDelay: \`${delay}s\``
+5. Test on mobile (375px viewport) before considering done
+6. Use relative imports, not path aliases
+
+**Backend Changes:**
+1. Extend error messages with `ValidationError` from DRF
+2. Use `get_permissions()` method for endpoint-level overrides
+3. Return standardized responses (backend handles formatting)
+4. Run migrations after model changes: `makemigrations` → `migrate`
+5. Test endpoint with Postman/cURL before frontend integration
+6. Update API documentation in CLAUDE.md when adding endpoints
+
+**General:**
+1. Commit frequently with clear messages
+2. Test responsive design at: 375px (mobile), 768px (tablet), 1024px+ (desktop)
+3. Check browser console for errors (should be zero)
+4. Verify no state-after-unmount warnings in React DevTools
+5. Ensure animations respect user's `prefers-reduced-motion` setting (future enhancement)
 
 ---
 
