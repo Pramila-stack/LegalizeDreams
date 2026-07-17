@@ -100,11 +100,6 @@ export default function Hero() {
               ))}
             </div>
           </div>
-
-          {/* Decorative corner badges */}
-          <span className="absolute -left-4 top-8 rounded-2xl bg-white px-4 py-3 text-2xl shadow-lg" aria-hidden="true">💄</span>
-          <span className="absolute -right-2 bottom-10 rounded-2xl bg-white px-4 py-3 text-2xl shadow-lg" aria-hidden="true">🎀</span>
-          <span className="absolute bottom-0 left-10 rounded-2xl bg-white px-4 py-3 text-2xl shadow-lg" aria-hidden="true">🧴</span>
         </div>
       </div>
     </section>
