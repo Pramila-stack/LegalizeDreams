@@ -21,6 +21,10 @@ export default function CategoryPage() {
   useEffect(() => {
     let active = true
     setLoading(true)
+
+    // Scroll to top immediately when slug changes
+    window.scrollTo(0, 0)
+
     Promise.all([api.getCategory(slug), api.getProducts({ categorySlug: slug })]).then(
       ([categoryData, productsData]) => {
         if (!active) return
@@ -48,20 +52,29 @@ export default function CategoryPage() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 animate-on-scroll">
-      <nav className="text-xs text-brand-400 opacity-0" style={{animation: 'slideUp 0.6s ease-out forwards'}}>
-        <Link to="/" className="hover:text-brand-700">Home</Link>
-        <span className="mx-1.5">/</span>
-        <span className="text-brand-700">{category?.name ?? '...'}</span>
-      </nav>
+    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 animate-on-scroll">
+      <div className="mb-4 flex items-center gap-4">
+        <Link
+          to="/"
+          className="inline-block rounded-full border border-brand-600 px-4 py-2 text-xs font-semibold text-brand-600 transition-colors hover:bg-brand-50"
+        >
+          ← Back
+        </Link>
 
-      <div className="mt-3 flex flex-wrap items-end justify-between gap-4 opacity-0" style={{animation: 'slideUp 0.7s ease-out forwards', animationDelay: '0.1s'}}>
+        <nav className="text-xs text-brand-400 opacity-0" style={{animation: 'slideUp 0.6s ease-out forwards'}}>
+          <Link to="/" className="hover:text-brand-700">Home</Link>
+          <span className="mx-1.5">/</span>
+          <span className="text-brand-700">{category?.name ?? '...'}</span>
+        </nav>
+      </div>
+
+      <div className="mt-2 flex flex-wrap items-end justify-between gap-4 animate-slow-text" style={{animationDelay: '0.1s'}}>
         <div className="flex items-center gap-3">
           <span className="text-3xl" aria-hidden="true">{category?.icon}</span>
           <h1 className="font-display text-3xl font-semibold text-black">{category?.name ?? 'Loading...'}</h1>
         </div>
 
-        <label className="flex items-center gap-2 text-sm text-brand-600">
+        <label className="flex items-center gap-2 text-sm text-brand-600 animate-slow-text" style={{animationDelay: '0.2s'}}>
           Sort by
           <select
             value={sort}
@@ -76,15 +89,15 @@ export default function CategoryPage() {
         </label>
       </div>
 
-      <p className="mt-1 text-sm text-brand-500">
+      <p className="mt-1 text-sm text-brand-500 animate-slow-text" style={{animationDelay: '0.3s'}}>
         {loading ? 'Loading products...' : `${products.length} product${products.length === 1 ? '' : 's'}`}
       </p>
 
-      <div className="mt-8 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
+      <div id="products-grid" className="mt-4 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
         {loading ? (
           Array.from({ length: 8 }).map((_, i) => <ProductCardSkeleton key={i} />)
         ) : sortedProducts.length ? (
-          sortedProducts.map((p) => <ProductCard key={p.id} product={p} />)
+          sortedProducts.map((p, idx) => <ProductCard key={p.id} product={p} index={idx} />)
         ) : (
           <p className="col-span-full py-16 text-center text-brand-500">No products in this category yet.</p>
         )}
