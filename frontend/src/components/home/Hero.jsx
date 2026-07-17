@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 const VIDEOS = [
   {
@@ -20,7 +20,7 @@ export default function Hero() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
   const [isVisible, setIsVisible] = useState(true)
-  const videoRef = React.useRef(null)
+  const videoRef = useRef(null)
 
   useEffect(() => {
     const interval = setInterval(() => {
