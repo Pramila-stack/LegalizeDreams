@@ -1,6 +1,37 @@
 import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+
+const VIDEOS = [
+  {
+    id: 1,
+    src: 'http://localhost:8000/media/products/army.MP4',
+    title: 'Army Collection',
+  },
+  {
+    id: 2,
+    src: 'http://localhost:8000/media/products/lowrise.MP4',
+    title: 'Lowrise Collection',
+  },
+]
+
+const VIDEO_DURATION = 5000 // 5 seconds per video
 
 export default function Hero() {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isTransitioning, setIsTransitioning] = useState(false)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsTransitioning(true)
+      setTimeout(() => {
+        setCurrentIndex((prev) => (prev + 1) % VIDEOS.length)
+        setIsTransitioning(false)
+      }, 500)
+    }, VIDEO_DURATION)
+
+    return () => clearInterval(interval)
+  }, [])
+
   return (
     <section className="bg-gradient-to-br from-brand-50 via-blush-50 to-brand-100">
       <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:py-24 lg:px-8">
@@ -28,8 +59,49 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="relative mx-auto flex aspect-square w-full max-w-md items-center justify-center rounded-[2rem] bg-gradient-to-br from-blush-100 to-brand-200 shadow-inner">
-          <span className="text-8xl" aria-hidden="true">🌙</span>
+        {/* Video Container */}
+        <div className="relative mx-auto w-full max-w-md overflow-hidden rounded-[2rem] bg-gradient-to-br from-blush-100 to-brand-200 shadow-xl border-4 border-white/50">
+          <div className="relative aspect-square w-full bg-brand-900">
+            {VIDEOS.map((video, idx) => (
+              <div
+                key={video.id}
+                className={`absolute inset-0 transition-opacity duration-500 ${
+                  idx === currentIndex && !isTransitioning ? 'opacity-100' : 'opacity-0'
+                }`}
+                style={{
+                  zIndex: idx === currentIndex ? 10 : 0,
+                }}
+              >
+                <video
+                  src={video.src}
+                  autoPlay
+                  muted
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            ))}
+
+            {/* Video Navigation Dots */}
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 pointer-events-auto z-20">
+              {VIDEOS.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => {
+                    setCurrentIndex(idx)
+                    setIsTransitioning(false)
+                  }}
+                  className={`transition-all duration-300 rounded-full ${
+                    idx === currentIndex
+                      ? 'bg-white w-6 h-2'
+                      : 'bg-white/40 w-2 h-2 hover:bg-white/70'
+                  }`}
+                  aria-label={`Go to video ${idx + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Decorative corner badges */}
           <span className="absolute -left-4 top-8 rounded-2xl bg-white px-4 py-3 text-2xl shadow-lg" aria-hidden="true">💄</span>
           <span className="absolute -right-2 bottom-10 rounded-2xl bg-white px-4 py-3 text-2xl shadow-lg" aria-hidden="true">🎀</span>
           <span className="absolute bottom-0 left-10 rounded-2xl bg-white px-4 py-3 text-2xl shadow-lg" aria-hidden="true">🧴</span>
