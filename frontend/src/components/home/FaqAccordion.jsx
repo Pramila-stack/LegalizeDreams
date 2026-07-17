@@ -38,10 +38,10 @@ export default function FaqAccordion() {
         {faqs.map((item, i) => {
           const isOpen = openIndex === i
           return (
-            <div key={item.q}>
+            <div key={item.q} className="animate-on-scroll opacity-0" style={{animation: `slideUp 0.6s ease-out forwards`, animationDelay: `${i * 0.1}s`}}>
               <button
                 onClick={() => setOpenIndex(isOpen ? null : i)}
-                className="flex w-full items-center justify-between gap-4 py-4 text-left text-sm font-medium text-brand-900"
+                className="flex w-full items-center justify-between gap-4 py-4 text-left text-sm font-medium text-black hover:text-brand-600 transition-colors"
                 aria-expanded={isOpen}
               >
                 {item.q}
@@ -52,12 +52,12 @@ export default function FaqAccordion() {
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2"
-                  className={`shrink-0 text-brand-500 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+                  className={`shrink-0 text-brand-500 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
                 >
                   <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
-              {isOpen && <p className="pb-4 text-sm leading-relaxed text-brand-600">{item.a}</p>}
+              {isOpen && <p className="pb-4 text-sm leading-relaxed text-brand-600 animate-on-load" style={{animation: `slideUp 0.4s ease-out`}}>{item.a}</p>}
             </div>
           )
         })}

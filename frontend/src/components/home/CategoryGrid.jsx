@@ -45,13 +45,14 @@ export default function CategoryGrid() {
       </div>
 
       <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-        {categories.map((c) => {
+        {categories.map((c, idx) => {
           const products = categoryProducts[c.id] || []
           return (
             <Link
               key={c.id}
               to={`/category/${c.slug}`}
-              className="group flex flex-col overflow-hidden rounded-2xl border border-brand-100 bg-white transition-shadow hover:shadow-lg hover:shadow-brand-100"
+              className="group flex flex-col overflow-hidden rounded-2xl border border-brand-100 bg-white transition-shadow hover:shadow-lg hover:shadow-brand-100 hover:scale-105 transition-transform duration-300 animate-on-scroll opacity-0"
+              style={{animation: `slideUp 0.6s ease-out forwards`, animationDelay: `${idx * 0.08}s`}}
             >
               {/* Product Images Grid */}
               <div className="relative aspect-square w-full overflow-hidden bg-gradient-to-br from-brand-100 to-brand-50">

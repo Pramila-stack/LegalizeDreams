@@ -32,7 +32,7 @@ export default function FeaturedProducts() {
         <div className="mt-10 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5">
           {loading
             ? Array.from({ length: 5 }).map((_, i) => <ProductCardSkeleton key={i} />)
-            : products.map((p) => <ProductCard key={p.id} product={p} />)}
+            : products.map((p, idx) => <ProductCard key={p.id} product={p} index={idx} />)}
         </div>
       </div>
     </section>
