@@ -100,8 +100,33 @@ export default function CategoryGrid() {
                           </div>
                         ))}
                       </div>
+                    ) : products.length === 3 ? (
+                      /* Three products - 3 columns in 1 row */
+                      <div className="grid grid-cols-3 gap-0 h-full">
+                        {products.slice(0, 3).map((product) => (
+                          <div
+                            key={product.id}
+                            className="relative overflow-hidden bg-brand-100"
+                          >
+                            {product.image ? (
+                              <img
+                                src={
+                                  typeof product.image === 'string' && !product.image.startsWith('http')
+                                    ? `http://localhost:8000${product.image}`
+                                    : product.image
+                                }
+                                alt={product.name}
+                                className="h-full w-full object-cover"
+                                onError={(e) => {
+                                  e.target.style.display = 'none'
+                                }}
+                              />
+                            ) : null}
+                          </div>
+                        ))}
+                      </div>
                     ) : (
-                      /* Three or more products - 2 rows, 2 columns */
+                      /* Four or more products - 2 rows, 2 columns */
                       <div className="grid grid-cols-2 grid-rows-2 gap-0 h-full">
                         {products.slice(0, 4).map((product) => (
                           <div
