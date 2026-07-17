@@ -126,8 +126,8 @@ export default function CategoryGrid() {
                         ))}
                       </div>
                     ) : (
-                      /* Four or more products - 2 rows, 2 columns */
-                      <div className="grid grid-cols-2 grid-rows-2 gap-0 h-full">
+                      /* Four or more products - Instagram-like 2x2 grid layout */
+                      <div className="grid grid-cols-2 gap-0 h-full">
                         {products.slice(0, 4).map((product) => (
                           <div
                             key={product.id}
