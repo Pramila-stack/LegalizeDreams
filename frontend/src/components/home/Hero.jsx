@@ -61,7 +61,7 @@ export default function Hero() {
 
         {/* Video Container */}
         <div className="relative mx-auto w-full max-w-md overflow-hidden rounded-[2rem] bg-gradient-to-br from-blush-100 to-brand-200 shadow-xl border-4 border-white/50">
-          <div className="relative aspect-square w-full bg-brand-900">
+          <div className={`relative aspect-square w-full bg-brand-900 ${isTransitioning ? 'video-transitioning' : ''}`}>
             {VIDEOS.map((video, idx) => (
               <div
                 key={video.id}

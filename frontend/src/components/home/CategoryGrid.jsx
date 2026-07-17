@@ -56,28 +56,51 @@ export default function CategoryGrid() {
               {/* Product Images Grid */}
               <div className="relative aspect-square w-full overflow-hidden bg-gradient-to-br from-brand-100 to-brand-50">
                 {products.length > 0 ? (
-                  <div className="grid grid-cols-2 gap-1 h-full p-2">
-                    {products.slice(0, 4).map((product, idx) => (
-                      <div
-                        key={product.id}
-                        className="relative overflow-hidden rounded-lg bg-brand-100"
-                      >
-                        {product.image ? (
+                  <div className="h-full w-full">
+                    {products.length === 1 ? (
+                      /* Single product - fill entire box */
+                      <div className="h-full w-full overflow-hidden rounded-lg bg-brand-100">
+                        {products[0].image && (
                           <img
                             src={
-                              typeof product.image === 'string' && !product.image.startsWith('http')
-                                ? `http://localhost:8000${product.image}`
-                                : product.image
+                              typeof products[0].image === 'string' && !products[0].image.startsWith('http')
+                                ? `http://localhost:8000${products[0].image}`
+                                : products[0].image
                             }
-                            alt={product.name}
+                            alt={products[0].name}
                             className="h-full w-full object-cover"
                             onError={(e) => {
                               e.target.style.display = 'none'
                             }}
                           />
-                        ) : null}
+                        )}
                       </div>
-                    ))}
+                    ) : (
+                      /* Multiple products - 4 column grid */
+                      <div className="grid grid-cols-4 gap-0 h-full">
+                        {products.slice(0, 4).map((product) => (
+                          <div
+                            key={product.id}
+                            className="relative overflow-hidden bg-brand-100"
+                          >
+                            {product.image ? (
+                              <img
+                                src={
+                                  typeof product.image === 'string' && !product.image.startsWith('http')
+                                    ? `http://localhost:8000${product.image}`
+                                    : product.image
+                                }
+                                alt={product.name}
+                                className="h-full w-full object-cover"
+                                onError={(e) => {
+                                  e.target.style.display = 'none'
+                                }}
+                              />
+                            ) : null}
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <div className="flex items-center justify-center h-full text-4xl">📁</div>

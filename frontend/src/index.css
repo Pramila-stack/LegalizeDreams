@@ -47,3 +47,22 @@ body {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+@keyframes videoTransition {
+  0% {
+    opacity: 1;
+  }
+  45% {
+    background-color: rgba(217, 169, 130, 0.6);
+  }
+  55% {
+    background-color: rgba(20, 20, 20, 0.8);
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.video-transitioning {
+  animation: videoTransition 0.5s ease-in-out;
+}
