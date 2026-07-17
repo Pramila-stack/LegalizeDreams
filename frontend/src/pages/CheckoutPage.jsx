@@ -140,6 +140,18 @@ export default function CheckoutPage() {
             <span>Rs {total.toLocaleString()}</span>
           </div>
 
+          {/* Bank Details Image */}
+          {step === 'payment' && (
+            <div className="mt-6 pt-6 border-t border-brand-100">
+              <p className="text-xs font-semibold text-brand-900 mb-3">Bank Details</p>
+              <img
+                src="http://localhost:8000/media/bank.png"
+                alt="Bank QR Code"
+                className="w-full rounded-lg border border-brand-200 shadow-sm"
+              />
+            </div>
+          )}
+
           <div className="mt-6 space-y-2 text-xs text-brand-600">
             <div className="flex items-start gap-2">
               <span className="text-green-600">✓</span>

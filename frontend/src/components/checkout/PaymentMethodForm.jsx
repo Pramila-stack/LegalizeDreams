@@ -3,20 +3,33 @@ import Button from '../common/Button'
 
 export default function PaymentMethodForm({ onSubmit, onBack, shippingData, loading = false }) {
   const [paymentMethod, setPaymentMethod] = useState('cod')
-  const [showBankDetails, setShowBankDetails] = useState(false)
+  const [showUpload, setShowUpload] = useState(false)
+  const [paymentImage, setPaymentImage] = useState(null)
 
   const handlePaymentMethodChange = (method) => {
     setPaymentMethod(method)
-    setShowBankDetails(method === 'online')
+    setShowUpload(method === 'online')
+  }
+
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      setPaymentImage(file)
+    }
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
 
+    if (paymentMethod === 'online' && !paymentImage) {
+      alert('Please upload payment proof image')
+      return
+    }
+
     const formData = {
       ...shippingData,
       payment_method: paymentMethod,
-      payment_proof_image: null,
+      payment_proof_image: paymentImage,
     }
 
     onSubmit(formData)
@@ -56,62 +69,45 @@ export default function PaymentMethodForm({ onSubmit, onBack, shippingData, load
             />
             <div className="ml-3 flex-1">
               <p className="font-medium text-brand-900">🔐 Online Payment</p>
-              <p className="text-sm text-brand-600">Scan QR code to transfer funds instantly</p>
+              <p className="text-sm text-brand-600">Upload payment proof to confirm transfer</p>
             </div>
           </label>
         </div>
       </div>
 
-      {/* Bank Details Section - Shows when Online Payment is selected */}
-      {showBankDetails && (
-        <div className="rounded-lg border-2 border-brand-200 p-6 bg-gradient-to-br from-brand-50 to-blush-50">
-          <h3 className="font-display font-semibold text-brand-900 mb-4 text-center">Bank Transfer Details</h3>
+      {/* Upload Payment Proof - Shows when Online Payment is selected */}
+      {showUpload && (
+        <div className="rounded-lg border-2 border-brand-200 p-6 bg-brand-50">
+          <label className="block text-sm font-semibold text-brand-900 mb-3">Upload Payment Proof</label>
 
-          <div className="space-y-4">
-            {/* QR Code Section */}
-            <div className="flex flex-col items-center">
-              <p className="text-sm text-brand-600 mb-4 font-medium">📱 Scan this QR code with your UPI/Banking app</p>
-              <div className="bg-white p-4 rounded-xl border-2 border-brand-200 shadow-md">
-                <img
-                  src="https://via.placeholder.com/220x220?text=Bank+QR+Code"
-                  alt="Bank QR Code for payment"
-                  className="w-56 h-56 rounded-lg"
-                />
+          <div className="flex flex-col items-center justify-center w-full">
+            <label className="flex flex-col w-full h-32 border-2 border-dashed border-brand-300 rounded-lg cursor-pointer hover:bg-white transition-colors">
+              <div className="flex flex-col items-center justify-center pt-7">
+                <span className="text-3xl mb-2">📸</span>
+                <span className="text-sm text-brand-600 font-medium">Click to upload or drag image</span>
+                <span className="text-xs text-brand-500 mt-1">PNG, JPG up to 10MB</span>
               </div>
-            </div>
-
-            {/* Bank Account Details */}
-            <div className="bg-white p-5 rounded-lg border border-brand-200 space-y-3">
-              <div className="border-b border-brand-100 pb-3">
-                <p className="text-xs font-semibold text-brand-500 uppercase tracking-wide">Bank Account Details</p>
-              </div>
-              <div className="grid gap-3">
-                <div>
-                  <p className="text-xs text-brand-500 font-medium">Bank Name</p>
-                  <p className="text-sm font-semibold text-brand-900">Example Bank Limited</p>
-                </div>
-                <div>
-                  <p className="text-xs text-brand-500 font-medium">Account Number</p>
-                  <p className="text-sm font-semibold text-brand-900">1234567890</p>
-                </div>
-                <div>
-                  <p className="text-xs text-brand-500 font-medium">Account Holder</p>
-                  <p className="text-sm font-semibold text-brand-900">LEGALIZE DREAMS</p>
-                </div>
-                <div>
-                  <p className="text-xs text-brand-500 font-medium">IFSC Code</p>
-                  <p className="text-sm font-semibold text-brand-900">EXPL0001234</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Info Box */}
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
-              <p className="text-xs text-amber-900 leading-relaxed">
-                <span className="font-semibold">ℹ️ How to pay:</span> Use your mobile banking app or UPI to scan the QR code above, or transfer manually using the bank details. Your order will be confirmed immediately after payment.
-              </p>
-            </div>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                className="hidden"
+              />
+            </label>
           </div>
+
+          {paymentImage && (
+            <div className="mt-3 flex items-center justify-between rounded-lg bg-white p-3 border border-brand-200">
+              <span className="text-sm text-brand-900 font-medium truncate">{paymentImage.name}</span>
+              <button
+                type="button"
+                onClick={() => setPaymentImage(null)}
+                className="ml-2 text-brand-600 hover:text-red-600"
+              >
+                ✕
+              </button>
+            </div>
+          )}
         </div>
       )}
 

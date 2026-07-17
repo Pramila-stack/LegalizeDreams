@@ -73,6 +73,11 @@ export const api = {
 
   async createOrder(formData) {
     const token = localStorage.getItem('access_token')
+
+    if (!token) {
+      throw new Error('You must be logged in to place an order. Please log in first.')
+    }
+
     const response = await fetch(`${API_BASE_URL}/orders/create/`, {
       method: 'POST',
       headers: {
@@ -80,7 +85,14 @@ export const api = {
       },
       body: formData
     })
-    if (!response.ok) throw new Error('Failed to create order')
-    return await response.json()
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      const errorMessage = data?.detail || data?.error || 'Failed to create order'
+      throw new Error(errorMessage)
+    }
+
+    return data
   },
 }
