@@ -1,0 +1,42 @@
+- generic [ref=f3e2]:
+  - navigation "navbar" [ref=f3e3]:
+    - generic [ref=f3e4]:
+      - link "Django REST framework" [ref=f3e5] [cursor=pointer]:
+        - /url: https://www.django-rest-framework.org/
+      - list
+  - generic [ref=f3e6]:
+    - list [ref=f3e7]:
+      - listitem [ref=f3e8]:
+        - link "Api Root" [ref=f3e9] [cursor=pointer]:
+          - /url: /api/
+      - listitem [ref=f3e10]:
+        - text: /
+        - link "Product List" [ref=f3e11] [cursor=pointer]:
+          - /url: /api/products/
+      - listitem [ref=f3e12]:
+        - text: /
+        - link "Product Instance" [ref=f3e13] [cursor=pointer]:
+          - /url: /api/products/chinese-style-knotted-top/
+    - main "content" [ref=f3e14]:
+      - generic "request form":
+        - group [ref=f3e16]:
+          - generic [ref=f3e17]:
+            - link "GET" [ref=f3e18] [cursor=pointer]:
+              - /url: /api/products/chinese-style-knotted-top/
+            - button [ref=f3e19] [cursor=pointer]
+        - button "OPTIONS" [ref=f3e22] [cursor=pointer]
+      - main "main content" [ref=f3e23]:
+        - heading "Product Instance" [level=1] [ref=f3e25]
+        - generic:
+          - paragraph
+        - generic "request info" [ref=f3e26]:
+          - generic [ref=f3e27]:
+            - generic [ref=f3e28]: GET
+            - text: /api/products/chinese-style-knotted-top/
+        - generic "response info" [ref=f3e29]:
+          - generic [ref=f3e30]:
+            - generic [ref=f3e31]: "HTTP 200 OK Allow: GET, HEAD, OPTIONS Content-Type: application/json Vary: Accept"
+            - text: "{ \"id\": 1, \"name\": \"Chinese style knotted top\", \"slug\": \"chinese-style-knotted-top\", \"description\": \"Cute chinese-style-knotted-top\", \"price\": \"1250.00\", \"stock\": 3, \"rating\": \"4.0\", \"review_count\": 0, \"image\": \""
+            - link "http://localhost:8000/media/products/Screenshot_2026-07-17_170335.png" [ref=f3e32] [cursor=pointer]:
+              - /url: http://localhost:8000/media/products/Screenshot_2026-07-17_170335.png
+            - text: "\", \"category\": { \"id\": \"bc1f16cb-e9ed-4732-ae3c-119d39b69c6c\", \"name\": \"Cute Tops\", \"slug\": \"babydoll-top\", \"description\": \"Cutesy fairy babydoll top\", \"created_at\": \"2026-07-14T18:08:58.542935Z\" }, \"category_name\": \"Cute Tops\", \"is_active\": true, \"created_at\": \"2026-07-17T11:23:55.858698Z\" }"

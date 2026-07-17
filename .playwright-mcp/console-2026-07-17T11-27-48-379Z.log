@@ -1,0 +1,17 @@
+[     312ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=b98a3065:14335
+[     858ms] TypeError: rating.toFixed is not a function
+    at StarRating (http://localhost:5173/src/components/common/StarRating.jsx:17:22)
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=b98a3065:12866:12)
+    at renderWithHooks (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=b98a3065:4213:19)
+    at updateFunctionComponent (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=b98a3065:5569:16)
+    at beginWork (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=b98a3065:6140:20)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=b98a3065:851:66)
+    at performUnitOfWork (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=b98a3065:8429:92)
+    at workLoopSync (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=b98a3065:8325:37)
+    at renderRootSync (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=b98a3065:8309:6)
+    at performWorkOnRoot (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=b98a3065:7994:27)
+[     855ms] [WARNING] %s
+
+%s
+ An error occurred in the <StarRating> component. Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries. @ http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=b98a3065:5257

@@ -1,0 +1,93 @@
+- generic [ref=f1e3]:
+  - banner [ref=f1e4]:
+    - generic [ref=f1e5]: Free shipping on orders over Rs 3,000 · New arrivals every week
+    - generic [ref=f1e6]:
+      - link "LEGALIZE DREAMS" [ref=f1e7] [cursor=pointer]:
+        - /url: /
+      - navigation [ref=f1e8]:
+        - link "Home" [ref=f1e9] [cursor=pointer]:
+          - /url: /
+        - button "Shop" [ref=f1e11]
+        - link "Cart" [ref=f1e14] [cursor=pointer]:
+          - /url: /cart
+      - searchbox "Search products..." [ref=f1e16]
+      - link "View cart" [ref=f1e17] [cursor=pointer]:
+        - /url: /cart
+  - main [ref=f1e22]:
+    - generic [ref=f1e163]:
+      - navigation [ref=f1e164]:
+        - link "Home" [ref=f1e165] [cursor=pointer]:
+          - /url: /
+        - text: /Cute Tops
+      - generic [ref=f1e166]:
+        - heading "Cute Tops" [level=1] [ref=f1e168]
+        - generic [ref=f1e169]:
+          - text: Sort by
+          - combobox "Sort by" [ref=f1e170]:
+            - option "Featured" [selected]
+            - 'option "Price: Low to High"'
+            - 'option "Price: High to Low"'
+            - option "Top Rated"
+      - paragraph [ref=f1e171]: 1 product
+      - generic [ref=f1e173]:
+        - link [ref=f1e174] [cursor=pointer]:
+          - /url: /product/chinese-style-knotted-top
+          - generic [ref=f1e175]: ✨
+        - generic [ref=f1e177]:
+          - link [ref=f1e178] [cursor=pointer]:
+            - /url: /product/chinese-style-knotted-top
+            - heading "Chinese style knotted top" [level=3] [ref=f1e179]
+          - generic [ref=f1e180]:
+            - generic [ref=f1e181]: ★★★★☆
+            - generic [ref=f1e182]: "4.0"
+          - generic [ref=f1e183]: Rs 1250.00
+          - button "Add to Cart" [ref=f1e185]
+  - contentinfo [ref=f1e106]:
+    - generic [ref=f1e107]:
+      - generic [ref=f1e108]:
+        - paragraph [ref=f1e109]: LEGALIZE DREAMS
+        - paragraph [ref=f1e110]: Fashion accessories, skincare and makeup curated for your everyday glow.
+        - generic [ref=f1e111]:
+          - link "Instagram" [ref=f1e112] [cursor=pointer]:
+            - /url: "#"
+          - link "TikTok" [ref=f1e113] [cursor=pointer]:
+            - /url: "#"
+          - link "Facebook" [ref=f1e114] [cursor=pointer]:
+            - /url: "#"
+      - generic [ref=f1e115]:
+        - paragraph [ref=f1e116]: Shop
+        - list [ref=f1e160]:
+          - listitem [ref=f1e161]:
+            - link "Cute Tops" [ref=f1e162] [cursor=pointer]:
+              - /url: /category/babydoll-top
+      - generic [ref=f1e117]:
+        - paragraph [ref=f1e118]: Help
+        - list [ref=f1e119]:
+          - listitem [ref=f1e120]:
+            - link "Shopping Cart" [ref=f1e121] [cursor=pointer]:
+              - /url: /cart
+          - listitem [ref=f1e122]:
+            - link "FAQs" [ref=f1e123] [cursor=pointer]:
+              - /url: "#faq"
+          - listitem [ref=f1e124]:
+            - link "Shipping Policy" [ref=f1e125] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f1e126]:
+            - link "Returns Policy" [ref=f1e127] [cursor=pointer]:
+              - /url: "#"
+      - generic [ref=f1e128]:
+        - paragraph [ref=f1e129]: Company
+        - list [ref=f1e130]:
+          - listitem [ref=f1e131]:
+            - link "About Us" [ref=f1e132] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f1e133]:
+            - link "Contact" [ref=f1e134] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f1e135]:
+            - link "Terms of Service" [ref=f1e136] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f1e137]:
+            - link "Privacy Policy" [ref=f1e138] [cursor=pointer]:
+              - /url: "#"
+    - generic [ref=f1e139]: © 2026 LEGALIZE DREAMS. All rights reserved.
