@@ -40,8 +40,15 @@ export default function CategoryGrid() {
   return (
     <section id="categories" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 animate-on-scroll">
       <div className="text-center">
-        <p className="text-sm font-semibold uppercase tracking-widest text-blush-400 animate-on-load">Explore</p>
-        <h2 className="font-display mt-2 text-3xl font-semibold text-black animate-on-load animate-stagger-1">All Our Categories</h2>
+        <p className="text-sm font-semibold uppercase tracking-widest text-blush-400 animate-title" style={{animationDelay: '0s'}}>
+          ✨ Explore
+        </p>
+        <h2 className="font-display mt-3 text-3xl font-semibold text-black animate-title animate-underline" style={{animationDelay: '0.15s'}}>
+          All Our Categories
+        </h2>
+        <p className="mt-4 text-sm text-brand-600 animate-slow-text" style={{animationDelay: '0.4s'}}>
+          Browse through our curated collection
+        </p>
       </div>
 
       <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
@@ -51,8 +58,9 @@ export default function CategoryGrid() {
             <Link
               key={c.id}
               to={`/category/${c.slug}`}
-              className="group flex flex-col overflow-hidden rounded-2xl border border-brand-100 bg-white transition-shadow hover:shadow-lg hover:shadow-brand-100 hover:scale-105 transition-transform duration-300 animate-on-scroll opacity-0"
-              style={{animation: `slideUp 0.6s ease-out forwards`, animationDelay: `${idx * 0.08}s`}}
+              state={{ scrollTarget: 'categories' }}
+              className="group flex flex-col overflow-hidden rounded-2xl border border-brand-100 bg-white hover:shadow-2xl hover:shadow-brand-200 hover:scale-110 transition-all duration-500 animate-scale-in"
+              style={{animationDelay: `${0.45 + idx * 0.08}s`}}
             >
               {/* Product Images Grid */}
               <div className="relative aspect-square w-full overflow-hidden bg-gradient-to-br from-brand-100 to-brand-50">
@@ -159,8 +167,10 @@ export default function CategoryGrid() {
               </div>
 
               {/* Category Name */}
-              <div className="p-4 text-center animate-on-load">
-                <span className="text-sm font-medium text-black">{c.name}</span>
+              <div className="p-4 text-center group-hover:bg-brand-50 transition-colors duration-300">
+                <span className="text-sm font-medium text-black group-hover:text-brand-600 transition-colors duration-300">
+                  {c.name}
+                </span>
               </div>
             </Link>
           )
