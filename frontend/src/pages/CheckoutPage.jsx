@@ -73,6 +73,28 @@ export default function CheckoutPage() {
     setError(null)
   }
 
+  // Check if user is logged in
+  const isLoggedIn = !!localStorage.getItem('access_token')
+
+  // Not logged in message
+  if (!isLoggedIn) {
+    return (
+      <div className="mx-auto max-w-xl px-4 py-24 text-center sm:px-6 lg:px-8">
+        <span className="text-5xl" aria-hidden="true">🔐</span>
+        <h1 className="font-display mt-4 text-2xl font-semibold text-brand-900">Login Required</h1>
+        <p className="mt-2 text-brand-600">You must be logged in to proceed with checkout.</p>
+        <div className="mt-6 flex gap-3 justify-center">
+          <Link to="/">
+            <Button>Continue Shopping</Button>
+          </Link>
+        </div>
+        <p className="mt-4 text-sm text-brand-500">
+          Demo: Use any credentials to login in the header. Authentication is required for checkout.
+        </p>
+      </div>
+    )
+  }
+
   // Empty cart message
   if (items.length === 0) {
     return (
@@ -145,7 +167,7 @@ export default function CheckoutPage() {
             <div className="mt-6 pt-6 border-t border-brand-100">
               <p className="text-xs font-semibold text-brand-900 mb-3">Bank Details</p>
               <img
-                src="http://localhost:8000/media/bank.png"
+                src="http://localhost:8000/media/products/bank.png"
                 alt="Bank QR Code"
                 className="w-full rounded-lg border border-brand-200 shadow-sm"
               />
