@@ -71,6 +71,10 @@ export default function Hero() {
 
         {/* Video Container */}
         <div className="relative mx-auto w-full max-w-md overflow-hidden rounded-[2rem] bg-gradient-to-br from-blush-100 to-brand-200 shadow-xl border-4 border-white/50">
+          {/* Audio Player - Hidden but plays background audio from lowrise.mp4 */}
+          <audio autoPlay loop muted={false} style={{display: 'none'}}>
+            <source src="http://localhost:8000/media/products/lowrise.MP4" type="audio/mp4" />
+          </audio>
           <div className={`relative aspect-square w-full bg-brand-900 ${isTransitioning ? 'video-transitioning' : ''}`}>
             {VIDEOS.map((video, idx) => (
               <div

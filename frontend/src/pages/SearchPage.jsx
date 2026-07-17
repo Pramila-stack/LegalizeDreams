@@ -25,8 +25,8 @@ export default function SearchPage() {
   }, [query])
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-      <h1 className="font-display text-2xl font-semibold text-black">
+    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 animate-on-scroll">
+      <h1 className="font-display text-2xl font-semibold text-black opacity-0" style={{animation: 'slideUp 0.7s ease-out forwards'}}>
         Search results for &quot;{query}&quot;
       </h1>
       <p className="mt-1 text-sm text-brand-500">

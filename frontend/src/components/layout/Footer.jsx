@@ -24,7 +24,7 @@ export default function Footer() {
   }, [])
 
   return (
-    <footer className="bg-brand-600 text-blue-100">
+    <footer className="bg-brand-500 text-blue-100">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-4 lg:px-8">
         <div>
           <p className="font-display text-2xl font-semibold text-white">LEGALIZE DREAMS</p>

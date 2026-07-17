@@ -59,8 +59,8 @@ export default function ProductPage() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-      <nav className="text-xs text-brand-400">
+    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 animate-on-scroll">
+      <nav className="text-xs text-brand-400 opacity-0" style={{animation: 'slideUp 0.6s ease-out forwards'}}>
         <Link to="/" className="hover:text-brand-700">Home</Link>
         <span className="mx-1.5">/</span>
         <Link to={`/category/${product.categorySlug}`} className="hover:text-brand-700">

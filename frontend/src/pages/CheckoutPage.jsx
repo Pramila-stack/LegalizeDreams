@@ -88,10 +88,10 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8 animate-on-scroll">
       <h1 className="font-display text-3xl font-semibold text-black">Checkout</h1>
 
-      <div className="mt-8 grid gap-8 lg:grid-cols-3">
+      <div className="mt-8 grid gap-8 lg:grid-cols-3 opacity-0" style={{animation: 'slideUp 0.7s ease-out forwards'}}>
         {/* Form Section (2 columns on lg) */}
         <div className="lg:col-span-2">
           <div className="rounded-2xl border border-brand-100 p-6">

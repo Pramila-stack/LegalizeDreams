@@ -48,14 +48,14 @@ export default function CategoryPage() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-      <nav className="text-xs text-brand-400">
+    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 animate-on-scroll">
+      <nav className="text-xs text-brand-400 opacity-0" style={{animation: 'slideUp 0.6s ease-out forwards'}}>
         <Link to="/" className="hover:text-brand-700">Home</Link>
         <span className="mx-1.5">/</span>
         <span className="text-brand-700">{category?.name ?? '...'}</span>
       </nav>
 
-      <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
+      <div className="mt-3 flex flex-wrap items-end justify-between gap-4 opacity-0" style={{animation: 'slideUp 0.7s ease-out forwards', animationDelay: '0.1s'}}>
         <div className="flex items-center gap-3">
           <span className="text-3xl" aria-hidden="true">{category?.icon}</span>
           <h1 className="font-display text-3xl font-semibold text-black">{category?.name ?? 'Loading...'}</h1>

@@ -8,7 +8,7 @@ export default function ProductCard({ product }) {
   const { addToCart } = useCart()
 
   return (
-    <div className="group flex flex-col overflow-hidden rounded-2xl border border-brand-100 bg-white transition-shadow hover:shadow-lg hover:shadow-brand-100">
+    <div className="group flex flex-col overflow-hidden rounded-2xl border border-brand-100 bg-white transition-shadow hover:shadow-lg hover:shadow-brand-100 animate-on-scroll">
       <Link to={`/product/${product.slug}`} className="block">
         <ProductImage product={product} size="lg" className="aspect-square w-full" />
       </Link>

@@ -56,11 +56,11 @@ export default function CartPage() {
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8 animate-on-scroll">
       <h1 className="font-display text-3xl font-semibold text-black">Your Cart</h1>
 
       <div className="mt-8 grid gap-10 lg:grid-cols-3">
-        <div className="divide-y divide-brand-100 lg:col-span-2">
+        <div className="divide-y divide-brand-100 lg:col-span-2 opacity-0" style={{animation: 'slideUp 0.7s ease-out forwards'}}>
           {items.map((item) => {
             const product = products[item.slug]
             return (
