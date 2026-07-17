@@ -1,0 +1,75 @@
+- generic [ref=f21e3]:
+  - banner [ref=f21e4]:
+    - generic [ref=f21e5]: Free shipping on orders over Rs 3,000 · New arrivals every week
+    - generic [ref=f21e6]:
+      - button "Toggle menu" [ref=f21e7]
+      - link [ref=f21e10] [cursor=pointer]:
+        - /url: /
+        - img "Legalize Dreams" [ref=f21e12]
+      - link "View cart" [ref=f21e13] [cursor=pointer]:
+        - /url: /cart
+  - main [ref=f21e18]:
+    - generic [ref=f21e19]:
+      - generic [ref=f21e20]:
+        - link "← Back" [ref=f21e21] [cursor=pointer]:
+          - /url: /
+        - navigation [ref=f21e22]:
+          - link "Home" [ref=f21e23] [cursor=pointer]:
+            - /url: /
+          - text: /...
+      - generic [ref=f21e24]:
+        - heading "Loading..." [level=1] [ref=f21e26]
+        - generic [ref=f21e27]:
+          - text: Sort by
+          - combobox "Sort by" [ref=f21e28]:
+            - option "Featured" [selected]
+            - 'option "Price: Low to High"'
+            - 'option "Price: High to Low"'
+            - option "Top Rated"
+      - paragraph [ref=f21e29]: Loading products...
+  - contentinfo [ref=f21e87]:
+    - generic [ref=f21e88]:
+      - generic [ref=f21e89]:
+        - paragraph [ref=f21e90]: LEGALIZE DREAMS
+        - paragraph [ref=f21e91]: Fashion accessories, skincare and makeup curated for your everyday glow.
+        - generic [ref=f21e92]:
+          - link "Instagram" [ref=f21e93] [cursor=pointer]:
+            - /url: "#"
+          - link "TikTok" [ref=f21e94] [cursor=pointer]:
+            - /url: "#"
+          - link "Facebook" [ref=f21e95] [cursor=pointer]:
+            - /url: "#"
+      - generic [ref=f21e96]:
+        - paragraph [ref=f21e97]: Shop
+        - list
+      - generic [ref=f21e98]:
+        - paragraph [ref=f21e99]: Help
+        - list [ref=f21e100]:
+          - listitem [ref=f21e101]:
+            - link "Shopping Cart" [ref=f21e102] [cursor=pointer]:
+              - /url: /cart
+          - listitem [ref=f21e103]:
+            - link "FAQs" [ref=f21e104] [cursor=pointer]:
+              - /url: "#faq"
+          - listitem [ref=f21e105]:
+            - link "Shipping Policy" [ref=f21e106] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f21e107]:
+            - link "Returns Policy" [ref=f21e108] [cursor=pointer]:
+              - /url: "#"
+      - generic [ref=f21e109]:
+        - paragraph [ref=f21e110]: Company
+        - list [ref=f21e111]:
+          - listitem [ref=f21e112]:
+            - link "About Us" [ref=f21e113] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f21e114]:
+            - link "Contact" [ref=f21e115] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f21e116]:
+            - link "Terms of Service" [ref=f21e117] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f21e118]:
+            - link "Privacy Policy" [ref=f21e119] [cursor=pointer]:
+              - /url: "#"
+    - generic [ref=f21e120]: © 2026 LEGALIZE DREAMS. All rights reserved.

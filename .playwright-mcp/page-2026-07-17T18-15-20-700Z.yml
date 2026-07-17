@@ -1,0 +1,65 @@
+- generic [ref=f18e3]:
+  - banner [ref=f18e4]:
+    - generic [ref=f18e5]: Free shipping on orders over Rs 3,000 · New arrivals every week
+    - generic [ref=f18e6]:
+      - link "Legalize Dreams LEGALIZE DREAMS" [ref=f18e7] [cursor=pointer]:
+        - /url: /
+        - img "Legalize Dreams" [ref=f18e9]
+        - generic [ref=f18e10]: LEGALIZE DREAMS
+      - navigation [ref=f18e11]:
+        - link "Home" [ref=f18e12] [cursor=pointer]:
+          - /url: /
+        - button "Shop" [ref=f18e14]
+        - link "Cart" [ref=f18e17] [cursor=pointer]:
+          - /url: /cart
+      - searchbox "Search products..." [ref=f18e19]
+      - link "View cart" [ref=f18e20] [cursor=pointer]:
+        - /url: /cart
+  - main [ref=f18e25]:
+    - generic [ref=f18e26]: Loading...
+  - contentinfo [ref=f18e27]:
+    - generic [ref=f18e28]:
+      - generic [ref=f18e29]:
+        - paragraph [ref=f18e30]: LEGALIZE DREAMS
+        - paragraph [ref=f18e31]: Fashion accessories, skincare and makeup curated for your everyday glow.
+        - generic [ref=f18e32]:
+          - link "Instagram" [ref=f18e33] [cursor=pointer]:
+            - /url: "#"
+          - link "TikTok" [ref=f18e34] [cursor=pointer]:
+            - /url: "#"
+          - link "Facebook" [ref=f18e35] [cursor=pointer]:
+            - /url: "#"
+      - generic [ref=f18e36]:
+        - paragraph [ref=f18e37]: Shop
+        - list
+      - generic [ref=f18e38]:
+        - paragraph [ref=f18e39]: Help
+        - list [ref=f18e40]:
+          - listitem [ref=f18e41]:
+            - link "Shopping Cart" [ref=f18e42] [cursor=pointer]:
+              - /url: /cart
+          - listitem [ref=f18e43]:
+            - link "FAQs" [ref=f18e44] [cursor=pointer]:
+              - /url: "#faq"
+          - listitem [ref=f18e45]:
+            - link "Shipping Policy" [ref=f18e46] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f18e47]:
+            - link "Returns Policy" [ref=f18e48] [cursor=pointer]:
+              - /url: "#"
+      - generic [ref=f18e49]:
+        - paragraph [ref=f18e50]: Company
+        - list [ref=f18e51]:
+          - listitem [ref=f18e52]:
+            - link "About Us" [ref=f18e53] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f18e54]:
+            - link "Contact" [ref=f18e55] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f18e56]:
+            - link "Terms of Service" [ref=f18e57] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f18e58]:
+            - link "Privacy Policy" [ref=f18e59] [cursor=pointer]:
+              - /url: "#"
+    - generic [ref=f18e60]: © 2026 LEGALIZE DREAMS. All rights reserved.

@@ -78,8 +78,8 @@ export default function CheckoutPage() {
     return (
       <div className="mx-auto max-w-xl px-4 py-24 text-center sm:px-6 lg:px-8">
         <span className="text-5xl" aria-hidden="true">🛍️</span>
-        <h1 className="font-display mt-4 text-2xl font-semibold text-brand-900">Your cart is empty</h1>
-        <p className="mt-2 text-brand-600">Add items before proceeding to checkout.</p>
+        <h1 className="font-display mt-4 text-2xl font-semibold text-black animate-slow-text">Your cart is empty</h1>
+        <p className="mt-2 text-brand-600 animate-slow-text" style={{animationDelay: '0.2s'}}>Add items before proceeding to checkout.</p>
         <Link to="/" className="mt-6 inline-block">
           <Button>Start Shopping</Button>
         </Link>
@@ -89,7 +89,7 @@ export default function CheckoutPage() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8 animate-on-scroll">
-      <h1 className="font-display text-3xl font-semibold text-black">Checkout</h1>
+      <h1 className="font-display text-3xl font-semibold text-black animate-slow-text">Checkout</h1>
 
       <div className="mt-8 grid gap-8 lg:grid-cols-3 opacity-0" style={{animation: 'slideUp 0.7s ease-out forwards'}}>
         {/* Form Section (2 columns on lg) */}
@@ -103,12 +103,12 @@ export default function CheckoutPage() {
 
             {step === 'shipping' ? (
               <div>
-                <h2 className="font-display mb-6 text-xl font-semibold text-brand-900">Shipping Information</h2>
+                <h2 className="font-display mb-6 text-xl font-semibold text-black animate-slow-text">Shipping Information</h2>
                 <ShippingForm onSubmit={handleShippingSubmit} loading={loading} />
               </div>
             ) : (
               <div>
-                <h2 className="font-display mb-6 text-xl font-semibold text-brand-900">Payment Method</h2>
+                <h2 className="font-display mb-6 text-xl font-semibold text-black animate-slow-text">Payment Method</h2>
                 <PaymentMethodForm
                   onSubmit={handlePaymentSubmit}
                   onBack={handleBack}
@@ -121,8 +121,8 @@ export default function CheckoutPage() {
         </div>
 
         {/* Order Summary Sidebar */}
-        <div className="h-fit rounded-2xl border border-brand-100 p-6 sticky top-4">
-          <h2 className="font-display text-lg font-semibold text-brand-900">Order Summary</h2>
+        <div className="h-fit rounded-2xl border border-brand-100 p-6 sticky top-4 animate-slow-text" style={{animationDelay: '0.2s'}}>
+          <h2 className="font-display text-lg font-semibold text-black">Order Summary</h2>
 
           <div className="mt-4 space-y-2 text-sm">
             <div className="flex justify-between text-brand-600">

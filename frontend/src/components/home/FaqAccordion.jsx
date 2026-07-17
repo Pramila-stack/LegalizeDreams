@@ -32,13 +32,13 @@ export default function FaqAccordion() {
 
   return (
     <section id="faq" className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 animate-on-scroll">
-      <h2 className="font-display text-center text-3xl font-semibold text-black animate-on-load">Most Asked Questions</h2>
+      <h2 className="font-display text-center text-3xl font-semibold text-black animate-slow-text" style={{animationDelay: '0s'}}>Most Asked Questions</h2>
 
       <div className="mt-8 divide-y divide-brand-100 border-y border-brand-100">
         {faqs.map((item, i) => {
           const isOpen = openIndex === i
           return (
-            <div key={item.q} className="animate-on-scroll opacity-0" style={{animation: `slideUp 0.6s ease-out forwards`, animationDelay: `${i * 0.1}s`}}>
+            <div key={item.q} className="animate-slow-text" style={{animationDelay: `${0.15 + i * 0.1}s`}}>
               <button
                 onClick={() => setOpenIndex(isOpen ? null : i)}
                 className="flex w-full items-center justify-between gap-4 py-4 text-left text-sm font-medium text-black hover:text-brand-600 transition-colors"
@@ -57,7 +57,7 @@ export default function FaqAccordion() {
                   <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
-              {isOpen && <p className="pb-4 text-sm leading-relaxed text-brand-600 animate-on-load" style={{animation: `slideUp 0.4s ease-out`}}>{item.a}</p>}
+              {isOpen && <p className="pb-4 text-sm leading-relaxed text-brand-600 animate-slow-fade" style={{animationDelay: '0s'}}>{item.a}</p>}
             </div>
           )
         })}

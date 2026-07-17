@@ -1,0 +1,91 @@
+- generic [ref=f5e3]:
+  - banner [ref=f5e4]:
+    - generic [ref=f5e5]: Free shipping on orders over Rs 3,000 · New arrivals every week
+    - generic [ref=f5e6]:
+      - link "Legalize Dreams LEGALIZE DREAMS" [ref=f5e7] [cursor=pointer]:
+        - /url: /
+        - img "Legalize Dreams" [ref=f5e9]
+        - generic [ref=f5e10]: LEGALIZE DREAMS
+      - navigation [ref=f5e11]:
+        - link "Home" [ref=f5e12] [cursor=pointer]:
+          - /url: /
+        - button "Shop" [ref=f5e14]
+        - link "Cart" [ref=f5e17] [cursor=pointer]:
+          - /url: /cart
+      - searchbox "Search products..." [ref=f5e19]
+      - link "View cart" [ref=f5e20] [cursor=pointer]:
+        - /url: /cart
+  - main [ref=f5e25]:
+    - generic [ref=f5e27]:
+      - generic [ref=f5e28]:
+        - paragraph [ref=f5e29]: New Season Edit
+        - heading "Little joys for your everyday glow" [level=1] [ref=f5e30]
+        - paragraph [ref=f5e31]: Skincare, makeup and fashion accessories curated in one place — cute, considered, and made to be loved.
+        - generic [ref=f5e32]:
+          - link "Shop New Arrivals" [ref=f5e33] [cursor=pointer]:
+            - /url: /shop
+          - link "Browse Categories" [ref=f5e34] [cursor=pointer]:
+            - /url: "#categories"
+      - generic [ref=f5e41]:
+        - button "Go to video 1" [ref=f5e42]
+        - button "Go to video 2" [ref=f5e43]
+    - generic [ref=f5e44]: Loading categories...
+    - generic [ref=f5e47]:
+      - paragraph [ref=f5e48]: Customer Favorites
+      - heading "Most Loved" [level=2] [ref=f5e49]
+      - paragraph [ref=f5e50]: Bestselling picks from our community
+    - generic [ref=f5e87]:
+      - heading "Most Asked Questions" [level=2] [ref=f5e88]
+      - generic [ref=f5e89]:
+        - button "How long is the delivery time and what’s the delivery fee?" [ref=f5e91]
+        - button "Are your skincare items authentic?" [ref=f5e95]
+        - button "I haven’t received any confirmation email or SMS?" [ref=f5e99]
+        - button "Do the lip tints cause dark lips?" [ref=f5e103]
+        - button "Returns?" [ref=f5e107]
+        - button "Is everything in stock that’s on the website?" [ref=f5e111]
+  - contentinfo [ref=f5e114]:
+    - generic [ref=f5e115]:
+      - generic [ref=f5e116]:
+        - paragraph [ref=f5e117]: LEGALIZE DREAMS
+        - paragraph [ref=f5e118]: Fashion accessories, skincare and makeup curated for your everyday glow.
+        - generic [ref=f5e119]:
+          - link "Instagram" [ref=f5e120] [cursor=pointer]:
+            - /url: "#"
+          - link "TikTok" [ref=f5e121] [cursor=pointer]:
+            - /url: "#"
+          - link "Facebook" [ref=f5e122] [cursor=pointer]:
+            - /url: "#"
+      - generic [ref=f5e123]:
+        - paragraph [ref=f5e124]: Shop
+        - list
+      - generic [ref=f5e125]:
+        - paragraph [ref=f5e126]: Help
+        - list [ref=f5e127]:
+          - listitem [ref=f5e128]:
+            - link "Shopping Cart" [ref=f5e129] [cursor=pointer]:
+              - /url: /cart
+          - listitem [ref=f5e130]:
+            - link "FAQs" [ref=f5e131] [cursor=pointer]:
+              - /url: "#faq"
+          - listitem [ref=f5e132]:
+            - link "Shipping Policy" [ref=f5e133] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f5e134]:
+            - link "Returns Policy" [ref=f5e135] [cursor=pointer]:
+              - /url: "#"
+      - generic [ref=f5e136]:
+        - paragraph [ref=f5e137]: Company
+        - list [ref=f5e138]:
+          - listitem [ref=f5e139]:
+            - link "About Us" [ref=f5e140] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f5e141]:
+            - link "Contact" [ref=f5e142] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f5e143]:
+            - link "Terms of Service" [ref=f5e144] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f5e145]:
+            - link "Privacy Policy" [ref=f5e146] [cursor=pointer]:
+              - /url: "#"
+    - generic [ref=f5e147]: © 2026 LEGALIZE DREAMS. All rights reserved.

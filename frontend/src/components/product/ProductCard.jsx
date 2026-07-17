@@ -4,13 +4,13 @@ import Price from '../common/Price'
 import StarRating from '../common/StarRating'
 import { useCart } from '../../context/CartContext'
 
-export default function ProductCard({ product, index = 0 }) {
+export default function ProductCard({ product, index = 0, scrollTarget = null }) {
   const { addToCart } = useCart()
 
   return (
     <div className="group flex flex-col overflow-hidden rounded-2xl border border-brand-100 bg-white transition-shadow hover:shadow-lg hover:shadow-brand-100 hover:scale-105 transition-transform duration-300 animate-on-scroll opacity-0"
       style={{animation: `slideUp 0.6s ease-out forwards`, animationDelay: `${index * 0.1}s`}}>
-      <Link to={`/product/${product.slug}`} className="block">
+      <Link to={`/product/${product.slug}`} state={scrollTarget ? { scrollTarget } : {}} className="block">
         <ProductImage product={product} size="lg" className="aspect-square w-full" />
       </Link>
       <div className="flex flex-1 flex-col gap-1.5 p-4">

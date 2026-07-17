@@ -1,0 +1,124 @@
+- generic [ref=f15e3]:
+  - banner [ref=f15e4]:
+    - generic [ref=f15e5]: Free shipping on orders over Rs 3,000 · New arrivals every week
+    - generic [ref=f15e6]:
+      - link "Legalize Dreams LEGALIZE DREAMS" [ref=f15e7] [cursor=pointer]:
+        - /url: /
+        - img "Legalize Dreams" [ref=f15e9]
+        - generic [ref=f15e10]: LEGALIZE DREAMS
+      - navigation [ref=f15e11]:
+        - link "Home" [ref=f15e12] [cursor=pointer]:
+          - /url: /
+        - button "Shop" [ref=f15e14]
+        - link "Cart" [ref=f15e17] [cursor=pointer]:
+          - /url: /cart
+      - searchbox "Search products..." [ref=f15e19]
+      - link "View cart" [ref=f15e20] [cursor=pointer]:
+        - /url: /cart
+  - main [ref=f15e25]:
+    - generic [ref=f15e272]:
+      - generic [ref=f15e273]:
+        - navigation [ref=f15e274]:
+          - link "Home" [ref=f15e275] [cursor=pointer]:
+            - /url: /
+          - text: /Chinese style knotted top
+        - link "← Back to Categories" [ref=f15e276] [cursor=pointer]:
+          - /url: /
+      - generic [ref=f15e277]:
+        - heading "Chinese style knotted top" [level=1] [ref=f15e279]
+        - generic [ref=f15e280]:
+          - text: Sort by
+          - combobox "Sort by" [ref=f15e281]:
+            - option "Featured" [selected]
+            - 'option "Price: Low to High"'
+            - 'option "Price: High to Low"'
+            - option "Top Rated"
+      - paragraph [ref=f15e282]: 2 products
+      - generic [ref=f15e283]:
+        - generic [ref=f15e284]:
+          - link [ref=f15e285] [cursor=pointer]:
+            - /url: /product/pink-chinese-style-tops
+            - img "Pink chinese style tops" [ref=f15e287]
+          - generic [ref=f15e288]:
+            - link [ref=f15e289] [cursor=pointer]:
+              - /url: /product/pink-chinese-style-tops
+              - heading "Pink chinese style tops" [level=3] [ref=f15e290]
+            - generic [ref=f15e291]:
+              - generic [ref=f15e292]: ☆☆☆☆☆
+              - generic [ref=f15e293]: "0.0"
+            - generic [ref=f15e294]: Rs 1250.00
+            - button "Add to Cart" [ref=f15e296]
+        - generic [ref=f15e297]:
+          - link [ref=f15e298] [cursor=pointer]:
+            - /url: /product/chinese-style-knotted-top
+            - img "Chinese style knotted top" [ref=f15e300]
+          - generic [ref=f15e301]:
+            - link [ref=f15e302] [cursor=pointer]:
+              - /url: /product/chinese-style-knotted-top
+              - heading "Chinese style knotted top" [level=3] [ref=f15e303]
+            - generic [ref=f15e304]:
+              - generic [ref=f15e305]: ★★★★☆
+              - generic [ref=f15e306]: "4.0"
+            - generic [ref=f15e307]: Rs 1250.00
+            - button "Add to Cart" [ref=f15e309]
+  - contentinfo [ref=f15e114]:
+    - generic [ref=f15e115]:
+      - generic [ref=f15e116]:
+        - paragraph [ref=f15e117]: LEGALIZE DREAMS
+        - paragraph [ref=f15e118]: Fashion accessories, skincare and makeup curated for your everyday glow.
+        - generic [ref=f15e119]:
+          - link "Instagram" [ref=f15e120] [cursor=pointer]:
+            - /url: "#"
+          - link "TikTok" [ref=f15e121] [cursor=pointer]:
+            - /url: "#"
+          - link "Facebook" [ref=f15e122] [cursor=pointer]:
+            - /url: "#"
+      - generic [ref=f15e123]:
+        - paragraph [ref=f15e124]: Shop
+        - list [ref=f15e261]:
+          - listitem [ref=f15e262]:
+            - link "Chinese style knotted top" [ref=f15e263] [cursor=pointer]:
+              - /url: /category/chinese-style-knotted-top
+          - listitem [ref=f15e264]:
+            - link "Cute Tops" [ref=f15e265] [cursor=pointer]:
+              - /url: /category/babydoll-top
+          - listitem [ref=f15e266]:
+            - link "FairyCore Tops" [ref=f15e267] [cursor=pointer]:
+              - /url: /category/fairycore-tops
+          - listitem [ref=f15e268]:
+            - link "Pinterest Pink Tops" [ref=f15e269] [cursor=pointer]:
+              - /url: /category/pink-tops
+          - listitem [ref=f15e270]:
+            - link "Pinteresty Inspired Tops" [ref=f15e271] [cursor=pointer]:
+              - /url: /category/pinterest-tops
+      - generic [ref=f15e125]:
+        - paragraph [ref=f15e126]: Help
+        - list [ref=f15e127]:
+          - listitem [ref=f15e128]:
+            - link "Shopping Cart" [ref=f15e129] [cursor=pointer]:
+              - /url: /cart
+          - listitem [ref=f15e130]:
+            - link "FAQs" [ref=f15e131] [cursor=pointer]:
+              - /url: "#faq"
+          - listitem [ref=f15e132]:
+            - link "Shipping Policy" [ref=f15e133] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f15e134]:
+            - link "Returns Policy" [ref=f15e135] [cursor=pointer]:
+              - /url: "#"
+      - generic [ref=f15e136]:
+        - paragraph [ref=f15e137]: Company
+        - list [ref=f15e138]:
+          - listitem [ref=f15e139]:
+            - link "About Us" [ref=f15e140] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f15e141]:
+            - link "Contact" [ref=f15e142] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f15e143]:
+            - link "Terms of Service" [ref=f15e144] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f15e145]:
+            - link "Privacy Policy" [ref=f15e146] [cursor=pointer]:
+              - /url: "#"
+    - generic [ref=f15e147]: © 2026 LEGALIZE DREAMS. All rights reserved.

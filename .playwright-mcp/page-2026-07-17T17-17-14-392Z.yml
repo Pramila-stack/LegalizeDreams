@@ -1,0 +1,91 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]: Free shipping on orders over Rs 3,000 · New arrivals every week
+    - generic [ref=e6]:
+      - link "Legalize Dreams LEGALIZE DREAMS" [ref=e7] [cursor=pointer]:
+        - /url: /
+        - img "Legalize Dreams" [ref=e9]
+        - generic [ref=e10]: LEGALIZE DREAMS
+      - navigation [ref=e11]:
+        - link "Home" [ref=e12] [cursor=pointer]:
+          - /url: /
+        - button "Shop" [ref=e14]
+        - link "Cart" [ref=e17] [cursor=pointer]:
+          - /url: /cart
+      - searchbox "Search products..." [ref=e19]
+      - link "View cart" [ref=e20] [cursor=pointer]:
+        - /url: /cart
+  - main [ref=e25]:
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - paragraph [ref=e29]: New Season Edit
+        - heading "Little joys for your everyday glow" [level=1] [ref=e30]
+        - paragraph [ref=e31]: Skincare, makeup and fashion accessories curated in one place — cute, considered, and made to be loved.
+        - generic [ref=e32]:
+          - link "Shop New Arrivals" [ref=e33] [cursor=pointer]:
+            - /url: /shop
+          - link "Browse Categories" [ref=e34] [cursor=pointer]:
+            - /url: "#categories"
+      - generic [ref=e41]:
+        - button "Go to video 1" [ref=e42]
+        - button "Go to video 2" [ref=e43]
+    - generic [ref=e44]: Loading categories...
+    - generic [ref=e47]:
+      - paragraph [ref=e48]: Customer Favorites
+      - heading "Most Loved" [level=2] [ref=e49]
+      - paragraph [ref=e50]: Bestselling picks from our community
+    - generic [ref=e87]:
+      - heading "Most Asked Questions" [level=2] [ref=e88]
+      - generic [ref=e89]:
+        - button "How long is the delivery time and what’s the delivery fee?" [ref=e91]
+        - button "Are your skincare items authentic?" [ref=e95]
+        - button "I haven’t received any confirmation email or SMS?" [ref=e99]
+        - button "Do the lip tints cause dark lips?" [ref=e103]
+        - button "Returns?" [ref=e107]
+        - button "Is everything in stock that’s on the website?" [ref=e111]
+  - contentinfo [ref=e114]:
+    - generic [ref=e115]:
+      - generic [ref=e116]:
+        - paragraph [ref=e117]: LEGALIZE DREAMS
+        - paragraph [ref=e118]: Fashion accessories, skincare and makeup curated for your everyday glow.
+        - generic [ref=e119]:
+          - link "Instagram" [ref=e120] [cursor=pointer]:
+            - /url: "#"
+          - link "TikTok" [ref=e121] [cursor=pointer]:
+            - /url: "#"
+          - link "Facebook" [ref=e122] [cursor=pointer]:
+            - /url: "#"
+      - generic [ref=e123]:
+        - paragraph [ref=e124]: Shop
+        - list
+      - generic [ref=e125]:
+        - paragraph [ref=e126]: Help
+        - list [ref=e127]:
+          - listitem [ref=e128]:
+            - link "Shopping Cart" [ref=e129] [cursor=pointer]:
+              - /url: /cart
+          - listitem [ref=e130]:
+            - link "FAQs" [ref=e131] [cursor=pointer]:
+              - /url: "#faq"
+          - listitem [ref=e132]:
+            - link "Shipping Policy" [ref=e133] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e134]:
+            - link "Returns Policy" [ref=e135] [cursor=pointer]:
+              - /url: "#"
+      - generic [ref=e136]:
+        - paragraph [ref=e137]: Company
+        - list [ref=e138]:
+          - listitem [ref=e139]:
+            - link "About Us" [ref=e140] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e141]:
+            - link "Contact" [ref=e142] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e143]:
+            - link "Terms of Service" [ref=e144] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e145]:
+            - link "Privacy Policy" [ref=e146] [cursor=pointer]:
+              - /url: "#"
+    - generic [ref=e147]: © 2026 LEGALIZE DREAMS. All rights reserved.

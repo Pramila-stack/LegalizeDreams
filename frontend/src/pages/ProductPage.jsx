@@ -60,31 +60,40 @@ export default function ProductPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 animate-on-scroll">
-      <nav className="text-xs text-brand-400 opacity-0" style={{animation: 'slideUp 0.6s ease-out forwards'}}>
-        <Link to="/" className="hover:text-brand-700">Home</Link>
-        <span className="mx-1.5">/</span>
-        <Link to={`/category/${product.categorySlug}`} className="hover:text-brand-700">
-          {category?.name}
+      <div className="mb-4 flex items-center gap-4">
+        <Link
+          to="/"
+          className="inline-block rounded-full border border-brand-600 px-4 py-2 text-xs font-semibold text-brand-600 transition-colors hover:bg-brand-50"
+        >
+          ← Back
         </Link>
-        <span className="mx-1.5">/</span>
-        <span className="text-brand-700">{product.name}</span>
-      </nav>
+
+        <nav className="text-xs text-brand-400 opacity-0" style={{animation: 'slideUp 0.6s ease-out forwards'}}>
+          <Link to="/" className="hover:text-brand-700">Home</Link>
+          <span className="mx-1.5">/</span>
+          <Link to={`/category/${product.categorySlug}`} className="hover:text-brand-700">
+            {category?.name}
+          </Link>
+          <span className="mx-1.5">/</span>
+          <span className="text-brand-700">{product.name}</span>
+        </nav>
+      </div>
 
       <div className="mt-6 grid gap-10 lg:grid-cols-2">
         <ProductImage product={product} size="lg" className="aspect-square w-full" />
 
         <div>
-          <h1 className="font-display text-3xl font-semibold text-black animate-on-load">{product.name}</h1>
-          <div className="mt-3 animate-on-load animate-stagger-1">
+          <h1 className="font-display text-3xl font-semibold text-black animate-slow-text">{product.name}</h1>
+          <div className="mt-3 animate-slow-text" style={{animationDelay: '0.15s'}}>
             <StarRating rating={product.rating} reviews={product.reviews} size="md" />
           </div>
-          <div className="mt-4 animate-on-load animate-stagger-2">
+          <div className="mt-4 animate-slow-text" style={{animationDelay: '0.3s'}}>
             <Price price={product.price} mrp={product.mrp} size="lg" />
           </div>
 
-          <p className="mt-6 max-w-lg leading-relaxed text-brand-600 animate-on-load animate-stagger-3">{product.description}</p>
+          <p className="mt-6 max-w-lg leading-relaxed text-brand-600 animate-slow-text" style={{animationDelay: '0.45s'}}>{product.description}</p>
 
-          <p className="mt-4 text-sm text-brand-500 animate-on-load animate-stagger-3">
+          <p className="mt-4 text-sm text-brand-500 animate-slow-text" style={{animationDelay: '0.6s'}}>
             {product.stock > 0 ? (
               <span className="text-green-600">In stock — ready to ship</span>
             ) : (
@@ -112,10 +121,10 @@ export default function ProductPage() {
 
       {related.length > 0 && (
         <section className="mt-20">
-          <h2 className="font-display text-2xl font-semibold text-brand-900">You may also like</h2>
+          <h2 className="font-display text-2xl font-semibold text-black animate-on-load">You may also like</h2>
           <div className="mt-6 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
-            {related.map((p) => (
-              <ProductCard key={p.id} product={p} />
+            {related.map((p, idx) => (
+              <ProductCard key={p.id} product={p} index={idx} />
             ))}
           </div>
         </section>

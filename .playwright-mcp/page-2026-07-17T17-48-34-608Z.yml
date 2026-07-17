@@ -1,0 +1,206 @@
+- generic [ref=f11e3]:
+  - banner [ref=f11e4]:
+    - generic [ref=f11e5]: Free shipping on orders over Rs 3,000 · New arrivals every week
+    - generic [ref=f11e6]:
+      - link "Legalize Dreams LEGALIZE DREAMS" [ref=f11e7] [cursor=pointer]:
+        - /url: /
+        - img "Legalize Dreams" [ref=f11e9]
+        - generic [ref=f11e10]: LEGALIZE DREAMS
+      - navigation [ref=f11e11]:
+        - link "Home" [ref=f11e12] [cursor=pointer]:
+          - /url: /
+        - button "Shop" [ref=f11e14]
+        - link "Cart" [ref=f11e17] [cursor=pointer]:
+          - /url: /cart
+      - searchbox "Search products..." [ref=f11e19]
+      - link "View cart" [ref=f11e20] [cursor=pointer]:
+        - /url: /cart
+  - main [ref=f11e25]:
+    - generic [ref=f11e27]:
+      - generic [ref=f11e28]:
+        - paragraph [ref=f11e29]: New Season Edit
+        - heading "Little joys for your everyday glow" [level=1] [ref=f11e30]
+        - paragraph [ref=f11e31]: Skincare, makeup and fashion accessories curated in one place — cute, considered, and made to be loved.
+        - generic [ref=f11e32]:
+          - link "Shop New Arrivals" [ref=f11e33] [cursor=pointer]:
+            - /url: /shop
+          - link "Browse Categories" [ref=f11e34] [cursor=pointer]:
+            - /url: "#categories"
+      - generic [ref=f11e41]:
+        - button "Go to video 1" [ref=f11e42]
+        - button "Go to video 2" [ref=f11e43]
+    - generic [ref=f11e44]:
+      - generic [ref=f11e148]:
+        - paragraph [ref=f11e149]: Explore
+        - heading "All Our Categories" [level=2] [ref=f11e150]
+        - paragraph [ref=f11e151]: Browse through our curated collection
+      - generic [ref=f11e152]:
+        - link "Pink chinese style tops Chinese style knotted top Chinese style knotted top" [ref=f11e153] [cursor=pointer]:
+          - /url: /category/chinese-style-knotted-top
+          - generic [ref=f11e156]:
+            - img "Pink chinese style tops" [ref=f11e158]
+            - img "Chinese style knotted top" [ref=f11e160]
+          - generic [ref=f11e161]: Chinese style knotted top
+        - link "Basic cute babytee Cute Tops" [ref=f11e162] [cursor=pointer]:
+          - /url: /category/babydoll-top
+          - img "Basic cute babytee" [ref=f11e166]
+          - generic [ref=f11e167]: Cute Tops
+        - link "White cute tee FairyCore Tops" [ref=f11e168] [cursor=pointer]:
+          - /url: /category/fairycore-tops
+          - img "White cute tee" [ref=f11e172]
+          - generic [ref=f11e173]: FairyCore Tops
+        - link "Pink and black coquette top Coquette pink top Black and pink top Pinterest Pink Tops" [ref=f11e174] [cursor=pointer]:
+          - /url: /category/pink-tops
+          - generic [ref=f11e177]:
+            - img "Pink and black coquette top" [ref=f11e179]
+            - img "Coquette pink top" [ref=f11e181]
+            - img "Black and pink top" [ref=f11e183]
+          - generic [ref=f11e184]: Pinterest Pink Tops
+        - link "Shoju inspired top Ghingnam top Cute polka dot babydoll tee Pinteresty Inspired Tops" [ref=f11e185] [cursor=pointer]:
+          - /url: /category/pinterest-tops
+          - generic [ref=f11e188]:
+            - img "Shoju inspired top" [ref=f11e190]
+            - img "Ghingnam top" [ref=f11e192]
+            - img "Cute polka dot babydoll tee" [ref=f11e194]
+          - generic [ref=f11e195]: Pinteresty Inspired Tops
+    - generic [ref=f11e46]:
+      - generic [ref=f11e47]:
+        - paragraph [ref=f11e48]: Customer Favorites
+        - heading "Most Loved" [level=2] [ref=f11e49]
+        - paragraph [ref=f11e50]: Bestselling picks from our community
+      - generic [ref=f11e51]:
+        - generic [ref=f11e196]:
+          - link [ref=f11e197] [cursor=pointer]:
+            - /url: /product/white-cute-tee
+            - img "White cute tee" [ref=f11e199]
+          - generic [ref=f11e200]:
+            - link [ref=f11e201] [cursor=pointer]:
+              - /url: /product/white-cute-tee
+              - heading "White cute tee" [level=3] [ref=f11e202]
+            - generic [ref=f11e203]:
+              - generic [ref=f11e204]: ☆☆☆☆☆
+              - generic [ref=f11e205]: "0.0"
+            - generic [ref=f11e206]: Rs 1359.00
+            - button "Add to Cart" [ref=f11e208]
+        - generic [ref=f11e209]:
+          - link [ref=f11e210] [cursor=pointer]:
+            - /url: /product/shoju-inspired-top
+            - img "Shoju inspired top" [ref=f11e212]
+          - generic [ref=f11e213]:
+            - link [ref=f11e214] [cursor=pointer]:
+              - /url: /product/shoju-inspired-top
+              - heading "Shoju inspired top" [level=3] [ref=f11e215]
+            - generic [ref=f11e216]:
+              - generic [ref=f11e217]: ☆☆☆☆☆
+              - generic [ref=f11e218]: "0.0"
+            - generic [ref=f11e219]: Rs 1400.00
+            - button "Add to Cart" [ref=f11e221]
+        - generic [ref=f11e222]:
+          - link [ref=f11e223] [cursor=pointer]:
+            - /url: /product/ghingnam-top
+            - img "Ghingnam top" [ref=f11e225]
+          - generic [ref=f11e226]:
+            - link [ref=f11e227] [cursor=pointer]:
+              - /url: /product/ghingnam-top
+              - heading "Ghingnam top" [level=3] [ref=f11e228]
+            - generic [ref=f11e229]:
+              - generic [ref=f11e230]: ☆☆☆☆☆
+              - generic [ref=f11e231]: "0.0"
+            - generic [ref=f11e232]: Rs 1999.00
+            - button "Add to Cart" [ref=f11e234]
+        - generic [ref=f11e235]:
+          - link [ref=f11e236] [cursor=pointer]:
+            - /url: /product/cute-polka-dot-babydoll-tee
+            - img "Cute polka dot babydoll tee" [ref=f11e238]
+          - generic [ref=f11e239]:
+            - link [ref=f11e240] [cursor=pointer]:
+              - /url: /product/cute-polka-dot-babydoll-tee
+              - heading "Cute polka dot babydoll tee" [level=3] [ref=f11e241]
+            - generic [ref=f11e242]:
+              - generic [ref=f11e243]: ☆☆☆☆☆
+              - generic [ref=f11e244]: "0.0"
+            - generic [ref=f11e245]: Rs 1650.00
+            - button "Add to Cart" [ref=f11e247]
+        - generic [ref=f11e248]:
+          - link [ref=f11e249] [cursor=pointer]:
+            - /url: /product/flower-full-sleeve-tee
+            - img "Flower full sleeve tee" [ref=f11e251]
+          - generic [ref=f11e252]:
+            - link [ref=f11e253] [cursor=pointer]:
+              - /url: /product/flower-full-sleeve-tee
+              - heading "Flower full sleeve tee" [level=3] [ref=f11e254]
+            - generic [ref=f11e255]:
+              - generic [ref=f11e256]: ☆☆☆☆☆
+              - generic [ref=f11e257]: "0.0"
+            - generic [ref=f11e258]: Rs 1500.00
+            - button "Add to Cart" [ref=f11e260]
+    - generic [ref=f11e87]:
+      - heading "Most Asked Questions" [level=2] [ref=f11e88]
+      - generic [ref=f11e89]:
+        - button "How long is the delivery time and what’s the delivery fee?" [ref=f11e91]
+        - button "Are your skincare items authentic?" [ref=f11e95]
+        - button "I haven’t received any confirmation email or SMS?" [ref=f11e99]
+        - button "Do the lip tints cause dark lips?" [ref=f11e103]
+        - button "Returns?" [ref=f11e107]
+        - button "Is everything in stock that’s on the website?" [ref=f11e111]
+  - contentinfo [ref=f11e114]:
+    - generic [ref=f11e115]:
+      - generic [ref=f11e116]:
+        - paragraph [ref=f11e117]: LEGALIZE DREAMS
+        - paragraph [ref=f11e118]: Fashion accessories, skincare and makeup curated for your everyday glow.
+        - generic [ref=f11e119]:
+          - link "Instagram" [ref=f11e120] [cursor=pointer]:
+            - /url: "#"
+          - link "TikTok" [ref=f11e121] [cursor=pointer]:
+            - /url: "#"
+          - link "Facebook" [ref=f11e122] [cursor=pointer]:
+            - /url: "#"
+      - generic [ref=f11e123]:
+        - paragraph [ref=f11e124]: Shop
+        - list [ref=f11e261]:
+          - listitem [ref=f11e262]:
+            - link "Chinese style knotted top" [ref=f11e263] [cursor=pointer]:
+              - /url: /category/chinese-style-knotted-top
+          - listitem [ref=f11e264]:
+            - link "Cute Tops" [ref=f11e265] [cursor=pointer]:
+              - /url: /category/babydoll-top
+          - listitem [ref=f11e266]:
+            - link "FairyCore Tops" [ref=f11e267] [cursor=pointer]:
+              - /url: /category/fairycore-tops
+          - listitem [ref=f11e268]:
+            - link "Pinterest Pink Tops" [ref=f11e269] [cursor=pointer]:
+              - /url: /category/pink-tops
+          - listitem [ref=f11e270]:
+            - link "Pinteresty Inspired Tops" [ref=f11e271] [cursor=pointer]:
+              - /url: /category/pinterest-tops
+      - generic [ref=f11e125]:
+        - paragraph [ref=f11e126]: Help
+        - list [ref=f11e127]:
+          - listitem [ref=f11e128]:
+            - link "Shopping Cart" [ref=f11e129] [cursor=pointer]:
+              - /url: /cart
+          - listitem [ref=f11e130]:
+            - link "FAQs" [ref=f11e131] [cursor=pointer]:
+              - /url: "#faq"
+          - listitem [ref=f11e132]:
+            - link "Shipping Policy" [ref=f11e133] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f11e134]:
+            - link "Returns Policy" [ref=f11e135] [cursor=pointer]:
+              - /url: "#"
+      - generic [ref=f11e136]:
+        - paragraph [ref=f11e137]: Company
+        - list [ref=f11e138]:
+          - listitem [ref=f11e139]:
+            - link "About Us" [ref=f11e140] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f11e141]:
+            - link "Contact" [ref=f11e142] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f11e143]:
+            - link "Terms of Service" [ref=f11e144] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f11e145]:
+            - link "Privacy Policy" [ref=f11e146] [cursor=pointer]:
+              - /url: "#"
+    - generic [ref=f11e147]: © 2026 LEGALIZE DREAMS. All rights reserved.

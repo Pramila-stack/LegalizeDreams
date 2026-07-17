@@ -46,8 +46,8 @@ export default function CartPage() {
     return (
       <div className="mx-auto max-w-xl px-4 py-24 text-center sm:px-6 lg:px-8">
         <span className="text-5xl" aria-hidden="true">🛍️</span>
-        <h1 className="font-display mt-4 text-2xl font-semibold text-brand-900">Your cart is empty</h1>
-        <p className="mt-2 text-brand-600">Looks like you haven’t added anything yet.</p>
+        <h1 className="font-display mt-4 text-2xl font-semibold text-black animate-slow-text">Your cart is empty</h1>
+        <p className="mt-2 text-brand-600 animate-slow-text" style={{animationDelay: "0.2s"}}>Looks like you haven’t added anything yet.</p>
         <Link to="/" className="mt-6 inline-block">
           <Button>Start Shopping</Button>
         </Link>
@@ -57,7 +57,7 @@ export default function CartPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8 animate-on-scroll">
-      <h1 className="font-display text-3xl font-semibold text-black">Your Cart</h1>
+      <h1 className="font-display text-3xl font-semibold text-black animate-slow-text">Your Cart</h1>
 
       <div className="mt-8 grid gap-10 lg:grid-cols-3">
         <div className="divide-y divide-brand-100 lg:col-span-2 opacity-0" style={{animation: 'slideUp 0.7s ease-out forwards'}}>
@@ -96,8 +96,8 @@ export default function CartPage() {
           })}
         </div>
 
-        <div className="h-fit rounded-2xl border border-brand-100 p-6">
-          <h2 className="font-display text-lg font-semibold text-brand-900">Order Summary</h2>
+        <div className="h-fit rounded-2xl border border-brand-100 p-6 animate-slow-text" style={{animationDelay: '0.2s'}}>
+          <h2 className="font-display text-lg font-semibold text-black">Order Summary</h2>
           <div className="mt-4 space-y-2 text-sm">
             <div className="flex justify-between text-brand-600">
               <span>Subtotal</span>

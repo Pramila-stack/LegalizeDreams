@@ -150,6 +150,33 @@ frontend/src/components/
 - **Ratings:** Display-only (from backend product data)
 - **Responsive:** Tailwind breakpoints (sm, md, lg, xl)
 - **Mobile Menu:** Simple useState toggle in Header
+- **Color Palette:** Sky blue theme (`brand-500: #2196f3`, `brand-600: #1976d2`, `brand-700: #1565c0`). Custom theme defined in `frontend/src/index.css`
+
+### Animation System
+
+**Page Load & Scroll Animations:**
+- `animate-on-load` — slides up on page load with staggered delays
+- `animate-on-scroll` — slides up when scrolling into view (via IntersectionObserver in `App.jsx`)
+- Keyframes: `slideUp`, `fadeIn`, `slideDown`, `videoTransition` defined in `index.css`
+
+**Component Patterns:**
+- Components pass `index` prop for staggered delays: `animationDelay: ${index * 0.1}s`
+- Used in: CategoryGrid, FeaturedProducts, ProductCard, FaqAccordion
+- Individual product cards receive index to create cascading entrance effect
+
+**IntersectionObserver:**
+- `App.jsx` initializes global observer for `.animate-on-scroll` elements
+- Sets `opacity: 0` → animates to `opacity: 1` when visible
+- Also controls Hero video/audio pause/resume on scroll
+
+### Media & Image Handling
+
+- **Backend images:** Stored in `backend/media/` directory, served via `/media/` endpoint
+- **Frontend image URLs:** Constructed as `http://localhost:8000{product.image}` (backend returns relative path)
+- **Hero background:** `flower.jpg` positioned left 40% of hero section (left side only, no-repeat)
+- **Video/Audio:** Stored in `/media/products/` (e.g., `lowrise.MP4`, `army.MP4`)
+- Hero video carousel auto-rotates every 5 seconds with fade transition
+- Audio tracks from video files played via hidden `<audio>` element, paused when Hero section scrolls out of view
 
 ---
 
@@ -346,6 +373,18 @@ JWT_REFRESH_TOKEN_LIFETIME=7            # Days
 - Create `backend/apps/products/management/commands/seed_products.py`
 - Run: `python manage.py seed_products`
 
+### Authentication & Authorization
+
+**Custom Auth Class:**
+- `backend/config/auth.py` defines `SafeJWTAuthentication` (extends DRF's `JWTAuthentication`)
+- Returns `None` for invalid tokens instead of raising `AuthenticationFailed`
+- Allows `AllowAny` endpoints (public endpoints) to work without tokens
+- Used for guest checkout: anonymous users can create orders without registration
+
+**Usage in Views:**
+- `OrderViewSet.create_order()` overrides permissions with `get_permissions()` → returns `AllowAny()`
+- Automatically creates/uses `guest_user` for anonymous orders (see `backend/apps/orders/views.py`)
+
 ### Coding Conventions
 
 - Models: descriptive names, include `created_at`/`updated_at` timestamps
@@ -354,6 +393,7 @@ JWT_REFRESH_TOKEN_LIFETIME=7            # Days
 - URLs: organized by app; meaningful route names
 - Admin: register all models; customize `list_display`, `search_fields`, `list_filter`
 - Validation: validate in serializer and model layers; raise DRF `ValidationError`
+- Permission overrides: use `get_permissions()` method in ViewSet to override class-level permissions on specific actions
 
 ---
 
@@ -361,15 +401,19 @@ JWT_REFRESH_TOKEN_LIFETIME=7            # Days
 
 | File | When to change | Notes |
 |------|----------------|-------|
-| `backend/config/settings.py` | Adding apps, changing DB, updating CORS | Also update `.env` template |
+| `frontend/src/index.css` | Adding animations or changing color theme | Define keyframes here; colors via `@theme` |
+| `frontend/src/App.jsx` | Adding routes or changing global animations | IntersectionObserver for `.animate-on-scroll` initialized here |
+| `backend/config/settings.py` | Adding apps, changing DB, updating CORS | Also update `.env` template; uses `SafeJWTAuthentication` by default |
+| `backend/config/auth.py` | Changing auth strategy for public endpoints | `SafeJWTAuthentication` allows AllowAny permission overrides |
 | `backend/config/urls.py` | Adding new routes | Keep organized by app |
 | `backend/apps/*/models.py` | Changing schema | Run `makemigrations` → `migrate` |
 | `backend/apps/*/serializers.py` | Changing API response format | Ensure frontend still works |
-| `backend/apps/*/views.py` | Adding/modifying endpoints | Return correct HTTP status |
+| `backend/apps/*/views.py` | Adding/modifying endpoints | Return correct HTTP status; use `get_permissions()` for permission overrides |
 | `frontend/src/services/api.js` | Adding new API calls | Already connected to backend |
 | `frontend/src/context/CartContext.jsx` | Changing cart logic | Update both context and backend if needed |
-| `frontend/src/App.jsx` | Adding routes | Update CLAUDE.md routes table |
+| `frontend/src/components/product/ProductCard.jsx` | Changing product card appearance | Receives `index` prop for staggered animations |
 | `backend/apps/products/views.py` | Changing product filtering behavior | Uses custom FilterSet for category slug filtering |
+| `backend/apps/orders/views.py` | Changing order/checkout flow | `create_order()` uses `AllowAny()` permissions for guest checkout |
 
 ---
 

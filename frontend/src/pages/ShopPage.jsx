@@ -34,9 +34,9 @@ export default function ShopPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 animate-on-scroll">
-      <div className="mb-12 opacity-0" style={{animation: 'slideUp 0.7s ease-out forwards'}}>
+      <div className="mb-12 animate-slow-text">
         <h1 className="font-display text-3xl font-semibold text-black">All Products</h1>
-        <p className="mt-2 text-brand-600">Explore our latest collection of fashion and skincare products</p>
+        <p className="mt-2 text-brand-600 animate-slow-text" style={{animationDelay: '0.2s'}}>Explore our latest collection of fashion and skincare products</p>
       </div>
 
       {products.length === 0 ? (

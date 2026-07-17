@@ -1,0 +1,91 @@
+- generic [ref=f15e3]:
+  - banner [ref=f15e4]:
+    - generic [ref=f15e5]: Free shipping on orders over Rs 3,000 · New arrivals every week
+    - generic [ref=f15e6]:
+      - link "Legalize Dreams LEGALIZE DREAMS" [ref=f15e7] [cursor=pointer]:
+        - /url: /
+        - img "Legalize Dreams" [ref=f15e9]
+        - generic [ref=f15e10]: LEGALIZE DREAMS
+      - navigation [ref=f15e11]:
+        - link "Home" [ref=f15e12] [cursor=pointer]:
+          - /url: /
+        - button "Shop" [ref=f15e14]
+        - link "Cart" [ref=f15e17] [cursor=pointer]:
+          - /url: /cart
+      - searchbox "Search products..." [ref=f15e19]
+      - link "View cart" [ref=f15e20] [cursor=pointer]:
+        - /url: /cart
+  - main [ref=f15e25]:
+    - generic [ref=f15e27]:
+      - generic [ref=f15e28]:
+        - paragraph [ref=f15e29]: New Season Edit
+        - heading "Little joys for your everyday glow" [level=1] [ref=f15e30]
+        - paragraph [ref=f15e31]: Skincare, makeup and fashion accessories curated in one place — cute, considered, and made to be loved.
+        - generic [ref=f15e32]:
+          - link "Shop New Arrivals" [ref=f15e33] [cursor=pointer]:
+            - /url: /shop
+          - link "Browse Categories" [ref=f15e34] [cursor=pointer]:
+            - /url: "#categories"
+      - generic [ref=f15e41]:
+        - button "Go to video 1" [ref=f15e42]
+        - button "Go to video 2" [ref=f15e43]
+    - generic [ref=f15e44]: Loading categories...
+    - generic [ref=f15e47]:
+      - paragraph [ref=f15e48]: Customer Favorites
+      - heading "Most Loved" [level=2] [ref=f15e49]
+      - paragraph [ref=f15e50]: Bestselling picks from our community
+    - generic [ref=f15e87]:
+      - heading "Most Asked Questions" [level=2] [ref=f15e88]
+      - generic [ref=f15e89]:
+        - button "How long is the delivery time and what’s the delivery fee?" [ref=f15e91]
+        - button "Are your skincare items authentic?" [ref=f15e95]
+        - button "I haven’t received any confirmation email or SMS?" [ref=f15e99]
+        - button "Do the lip tints cause dark lips?" [ref=f15e103]
+        - button "Returns?" [ref=f15e107]
+        - button "Is everything in stock that’s on the website?" [ref=f15e111]
+  - contentinfo [ref=f15e114]:
+    - generic [ref=f15e115]:
+      - generic [ref=f15e116]:
+        - paragraph [ref=f15e117]: LEGALIZE DREAMS
+        - paragraph [ref=f15e118]: Fashion accessories, skincare and makeup curated for your everyday glow.
+        - generic [ref=f15e119]:
+          - link "Instagram" [ref=f15e120] [cursor=pointer]:
+            - /url: "#"
+          - link "TikTok" [ref=f15e121] [cursor=pointer]:
+            - /url: "#"
+          - link "Facebook" [ref=f15e122] [cursor=pointer]:
+            - /url: "#"
+      - generic [ref=f15e123]:
+        - paragraph [ref=f15e124]: Shop
+        - list
+      - generic [ref=f15e125]:
+        - paragraph [ref=f15e126]: Help
+        - list [ref=f15e127]:
+          - listitem [ref=f15e128]:
+            - link "Shopping Cart" [ref=f15e129] [cursor=pointer]:
+              - /url: /cart
+          - listitem [ref=f15e130]:
+            - link "FAQs" [ref=f15e131] [cursor=pointer]:
+              - /url: "#faq"
+          - listitem [ref=f15e132]:
+            - link "Shipping Policy" [ref=f15e133] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f15e134]:
+            - link "Returns Policy" [ref=f15e135] [cursor=pointer]:
+              - /url: "#"
+      - generic [ref=f15e136]:
+        - paragraph [ref=f15e137]: Company
+        - list [ref=f15e138]:
+          - listitem [ref=f15e139]:
+            - link "About Us" [ref=f15e140] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f15e141]:
+            - link "Contact" [ref=f15e142] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f15e143]:
+            - link "Terms of Service" [ref=f15e144] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=f15e145]:
+            - link "Privacy Policy" [ref=f15e146] [cursor=pointer]:
+              - /url: "#"
+    - generic [ref=f15e147]: © 2026 LEGALIZE DREAMS. All rights reserved.
