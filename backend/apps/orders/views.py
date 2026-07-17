@@ -103,15 +103,25 @@ class OrderViewSet(viewsets.ReadOnlyModelViewSet):
         with transaction.atomic():
             order_number = f"ORD-{timezone.now().strftime('%Y%m%d')}-{str(uuid.uuid4())[:8].upper()}"
 
+            # Determine payment_proof_image: only set if payment_method is 'online'
+            payment_method = serializer.validated_data['payment_method']
+            payment_proof_image = None
+            if payment_method == 'online':
+                payment_proof_image = request.FILES.get('payment_proof_image')
+
             order = Order.objects.create(
                 user=request.user,
                 order_number=order_number,
+                customer_name=serializer.validated_data['customer_name'],
                 customer_email=serializer.validated_data['customer_email'],
+                customer_phone=serializer.validated_data.get('customer_phone', ''),
+                alternative_phone=serializer.validated_data.get('alternative_phone', ''),
                 shipping_address=serializer.validated_data['shipping_address'],
                 city=serializer.validated_data['city'],
                 postal_code=serializer.validated_data['postal_code'],
                 country=serializer.validated_data['country'],
-                customer_phone=serializer.validated_data.get('customer_phone', ''),
+                payment_method=payment_method,
+                payment_proof_image=payment_proof_image,
                 notes=serializer.validated_data.get('notes', ''),
                 total_amount=0,
             )
