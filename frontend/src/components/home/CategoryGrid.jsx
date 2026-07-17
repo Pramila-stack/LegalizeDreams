@@ -4,20 +4,34 @@ import { api } from '../../services/api'
 
 export default function CategoryGrid() {
   const [categories, setCategories] = useState([])
+  const [categoryProducts, setCategoryProducts] = useState({})
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const fetchCategories = async () => {
+    const fetchCategoriesAndProducts = async () => {
       try {
-        const data = await api.getCategories()
-        setCategories(data.results || data)
+        const categoriesData = await api.getCategories()
+        const cats = categoriesData.results || categoriesData
+        setCategories(cats)
+
+        // Fetch products for each category
+        const productsMap = {}
+        for (const cat of cats) {
+          try {
+            const products = await api.getProducts({ categorySlug: cat.slug, limit: 3 })
+            productsMap[cat.id] = products
+          } catch (err) {
+            productsMap[cat.id] = []
+          }
+        }
+        setCategoryProducts(productsMap)
       } catch (error) {
         console.error('Failed to fetch categories:', error)
       } finally {
         setLoading(false)
       }
     }
-    fetchCategories()
+    fetchCategoriesAndProducts()
   }, [])
 
   if (loading) return <section className="mx-auto max-w-7xl px-4 py-16">Loading categories...</section>
@@ -31,21 +45,52 @@ export default function CategoryGrid() {
       </div>
 
       <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-        {categories.map((c) => (
-          <Link
-            key={c.id}
-            to={`/category/${c.slug}`}
-            className="group flex flex-col items-center gap-3 rounded-2xl border border-brand-100 p-5 text-center transition-shadow hover:shadow-lg hover:shadow-brand-100"
-          >
-            <div
-              className="flex h-16 w-16 items-center justify-center rounded-full text-3xl font-semibold transition-transform group-hover:scale-105 bg-gradient-to-br from-brand-200 to-blush-200"
-              aria-hidden="true"
+        {categories.map((c) => {
+          const products = categoryProducts[c.id] || []
+          return (
+            <Link
+              key={c.id}
+              to={`/category/${c.slug}`}
+              className="group flex flex-col overflow-hidden rounded-2xl border border-brand-100 bg-white transition-shadow hover:shadow-lg hover:shadow-brand-100"
             >
-              📁
-            </div>
-            <span className="text-sm font-medium text-brand-800">{c.name}</span>
-          </Link>
-        ))}
+              {/* Product Images Grid */}
+              <div className="relative aspect-square w-full overflow-hidden bg-gradient-to-br from-brand-100 to-brand-50">
+                {products.length > 0 ? (
+                  <div className="grid grid-cols-2 gap-1 h-full p-2">
+                    {products.slice(0, 4).map((product, idx) => (
+                      <div
+                        key={product.id}
+                        className="relative overflow-hidden rounded-lg bg-brand-100"
+                      >
+                        {product.image ? (
+                          <img
+                            src={
+                              typeof product.image === 'string' && !product.image.startsWith('http')
+                                ? `http://localhost:8000${product.image}`
+                                : product.image
+                            }
+                            alt={product.name}
+                            className="h-full w-full object-cover"
+                            onError={(e) => {
+                              e.target.style.display = 'none'
+                            }}
+                          />
+                        ) : null}
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-center h-full text-4xl">📁</div>
+                )}
+              </div>
+
+              {/* Category Name */}
+              <div className="p-4 text-center">
+                <span className="text-sm font-medium text-brand-800">{c.name}</span>
+              </div>
+            </Link>
+          )
+        })}
       </div>
     </section>
   )
