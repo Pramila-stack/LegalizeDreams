@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { getProductBySlug } from '../data/products'
@@ -10,31 +9,11 @@ const SHIPPING_THRESHOLD = 3000
 const SHIPPING_FEE = 150
 
 export default function CartPage() {
-  const { items, updateQty, removeFromCart, subtotal, clearCart } = useCart()
-  const [placed, setPlaced] = useState(false)
+  const { items, updateQty, removeFromCart, subtotal } = useCart()
 
   const shipping = items.length === 0 || subtotal >= SHIPPING_THRESHOLD ? 0 : SHIPPING_FEE
   const total = subtotal + shipping
 
-  function handleCheckout() {
-    setPlaced(true)
-    clearCart()
-  }
-
-  if (placed) {
-    return (
-      <div className="mx-auto max-w-xl px-4 py-24 text-center sm:px-6 lg:px-8">
-        <span className="text-5xl" aria-hidden="true">🎉</span>
-        <h1 className="font-display mt-4 text-2xl font-semibold text-brand-900">Order placed!</h1>
-        <p className="mt-2 text-brand-600">
-          Thanks for shopping with LUNE. A confirmation email is on its way to you.
-        </p>
-        <Link to="/" className="mt-6 inline-block">
-          <Button>Continue Shopping</Button>
-        </Link>
-      </div>
-    )
-  }
 
   if (items.length === 0) {
     return (
@@ -106,9 +85,11 @@ export default function CartPage() {
             <span>Total</span>
             <span>Rs {total.toLocaleString()}</span>
           </div>
-          <Button onClick={handleCheckout} className="mt-6 w-full">
-            Checkout
-          </Button>
+          <Link to="/checkout">
+            <Button className="mt-6 w-full">
+              Proceed to Checkout
+            </Button>
+          </Link>
           <Link to="/" className="mt-3 block text-center text-sm text-brand-500 hover:text-brand-800">
             Continue shopping
           </Link>

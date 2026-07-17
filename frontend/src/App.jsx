@@ -6,6 +6,8 @@ import HomePage from './pages/HomePage'
 import CategoryPage from './pages/CategoryPage'
 import ProductPage from './pages/ProductPage'
 import CartPage from './pages/CartPage'
+import CheckoutPage from './pages/CheckoutPage'
+import CheckoutSuccessPage from './pages/CheckoutSuccessPage'
 import SearchPage from './pages/SearchPage'
 import NotFoundPage from './pages/NotFoundPage'
 
@@ -20,6 +22,8 @@ function App() {
             <Route path="category/:slug" element={<CategoryPage />} />
             <Route path="product/:slug" element={<ProductPage />} />
             <Route path="cart" element={<CartPage />} />
+            <Route path="checkout" element={<CheckoutPage />} />
+            <Route path="checkout-success" element={<CheckoutSuccessPage />} />
             <Route path="search" element={<SearchPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
