@@ -57,7 +57,7 @@ export default function CheckoutPage() {
       }
 
       // Create the order
-      const result = await api.createOrder(fd)
+      await api.createOrder(fd)
 
       // Clear cart and navigate to success page
       clearCart()
