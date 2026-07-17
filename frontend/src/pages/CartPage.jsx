@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import { useCart } from '../context/CartContext'
-import { getProductBySlug } from '../data/products'
+import { api } from '../services/api'
 import ProductImage from '../components/common/ProductImage'
 import QuantityInput from '../components/common/QuantityInput'
 import Button from '../components/common/Button'
@@ -10,6 +11,32 @@ const SHIPPING_FEE = 150
 
 export default function CartPage() {
   const { items, updateQty, removeFromCart, subtotal } = useCart()
+  const [products, setProducts] = useState({})
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const productMap = {}
+      for (const item of items) {
+        if (!productMap[item.slug]) {
+          try {
+            const product = await api.getProduct(item.slug)
+            if (product) {
+              productMap[item.slug] = product
+            }
+          } catch (err) {
+            // Product not found or error fetching
+          }
+        }
+      }
+      setProducts(productMap)
+    }
+
+    if (items.length > 0) {
+      fetchProducts()
+    } else {
+      setProducts({})
+    }
+  }, [items])
 
   const shipping = items.length === 0 || subtotal >= SHIPPING_THRESHOLD ? 0 : SHIPPING_FEE
   const total = subtotal + shipping
@@ -35,7 +62,7 @@ export default function CartPage() {
       <div className="mt-8 grid gap-10 lg:grid-cols-3">
         <div className="divide-y divide-brand-100 lg:col-span-2">
           {items.map((item) => {
-            const product = getProductBySlug(item.slug)
+            const product = products[item.slug]
             return (
               <div key={item.id} className="flex items-center gap-4 py-5">
                 <Link to={`/product/${item.slug}`} className="shrink-0">

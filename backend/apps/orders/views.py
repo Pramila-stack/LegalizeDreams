@@ -91,24 +91,21 @@ class OrderViewSet(viewsets.ReadOnlyModelViewSet):
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user)
 
-    @action(detail=False, methods=['post'], permission_classes=[AllowAny])
+    def get_permissions(self):
+        if self.action == 'create_order':
+            return [AllowAny()]
+        return super().get_permissions()
+
+    @action(detail=False, methods=['post'])
     def create_order(self, request):
-        # Get or create a guest user for anonymous orders
+        # For anonymous/guest checkout, create or get a guest user
         guest_user, created = User.objects.get_or_create(
             username='guest_user',
             defaults={'email': 'guest@example.com'}
         )
 
-        # Get or create cart for guest user
-        cart, created = Cart.objects.get_or_create(user=guest_user)
-
-        # If cart is empty, create a temporary cart from session data
-        if not cart.items.exists():
-            # For now, allow checkout without cart items (guest checkout)
-            pass
-
-        if not cart.items.exists():
-            return Response({'detail': 'Cart is empty'}, status=status.HTTP_400_BAD_REQUEST)
+        # Anonymous checkout doesn't require cart items to exist
+        # The order is created directly from the frontend form data
 
         serializer = OrderCreateSerializer(data=request.data)
         if not serializer.is_valid():
@@ -137,26 +134,31 @@ class OrderViewSet(viewsets.ReadOnlyModelViewSet):
                 payment_method=payment_method,
                 payment_proof_image=payment_proof_image,
                 notes=serializer.validated_data.get('notes', ''),
-                total_amount=0,
+                total_amount=0,  # Will be updated if cart items exist
             )
 
+            # Process cart items if they exist (for logged-in users)
             total_amount = 0
-            for cart_item in cart.items.all():
-                product = cart_item.product
-                product.stock -= cart_item.quantity
-                product.save()
+            try:
+                user_cart = Cart.objects.get(user=guest_user)
+                for cart_item in user_cart.items.all():
+                    product = cart_item.product
+                    product.stock -= cart_item.quantity
+                    product.save()
 
-                order_item = OrderItem.objects.create(
-                    order=order,
-                    product=product,
-                    quantity=cart_item.quantity,
-                    price_at_purchase=product.price,
-                )
-                total_amount += order_item.get_total_price()
+                    order_item = OrderItem.objects.create(
+                        order=order,
+                        product=product,
+                        quantity=cart_item.quantity,
+                        price_at_purchase=product.price,
+                    )
+                    total_amount += order_item.get_total_price()
 
-            order.total_amount = total_amount
-            order.save()
-
-            cart.items.all().delete()
+                order.total_amount = total_amount
+                order.save()
+                user_cart.items.all().delete()
+            except Cart.DoesNotExist:
+                # Anonymous checkout - no cart items
+                pass
 
         return Response(OrderSerializer(order).data, status=status.HTTP_201_CREATED)

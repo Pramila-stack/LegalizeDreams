@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { getCategoryBySlug } from '../../data/categories'
 
 const sizeStyles = {
   sm: 'text-2xl',
@@ -7,10 +6,18 @@ const sizeStyles = {
   lg: 'text-6xl',
 }
 
+const defaultGradients = {
+  0: ['#eef5fb', '#b7d5ea'],
+  1: ['#fef3e0', '#fdd79d'],
+  2: ['#f0e5ff', '#d9a6ff'],
+  3: ['#ffe5e5', '#ffb3b3'],
+  4: ['#e5f5ff', '#99d9ff'],
+}
+
 export default function ProductImage({ product, size = 'md', className = '' }) {
   const [imageError, setImageError] = useState(false)
-  const category = getCategoryBySlug(product.category_name)
-  const [from, to] = category?.swatch ?? ['#eef5fb', '#b7d5ea']
+  const gradientIndex = (product.id || 0) % Object.keys(defaultGradients).length
+  const [from, to] = defaultGradients[gradientIndex]
 
   return (
     <div
@@ -19,14 +26,16 @@ export default function ProductImage({ product, size = 'md', className = '' }) {
     >
       {product.image && !imageError ? (
         <img
-          src={product.image}
+          src={typeof product.image === 'string' && !product.image.startsWith('http')
+            ? `http://localhost:8000${product.image}`
+            : product.image}
           alt={product.name}
           className="h-full w-full object-cover"
           onError={() => setImageError(true)}
         />
       ) : (
         <span className={sizeStyles[size]} aria-hidden="true">
-          {category?.icon ?? '✨'}
+          ✨
         </span>
       )}
       {product.badge && (
