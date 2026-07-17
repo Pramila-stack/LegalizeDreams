@@ -19,17 +19,40 @@ const VIDEO_DURATION = 5000 // 5 seconds per video
 export default function Hero() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
+  const videoRef = React.useRef(null)
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIsTransitioning(true)
-      setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % VIDEOS.length)
-        setIsTransitioning(false)
-      }, 500)
+      if (isVisible) {
+        setIsTransitioning(true)
+        setTimeout(() => {
+          setCurrentIndex((prev) => (prev + 1) % VIDEOS.length)
+          setIsTransitioning(false)
+        }, 500)
+      }
     }, VIDEO_DURATION)
 
     return () => clearInterval(interval)
+  }, [isVisible])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting)
+      },
+      { threshold: 0.5 }
+    )
+
+    if (videoRef.current) {
+      observer.observe(videoRef.current)
+    }
+
+    return () => {
+      if (videoRef.current) {
+        observer.unobserve(videoRef.current)
+      }
+    }
   }, [])
 
   return (
@@ -70,7 +93,7 @@ export default function Hero() {
         </div>
 
         {/* Video Container */}
-        <div className="relative mx-auto w-full max-w-md overflow-hidden rounded-[2rem] bg-gradient-to-br from-blush-100 to-brand-200 shadow-xl border-4 border-white/50">
+        <div ref={videoRef} className="relative mx-auto w-full max-w-md overflow-hidden rounded-[2rem] bg-gradient-to-br from-blush-100 to-brand-200 shadow-xl border-4 border-white/50 animate-on-load animate-stagger-3">
           {/* Audio Player - Hidden but plays background audio from lowrise.mp4 */}
           <audio autoPlay loop muted={false} style={{display: 'none'}}>
             <source src="http://localhost:8000/media/products/lowrise.MP4" type="audio/mp4" />

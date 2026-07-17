@@ -40,8 +40,8 @@ export default function CategoryGrid() {
   return (
     <section id="categories" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 animate-on-scroll">
       <div className="text-center">
-        <p className="text-sm font-semibold uppercase tracking-widest text-blush-400">Explore</p>
-        <h2 className="font-display mt-2 text-3xl font-semibold text-black">All Our Categories</h2>
+        <p className="text-sm font-semibold uppercase tracking-widest text-blush-400 animate-on-load">Explore</p>
+        <h2 className="font-display mt-2 text-3xl font-semibold text-black animate-on-load animate-stagger-1">All Our Categories</h2>
       </div>
 
       <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
@@ -158,8 +158,8 @@ export default function CategoryGrid() {
               </div>
 
               {/* Category Name */}
-              <div className="p-4 text-center">
-                <span className="text-sm font-medium text-brand-800">{c.name}</span>
+              <div className="p-4 text-center animate-on-load">
+                <span className="text-sm font-medium text-black">{c.name}</span>
               </div>
             </Link>
           )

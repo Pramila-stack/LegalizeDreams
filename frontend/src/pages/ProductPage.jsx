@@ -74,17 +74,17 @@ export default function ProductPage() {
         <ProductImage product={product} size="lg" className="aspect-square w-full" />
 
         <div>
-          <h1 className="font-display text-3xl font-semibold text-black">{product.name}</h1>
-          <div className="mt-3">
+          <h1 className="font-display text-3xl font-semibold text-black animate-on-load">{product.name}</h1>
+          <div className="mt-3 animate-on-load animate-stagger-1">
             <StarRating rating={product.rating} reviews={product.reviews} size="md" />
           </div>
-          <div className="mt-4">
+          <div className="mt-4 animate-on-load animate-stagger-2">
             <Price price={product.price} mrp={product.mrp} size="lg" />
           </div>
 
-          <p className="mt-6 max-w-lg leading-relaxed text-brand-600">{product.description}</p>
+          <p className="mt-6 max-w-lg leading-relaxed text-brand-600 animate-on-load animate-stagger-3">{product.description}</p>
 
-          <p className="mt-4 text-sm text-brand-500">
+          <p className="mt-4 text-sm text-brand-500 animate-on-load animate-stagger-3">
             {product.stock > 0 ? (
               <span className="text-green-600">In stock — ready to ship</span>
             ) : (
