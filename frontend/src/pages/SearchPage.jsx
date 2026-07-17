@@ -26,7 +26,7 @@ export default function SearchPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-      <h1 className=”font-display text-2xl font-semibold text-black”>
+      <h1 className="font-display text-2xl font-semibold text-black">
         Search results for &quot;{query}&quot;
       </h1>
       <p className="mt-1 text-sm text-brand-500">

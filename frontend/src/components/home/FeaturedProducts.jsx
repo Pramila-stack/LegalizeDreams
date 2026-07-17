@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react'
 import { api } from '../../services/api'
 import ProductCard from '../product/ProductCard'
 import ProductCardSkeleton from '../product/ProductCardSkeleton'
+import { useScrollAnimation } from '../../hooks/useScrollAnimation'
 
 export default function FeaturedProducts() {
+  const scrollRef = useScrollAnimation()
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -22,7 +24,7 @@ export default function FeaturedProducts() {
   }, [])
 
   return (
-    <section className="bg-brand-50/60 py-16">
+    <section className="bg-brand-50/60 py-16 opacity-0" ref={scrollRef}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <p className="text-sm font-semibold uppercase tracking-widest text-blush-400">Customer Favorites</p>

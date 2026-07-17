@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { api } from '../../services/api'
+import { useScrollAnimation } from '../../hooks/useScrollAnimation'
 
 export default function CategoryGrid() {
+  const scrollRef = useScrollAnimation()
   const [categories, setCategories] = useState([])
   const [categoryProducts, setCategoryProducts] = useState({})
   const [loading, setLoading] = useState(true)
@@ -38,7 +40,7 @@ export default function CategoryGrid() {
   if (!categories.length) return null
 
   return (
-    <section id="categories" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <section id="categories" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 opacity-0" ref={scrollRef}>
       <div className="text-center">
         <p className="text-sm font-semibold uppercase tracking-widest text-blush-400">Explore</p>
         <h2 className="font-display mt-2 text-3xl font-semibold text-black">All Our Categories</h2>
