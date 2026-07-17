@@ -43,6 +43,11 @@ class Order(models.Model):
         ('delivered', 'Delivered'),
     ]
 
+    PAYMENT_CHOICES = [
+        ('cod', 'Cash on Delivery'),
+        ('online', 'Online Payment'),
+    ]
+
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
     order_number = models.CharField(max_length=50, unique=True)
@@ -54,6 +59,10 @@ class Order(models.Model):
     country = models.CharField(max_length=100)
     customer_email = models.EmailField()
     customer_phone = models.CharField(max_length=20, blank=True)
+    customer_name = models.CharField(max_length=255, default='')
+    alternative_phone = models.CharField(max_length=20, blank=True)
+    payment_method = models.CharField(max_length=20, choices=PAYMENT_CHOICES, default='cod')
+    payment_proof_image = models.ImageField(upload_to='payments/', null=True, blank=True)
     notes = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
