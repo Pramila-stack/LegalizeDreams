@@ -53,5 +53,18 @@ class OrderSerializer(serializers.ModelSerializer):
 class OrderCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
-        fields = ['shipping_address', 'city', 'postal_code', 'country',
-                  'customer_email', 'customer_phone', 'notes']
+        fields = ['customer_name', 'customer_email', 'customer_phone', 'alternative_phone',
+                  'shipping_address', 'city', 'postal_code', 'country',
+                  'payment_method', 'payment_proof_image']
+
+    def validate_customer_name(self, value):
+        if len(value) < 2:
+            raise serializers.ValidationError("Name must be at least 2 characters")
+        return value
+
+    def validate_customer_phone(self, value):
+        # Extract only digits from the phone number
+        digits_only = ''.join(filter(str.isdigit, value))
+        if len(digits_only) < 10:
+            raise serializers.ValidationError("Phone number must be at least 10 digits")
+        return value
