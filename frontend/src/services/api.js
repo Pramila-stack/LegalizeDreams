@@ -70,4 +70,17 @@ export const api = {
       .filter((p) => p.id !== product.id)
       .slice(0, limit)
   },
+
+  async createOrder(formData) {
+    const token = localStorage.getItem('access_token')
+    const response = await fetch(`${API_BASE_URL}/orders/create/`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      },
+      body: formData
+    })
+    if (!response.ok) throw new Error('Failed to create order')
+    return await response.json()
+  },
 }
