@@ -21,6 +21,7 @@ export default function Hero() {
   const [isTransitioning, setIsTransitioning] = useState(false)
   const [isVisible, setIsVisible] = useState(true)
   const videoRef = useRef(null)
+  const audioRef = useRef(null)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -40,6 +41,14 @@ export default function Hero() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsVisible(entry.isIntersecting)
+        // Pause/play audio based on visibility
+        if (audioRef.current) {
+          if (entry.isIntersecting) {
+            audioRef.current.play().catch(() => {})
+          } else {
+            audioRef.current.pause()
+          }
+        }
       },
       { threshold: 0.5 }
     )
@@ -95,7 +104,7 @@ export default function Hero() {
         {/* Video Container */}
         <div ref={videoRef} className="relative mx-auto w-full max-w-md overflow-hidden rounded-[2rem] bg-gradient-to-br from-blush-100 to-brand-200 shadow-xl border-4 border-white/50 animate-on-load animate-stagger-3">
           {/* Audio Player - Hidden but plays background audio from lowrise.mp4 */}
-          <audio autoPlay loop muted={false} style={{display: 'none'}}>
+          <audio ref={audioRef} autoPlay loop muted={false} style={{display: 'none'}}>
             <source src="http://localhost:8000/media/products/lowrise.MP4" type="audio/mp4" />
           </audio>
           <div className={`relative aspect-square w-full bg-brand-900 ${isTransitioning ? 'video-transitioning' : ''}`}>
