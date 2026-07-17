@@ -5,7 +5,7 @@ export default function Price({ price, mrp, size = 'md' }) {
 
   return (
     <div className="flex items-center gap-2">
-      <span className={`font-semibold text-brand-900 ${priceClass}`}>Rs {price.toLocaleString()}</span>
+      <span className={`font-semibold text-black ${priceClass}`}>Rs {price.toLocaleString()}</span>
       {hasDiscount && (
         <>
           <span className="text-sm text-brand-400 line-through">Rs {mrp.toLocaleString()}</span>

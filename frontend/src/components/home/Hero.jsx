@@ -34,23 +34,26 @@ export default function Hero() {
 
   return (
     <section
-      className="relative bg-cover bg-center bg-no-repeat"
+      className="relative bg-white"
       style={{
         backgroundImage: 'url(http://localhost:8000/media/logo/flower.jpg)',
-        backgroundBlendMode: 'overlay',
-        backgroundColor: 'rgba(255, 255, 255, 0.85)'
+        backgroundPosition: 'left center',
+        backgroundSize: '40%',
+        backgroundRepeat: 'no-repeat',
+        backgroundBlendMode: 'multiply',
+        backgroundColor: '#ffffff'
       }}
     >
       <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:py-24 lg:px-8">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-widest text-blush-400">New Season Edit</p>
-          <h1 className="font-display mt-3 text-4xl font-semibold leading-tight text-black sm:text-5xl">
+          <p className="text-sm font-semibold uppercase tracking-widest text-blush-400 animate-on-load">New Season Edit</p>
+          <h1 className="font-display mt-3 text-4xl font-semibold leading-tight text-black sm:text-5xl animate-on-load animate-stagger-1">
             Little joys for your everyday glow
           </h1>
-          <p className="mt-4 max-w-md text-gray-700">
+          <p className="mt-4 max-w-md text-gray-700 animate-on-load animate-stagger-2">
             Skincare, makeup and fashion accessories curated in one place — cute, considered, and made to be loved.
           </p>
-          <div className="mt-8 flex gap-3">
+          <div className="mt-8 flex gap-3 animate-on-load animate-stagger-3">
             <Link
               to="/shop"
               className="rounded-full bg-brand-900 px-7 py-3 text-sm font-medium text-white hover:bg-brand-800"

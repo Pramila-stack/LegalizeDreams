@@ -31,7 +31,7 @@ export default function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState(null)
 
   return (
-    <section id="faq" className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
+    <section id="faq" className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 animate-on-scroll">
       <h2 className="font-display text-center text-3xl font-semibold text-black">Most Asked Questions</h2>
 
       <div className="mt-8 divide-y divide-brand-100 border-y border-brand-100">
