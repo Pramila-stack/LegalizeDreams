@@ -7,6 +7,8 @@ class Command(BaseCommand):
     help = 'Initialize admin user and sample data for first deployment'
 
     def handle(self, *args, **options):
+        self.stdout.write(self.style.SUCCESS('\n=== Database Initialization ===\n'))
+
         # Create admin user if it doesn't exist
         if not User.objects.filter(username='admin').exists():
             User.objects.create_superuser(
@@ -16,10 +18,11 @@ class Command(BaseCommand):
             )
             self.stdout.write(self.style.SUCCESS('✓ Admin user created (admin/admin123)'))
         else:
-            self.stdout.write(self.style.WARNING('⚠ Admin user already exists'))
+            self.stdout.write(self.style.WARNING('⚠ Admin user already exists - skipping'))
 
-        # Create sample categories if none exist
-        if not Category.objects.exists():
+        # Create sample categories only if database is completely empty
+        existing_categories = Category.objects.count()
+        if existing_categories == 0:
             categories_data = [
                 {'name': 'Electronics', 'slug': 'electronics', 'description': 'Electronic devices and accessories'},
                 {'name': 'Books', 'slug': 'books', 'description': 'Books and literary works'},
@@ -29,12 +32,16 @@ class Command(BaseCommand):
             ]
             for cat_data in categories_data:
                 Category.objects.create(**cat_data)
-            self.stdout.write(self.style.SUCCESS(f'✓ Created {len(categories_data)} categories'))
+            self.stdout.write(self.style.SUCCESS(f'✓ Created {len(categories_data)} sample categories'))
         else:
-            self.stdout.write(self.style.WARNING(f'⚠ Categories already exist: {Category.objects.count()}'))
+            self.stdout.write(self.style.WARNING(
+                f'⚠ Skipping category creation - {existing_categories} categories already exist\n'
+                f'  Your existing data is preserved!'
+            ))
 
-        # Create sample products if none exist
-        if not Product.objects.exists():
+        # Create sample products only if database is completely empty
+        existing_products = Product.objects.count()
+        if existing_products == 0:
             sample_products = [
                 {
                     'name': 'Wireless Headphones',
@@ -97,6 +104,9 @@ class Command(BaseCommand):
                 Product.objects.create(**product_data)
             self.stdout.write(self.style.SUCCESS(f'✓ Created {len(sample_products)} sample products'))
         else:
-            self.stdout.write(self.style.WARNING(f'⚠ Products already exist: {Product.objects.count()}'))
+            self.stdout.write(self.style.WARNING(
+                f'⚠ Skipping product creation - {existing_products} products already exist\n'
+                f'  Your existing data is preserved! ✓'
+            ))
 
-        self.stdout.write(self.style.SUCCESS('\n✓ Database initialization complete!'))
+        self.stdout.write(self.style.SUCCESS('\n=== Initialization Complete ===\n'))
