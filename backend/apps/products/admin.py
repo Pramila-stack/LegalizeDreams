@@ -11,29 +11,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category', 'price', 'stock', 'rating', 'is_active', 'created_at')
-    prepopulated_fields = {'slug': ('name',)}
-    list_filter = ('category', 'is_active', 'created_at')
+    list_display = ('name', 'price', 'stock', 'is_active')
+    list_filter = ('is_active', 'created_at')
     search_fields = ('name', 'description')
-    readonly_fields = ('created_at', 'updated_at')
-    fieldsets = (
-        ('Basic Info', {
-            'fields': ('name', 'slug', 'category', 'description')
-        }),
-        ('Pricing & Stock', {
-            'fields': ('price', 'stock')
-        }),
-        ('Media', {
-            'fields': ('image',)
-        }),
-        ('Ratings', {
-            'fields': ('rating', 'review_count')
-        }),
-        ('Status', {
-            'fields': ('is_active',)
-        }),
-        ('Timestamps', {
-            'fields': ('created_at', 'updated_at'),
-            'classes': ('collapse',)
-        }),
-    )
+    readonly_fields = ('created_at', 'updated_at', 'id')
