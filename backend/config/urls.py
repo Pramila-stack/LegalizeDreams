@@ -1,30 +1,19 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.http import JsonResponse
-
-def api_root(request):
-    return JsonResponse({
-        'message': 'LEGALIZE DREAMS API',
-        'version': '1.0',
-        'status': 'online',
-        'endpoints': {
-            'admin': '/admin/',
-            'auth': '/api/auth/',
-            'products': '/api/products/',
-            'categories': '/api/categories/',
-            'orders': '/api/orders/',
-            'cart': '/api/cart/',
-        }
-    })
+from config.views import api_root, serve_react
 
 urlpatterns = [
-    path('', api_root, name='api-root'),
+    path('api/', api_root, name='api-root'),
     path('admin/', admin.site.urls),
     path('api/auth/', include('apps.users.urls')),
     path('api/', include('apps.products.urls')),
     path('api/', include('apps.orders.urls')),
+
+    # Serve React app for all other routes (catch-all must be last)
+    re_path(r'^(?!api|admin|static|media).*', serve_react, name='react-app'),
 ]
 
 if settings.DEBUG:
