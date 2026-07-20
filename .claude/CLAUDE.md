@@ -305,6 +305,8 @@ python manage.py runserver
 - Pillow 11.0.0 (image uploads)
 - python-decouple 3.8 (environment variables)
 - SQLite (development)
+- **Python 3.12.3** (pinned in `runtime.txt` at repository root — required for Django 4.2 compatibility on Render)
+- WhiteNoise 6+ (static file serving in production)
 
 ### Architecture
 
@@ -419,10 +421,12 @@ JWT_REFRESH_TOKEN_LIFETIME=7            # Days
 
 **Settings (config/settings.py):**
 - REST Framework pagination: 20 items per page
+- REST Framework: JSON-only rendering (`DEFAULT_RENDERER_CLASSES = ['rest_framework.renderers.JSONRenderer']`) — avoids template errors in production
 - Search/filter on products by name, description, category
 - CSRF protection enabled
 - Passwords hashed with PBKDF2 (Django default)
 - JWT tokens signed with SECRET_KEY
+- Static files: `STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"` handles compression & serving in production
 - Rate limiting: NOT implemented (add if needed)
 
 ### Adding Data to Backend
@@ -434,9 +438,12 @@ JWT_REFRESH_TOKEN_LIFETIME=7            # Days
 4. Click "Products" → "Products" → "Add Product"
 5. Upload images, set prices, stock, ratings
 
-**Option 2: Management Command (Future)**
-- Create `backend/apps/products/management/commands/seed_products.py`
-- Run: `python manage.py seed_products`
+**Option 2: Management Command (Automated)**
+- `backend/apps/products/management/commands/init_admin.py` — Automatically runs during deployment (see `build.sh`)
+- Creates admin superuser: `admin` / `admin123` (only if doesn't exist)
+- Populates 5 sample categories & 5 sample products (only if database is empty)
+- **Preserves existing data on redeploys** — idempotent, safe to re-run
+- Run manually: `python manage.py init_admin`
 
 ### Authentication & Authorization
 
@@ -484,6 +491,7 @@ JWT_REFRESH_TOKEN_LIFETIME=7            # Days
 | `backend/apps/*/serializers.py` | Changing API response format | Ensure frontend still works |
 | `backend/apps/*/views.py` | Adding/modifying endpoints | Return correct HTTP status; use `get_permissions()` for permission overrides |
 | `backend/apps/orders/views.py` | Changing order/checkout flow | `create_order()` uses `AllowAny()` permissions for guest checkout |
+| `backend/apps/products/admin.py` | Customizing admin panel | ProductAdmin simplified (no prepopulated_fields) to avoid template rendering issues |
 
 ---
 
@@ -624,11 +632,63 @@ When working on this codebase:
 
 ---
 
-## Deployment (Deferred)
+## Deployment
+
+### Render Deployment (Backend)
+
+**Prerequisites:**
+- `runtime.txt` at repository root with `python-3.12.3` (pinned Python version)
+- `build.sh` in backend root with build commands (migrations + init_admin)
+- `.env` configured for production with:
+  ```
+  DEBUG=False
+  ALLOWED_HOSTS=localhost,127.0.0.1,<your-render-domain>.onrender.com
+  CORS_ALLOWED_ORIGINS=http://localhost:5173,https://<your-frontend-domain>
+  ```
+
+**Initial Setup:**
+1. Create new Web Service on Render
+2. Connect GitHub repo
+3. Set Python runtime to match `runtime.txt`
+4. Add environment variables in Render dashboard (from `.env`)
+5. Set Build Command: `bash build.sh`
+6. Set Start Command: `gunicorn config.wsgi:application`
+
+**First Deploy:**
+- `build.sh` runs migrations and `init_admin` command
+- Admin superuser created automatically: `admin` / `admin123`
+- 5 sample categories and products created
+- Visit `/admin/` to manage data manually
+
+**Subsequent Deploys:**
+- `init_admin` checks if data exists and skips creation if it does
+- **Your manually added data is preserved** across redeploys
+- If you want fresh sample data, manually delete via admin panel first
+
+**Key Configuration Files:**
+- `backend/build.sh` — Build script (pip install → migrate → init_admin)
+- `backend/config/settings.py` — Production settings (DEBUG=False, STATICFILES_STORAGE, DRF JSON-only)
+- `backend/.env` — Environment variables (generated from `.env.example`)
+
+### Frontend Deployment
 
 When ready:
-1. **Frontend:** Netlify/Vercel → Set `VITE_API_URL` to production backend URL
-2. **Backend:** Render with PostgreSQL → Set `DEBUG=False`, strong `SECRET_KEY`, production `ALLOWED_HOSTS`
-3. Update `CORS_ALLOWED_ORIGINS` to production frontend URL
+1. **Frontend:** Netlify/Vercel → Set `VITE_API_URL` to production backend URL (e.g., `https://legalizedreams.onrender.com/api`)
+2. Deploy after backend is live
 
-Details in separate deployment guide later.
+### Common Issues & Fixes
+
+**"Not found" at domain root:**
+- Solution: Verify `backend/config/urls.py` has `api_root` view mapped to `''` path
+
+**ALLOWED_HOSTS rejection (400 Bad Request):**
+- Solution: Add Render domain to `ALLOWED_HOSTS` in `.env` and redeploy
+
+**TemplateDoesNotExist in /api/products/:**
+- Solution: Verify `DEFAULT_RENDERER_CLASSES = ['rest_framework.renderers.JSONRenderer']` is set (DRF JSON-only mode)
+
+**Admin panel shows 500 error:**
+- Solution: Check Python version matches `runtime.txt` (Django 4.2 requires Python 3.12 or lower, not 3.14+)
+
+**Data disappears after redeployment:**
+- Solution: `init_admin` is idempotent — if database is empty, it seeds sample data. Manually added data is preserved as long as you don't delete the database.
