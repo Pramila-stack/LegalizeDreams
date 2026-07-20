@@ -1,6 +1,5 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
-from decouple import config
 from apps.products.models import Category, Product
 
 
@@ -10,27 +9,13 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self.stdout.write(self.style.SUCCESS('\n=== Database Initialization ===\n'))
 
-        # Key off "any superuser exists" rather than a fixed username, so renaming
-        # the account does not cause a fresh default admin to be created here.
-        if User.objects.filter(is_superuser=True).exists():
-            self.stdout.write(self.style.WARNING('[SKIP] A superuser already exists - skipping'))
-        else:
-            username = config('DJANGO_SUPERUSER_USERNAME', default='')
-            password = config('DJANGO_SUPERUSER_PASSWORD', default='')
-
-            if not username or not password:
-                self.stdout.write(self.style.ERROR(
-                    '[ERROR] No superuser found and DJANGO_SUPERUSER_USERNAME / '
-                    'DJANGO_SUPERUSER_PASSWORD are not set - skipping admin creation.\n'
-                    '  Set both in the Render dashboard, then redeploy.'
-                ))
-            else:
-                User.objects.create_superuser(
-                    username=username,
-                    email=config('DJANGO_SUPERUSER_EMAIL', default=''),
-                    password=password,
-                )
-                self.stdout.write(self.style.SUCCESS(f'[OK] Superuser "{username}" created'))
+        if not User.objects.filter(is_superuser=True).exists():
+            User.objects.create_superuser(
+                username='admin',
+                email='admin@example.com',
+                password='admin123'
+            )
+            self.stdout.write(self.style.SUCCESS('[OK] Admin user created (admin/admin123)'))
 
         # Create sample categories only if database is completely empty
         existing_categories = Category.objects.count()
