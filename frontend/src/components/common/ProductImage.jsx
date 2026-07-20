@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { mediaUrl } from '../../utils/mediaUrl'
 
 const sizeStyles = {
   sm: 'text-2xl',
@@ -26,9 +27,7 @@ export default function ProductImage({ product, size = 'md', className = '' }) {
     >
       {product.image && !imageError ? (
         <img
-          src={typeof product.image === 'string' && !product.image.startsWith('http')
-            ? `http://localhost:8000${product.image}`
-            : product.image}
+          src={mediaUrl(product.image)}
           alt={product.name}
           className="h-full w-full object-cover"
           onError={() => setImageError(true)}

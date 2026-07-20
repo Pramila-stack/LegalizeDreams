@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
+from decouple import config
 from apps.products.models import Category, Product
 
 
@@ -9,16 +10,27 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self.stdout.write(self.style.SUCCESS('\n=== Database Initialization ===\n'))
 
-        # Create admin user if it doesn't exist
-        if not User.objects.filter(username='admin').exists():
-            User.objects.create_superuser(
-                username='admin',
-                email='admin@example.com',
-                password='admin123'
-            )
-            self.stdout.write(self.style.SUCCESS('✓ Admin user created (admin/admin123)'))
+        # Key off "any superuser exists" rather than a fixed username, so renaming
+        # the account does not cause a fresh default admin to be created here.
+        if User.objects.filter(is_superuser=True).exists():
+            self.stdout.write(self.style.WARNING('[SKIP] A superuser already exists - skipping'))
         else:
-            self.stdout.write(self.style.WARNING('⚠ Admin user already exists - skipping'))
+            username = config('DJANGO_SUPERUSER_USERNAME', default='')
+            password = config('DJANGO_SUPERUSER_PASSWORD', default='')
+
+            if not username or not password:
+                self.stdout.write(self.style.ERROR(
+                    '[ERROR] No superuser found and DJANGO_SUPERUSER_USERNAME / '
+                    'DJANGO_SUPERUSER_PASSWORD are not set - skipping admin creation.\n'
+                    '  Set both in the Render dashboard, then redeploy.'
+                ))
+            else:
+                User.objects.create_superuser(
+                    username=username,
+                    email=config('DJANGO_SUPERUSER_EMAIL', default=''),
+                    password=password,
+                )
+                self.stdout.write(self.style.SUCCESS(f'[OK] Superuser "{username}" created'))
 
         # Create sample categories only if database is completely empty
         existing_categories = Category.objects.count()
@@ -32,10 +44,10 @@ class Command(BaseCommand):
             ]
             for cat_data in categories_data:
                 Category.objects.create(**cat_data)
-            self.stdout.write(self.style.SUCCESS(f'✓ Created {len(categories_data)} sample categories'))
+            self.stdout.write(self.style.SUCCESS(f'[OK] Created {len(categories_data)} sample categories'))
         else:
             self.stdout.write(self.style.WARNING(
-                f'⚠ Skipping category creation - {existing_categories} categories already exist\n'
+                f'[SKIP] Skipping category creation - {existing_categories} categories already exist\n'
                 f'  Your existing data is preserved!'
             ))
 
@@ -102,11 +114,11 @@ class Command(BaseCommand):
 
             for product_data in sample_products:
                 Product.objects.create(**product_data)
-            self.stdout.write(self.style.SUCCESS(f'✓ Created {len(sample_products)} sample products'))
+            self.stdout.write(self.style.SUCCESS(f'[OK] Created {len(sample_products)} sample products'))
         else:
             self.stdout.write(self.style.WARNING(
-                f'⚠ Skipping product creation - {existing_products} products already exist\n'
-                f'  Your existing data is preserved! ✓'
+                f'[SKIP] Skipping product creation - {existing_products} products already exist\n'
+                f'  Your existing data is preserved!'
             ))
 
         self.stdout.write(self.style.SUCCESS('\n=== Initialization Complete ===\n'))

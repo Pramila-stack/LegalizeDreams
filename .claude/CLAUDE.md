@@ -53,7 +53,7 @@ source venv/bin/activate  # (Windows: venv\Scripts\activate)
 python manage.py runserver
 # Backend at http://localhost:8000
 # Admin Dashboard: http://localhost:8000/admin
-#   Login: admin / admin123
+#   Login: your superuser credentials
 #   Use this to create categories, add products, manage inventory
 ```
 
@@ -261,9 +261,12 @@ cp .env.example .env
 python manage.py migrate
 ```
 
-**5. Create admin account (already done):**
-- Username: `admin`
-- Password: `admin123`
+**5. Create admin account:**
+```bash
+python manage.py createsuperuser
+```
+- Never commit these credentials. On Render, `init_admin` reads
+  `DJANGO_SUPERUSER_USERNAME` / `DJANGO_SUPERUSER_PASSWORD` from the environment.
 - Login at http://localhost:8000/admin/
 
 **6. Run server:**
@@ -426,7 +429,7 @@ JWT_REFRESH_TOKEN_LIFETIME=7            # Days
 
 **Option 1: Django Admin (Easiest)**
 1. Visit http://localhost:8000/admin/
-2. Login with `admin`/`admin123`
+2. Login with your superuser credentials
 3. Click "Products" → "Categories" → "Add Category"
 4. Click "Products" → "Products" → "Add Product"
 5. Upload images, set prices, stock, ratings
@@ -605,7 +608,7 @@ When working on this codebase:
 - Verify backend is running (`python manage.py runserver`)
 - Check `.env` in frontend: `VITE_API_URL=http://localhost:8000/api`
 - Check browser console for API errors (CORS, 404, etc.)
-- Verify database has categories/products: Visit http://localhost:8000/admin (admin/admin123)
+- Verify database has categories/products: Visit http://localhost:8000/admin (log in as your superuser)
 
 **CORS errors when frontend calls backend:**
 - Verify `CORS_ALLOWED_ORIGINS=http://localhost:5173` in backend `.env`

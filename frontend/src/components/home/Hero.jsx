@@ -1,15 +1,16 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState, useRef } from 'react'
+import { mediaUrl } from '../../utils/mediaUrl'
 
 const VIDEOS = [
   {
     id: 1,
-    src: 'http://localhost:8000/media/products/army.MP4',
+    src: mediaUrl('/media/products/army.MP4'),
     title: 'Army Collection',
   },
   {
     id: 2,
-    src: 'http://localhost:8000/media/products/lowrise.MP4',
+    src: mediaUrl('/media/products/lowrise.MP4'),
     title: 'Lowrise Collection',
   },
 ]
@@ -61,7 +62,7 @@ export default function Hero() {
         <div
           className="relative"
           style={{
-            backgroundImage: 'url(http://localhost:8000/media/logo/flower.jpg)',
+            backgroundImage: `url(${mediaUrl('/media/logo/flower.jpg')})`,
             backgroundPosition: 'left center',
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',

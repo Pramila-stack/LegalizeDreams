@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { api } from '../services/api'
+import { mediaUrl } from '../utils/mediaUrl'
 import ShippingForm from '../components/checkout/ShippingForm'
 import PaymentMethodForm from '../components/checkout/PaymentMethodForm'
 import Button from '../components/common/Button'
@@ -145,7 +146,7 @@ export default function CheckoutPage() {
             <div className="mt-6 pt-6 border-t border-brand-100">
               <p className="text-xs font-semibold text-brand-900 mb-3">Bank Details</p>
               <img
-                src="http://localhost:8000/media/products/bank.png"
+                src={mediaUrl('/media/products/bank.png')}
                 alt="Bank QR Code"
                 className="w-full rounded-lg border border-brand-200 shadow-sm"
               />

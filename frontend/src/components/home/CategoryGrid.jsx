@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { api } from '../../services/api'
+import { mediaUrl } from '../../utils/mediaUrl'
 
 export default function CategoryGrid() {
   const [categories, setCategories] = useState([])
@@ -71,11 +72,7 @@ export default function CategoryGrid() {
                       <div className="h-full w-full overflow-hidden bg-brand-100">
                         {products[0].image && (
                           <img
-                            src={
-                              typeof products[0].image === 'string' && !products[0].image.startsWith('http')
-                                ? `http://localhost:8000${products[0].image}`
-                                : products[0].image
-                            }
+                            src={mediaUrl(products[0].image)}
                             alt={products[0].name}
                             className="h-full w-full object-cover"
                             onError={(e) => {
@@ -94,11 +91,7 @@ export default function CategoryGrid() {
                           >
                             {product.image ? (
                               <img
-                                src={
-                                  typeof product.image === 'string' && !product.image.startsWith('http')
-                                    ? `http://localhost:8000${product.image}`
-                                    : product.image
-                                }
+                                src={mediaUrl(product.image)}
                                 alt={product.name}
                                 className="h-full w-full object-cover"
                                 onError={(e) => {
@@ -119,11 +112,7 @@ export default function CategoryGrid() {
                           >
                             {product.image ? (
                               <img
-                                src={
-                                  typeof product.image === 'string' && !product.image.startsWith('http')
-                                    ? `http://localhost:8000${product.image}`
-                                    : product.image
-                                }
+                                src={mediaUrl(product.image)}
                                 alt={product.name}
                                 className="h-full w-full object-cover"
                                 onError={(e) => {
@@ -144,11 +133,7 @@ export default function CategoryGrid() {
                           >
                             {product.image ? (
                               <img
-                                src={
-                                  typeof product.image === 'string' && !product.image.startsWith('http')
-                                    ? `http://localhost:8000${product.image}`
-                                    : product.image
-                                }
+                                src={mediaUrl(product.image)}
                                 alt={product.name}
                                 className="h-full w-full object-cover"
                                 onError={(e) => {

@@ -121,7 +121,7 @@ curl https://legalizedreams.onrender.com/api/products/
 ### Admin Panel
 ```
 https://legalizedreams.onrender.com/admin/
-# Login with: admin / admin123
+# Login with your superuser credentials
 ```
 
 ---

@@ -79,6 +79,20 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+# Render's filesystem is ephemeral: anything uploaded through the admin is lost
+# on the next deploy. When Cloudinary credentials are present, store uploads
+# there instead. Without them (local dev) uploads stay on disk as before.
+CLOUDINARY_CLOUD_NAME = config('CLOUDINARY_CLOUD_NAME', default='')
+
+if CLOUDINARY_CLOUD_NAME:
+    INSTALLED_APPS += ['cloudinary', 'cloudinary_storage']
+    CLOUDINARY_STORAGE = {
+        'CLOUD_NAME': CLOUDINARY_CLOUD_NAME,
+        'API_KEY': config('CLOUDINARY_API_KEY'),
+        'API_SECRET': config('CLOUDINARY_API_SECRET'),
+    }
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # REST Framework Configuration
@@ -110,3 +124,34 @@ CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='http://localhost:
 CORS_ALLOW_CREDENTIALS = True
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+# Django 4.0+ requires the HTTPS origin to be trusted for any POST to the admin
+# (login, add, change). Without this, admin logins fail with a 403 CSRF error.
+CSRF_TRUSTED_ORIGINS = [
+    f"https://{host.strip()}"
+    for host in ALLOWED_HOSTS
+    if host.strip() not in ('localhost', '127.0.0.1', '*')
+]
+
+# Render terminates TLS at its proxy; without this Django thinks requests are
+# plain HTTP and the CSRF origin check above never matches.
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# With DEBUG=False Django swallows tracebacks. Send them to stdout so they are
+# visible in the Render dashboard logs.
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    },
+}
