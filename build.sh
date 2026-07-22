@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -o errexit
 
+# Force rebuild: Python 3.12.3 from runtime.txt
 echo "=== BUILDING REACT FRONTEND ==="
 cd frontend
 npm install
