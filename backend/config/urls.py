@@ -13,7 +13,8 @@ urlpatterns = [
     path('api/', include('apps.orders.urls')),
 
     # Serve React app for all other routes (catch-all must be last)
-    re_path(r'^(?!api|admin|static|media).*', serve_react, name='react-app'),
+    # Exclude: api, admin, static, media, assets (static file assets from React build)
+    re_path(r'^(?!api|admin|static|media|assets).*', serve_react, name='react-app'),
 ]
 
 if settings.DEBUG:
