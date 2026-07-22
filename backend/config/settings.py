@@ -126,7 +126,11 @@ SIMPLE_JWT = {
 CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='http://localhost:5173').split(',')
 CORS_ALLOW_CREDENTIALS = True
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# Use manifest storage in production (DEBUG=False), simple storage in development
+if DEBUG:
+    STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+else:
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Django 4.0+ requires the HTTPS origin to be trusted for any POST to the admin
 # (login, add, change). Without this, admin logins fail with a 403 CSRF error.
