@@ -265,8 +265,7 @@ python manage.py migrate
 ```bash
 python manage.py createsuperuser
 ```
-- Never commit these credentials. On Render, `init_admin` reads
-  `DJANGO_SUPERUSER_USERNAME` / `DJANGO_SUPERUSER_PASSWORD` from the environment.
+- Never commit these credentials. Keep them secure and use environment variables in production.
 - Login at http://localhost:8000/admin/
 
 **6. Run server:**
@@ -305,7 +304,7 @@ python manage.py runserver
 - Pillow 11.0.0 (image uploads)
 - python-decouple 3.8 (environment variables)
 - SQLite (development)
-- **Python 3.12.3** (pinned in `runtime.txt` at repository root — required for Django 4.2 compatibility on Render)
+- **Python 3.12+** (required for Django 4.2 compatibility)
 - WhiteNoise 6+ (static file serving in production)
 
 ### Architecture
@@ -439,10 +438,10 @@ JWT_REFRESH_TOKEN_LIFETIME=7            # Days
 5. Upload images, set prices, stock, ratings
 
 **Option 2: Management Command (Automated)**
-- `backend/apps/products/management/commands/init_admin.py` — Automatically runs during deployment (see `build.sh`)
-- Creates admin superuser: `admin` / `admin123` (only if doesn't exist)
+- `backend/apps/products/management/commands/init_admin.py` — Creates sample data on first run
+- Creates admin superuser from environment variables or defaults to `admin` / `admin123`
 - Populates 5 sample categories & 5 sample products (only if database is empty)
-- **Preserves existing data on redeploys** — idempotent, safe to re-run
+- **Idempotent** — safe to re-run; skips creation if data already exists
 - Run manually: `python manage.py init_admin`
 
 ### Authentication & Authorization
@@ -632,63 +631,51 @@ When working on this codebase:
 
 ---
 
-## Deployment
+## Production Deployment Guide
 
-### Render Deployment (Backend)
+### Prerequisites
 
-**Prerequisites:**
-- `runtime.txt` at repository root with `python-3.12.3` (pinned Python version)
-- `build.sh` in backend root with build commands (migrations + init_admin)
-- `.env` configured for production with:
-  ```
-  DEBUG=False
-  ALLOWED_HOSTS=localhost,127.0.0.1,<your-render-domain>.onrender.com
-  CORS_ALLOWED_ORIGINS=http://localhost:5173,https://<your-frontend-domain>
-  ```
+1. **Python Version:** Ensure Python 3.12+ is available on your deployment platform
+2. **Environment Variables:** Set up production `.env` with:
+   ```
+   DEBUG=False
+   SECRET_KEY=<strong-random-key>
+   ALLOWED_HOSTS=<your-domain.com>,localhost
+   CORS_ALLOWED_ORIGINS=https://<your-domain.com>,http://localhost
+   DATABASE_URL=<your-production-db>
+   ```
+3. **Database:** Configure for your hosting provider (PostgreSQL recommended for production)
 
-**Initial Setup:**
-1. Create new Web Service on Render
-2. Connect GitHub repo
-3. Set Python runtime to match `runtime.txt`
-4. Add environment variables in Render dashboard (from `.env`)
-5. Set Build Command: `bash build.sh`
-6. Set Start Command: `gunicorn config.wsgi:application`
+### General Deployment Steps
 
-**First Deploy:**
-- `build.sh` runs migrations and `init_admin` command
-- Admin superuser created automatically: `admin` / `admin123`
-- 5 sample categories and products created
-- Visit `/admin/` to manage data manually
+1. **Build & Dependencies:**
+   ```bash
+   cd backend
+   pip install -r requirements.txt
+   python manage.py migrate
+   python manage.py collectstatic --noinput
+   ```
 
-**Subsequent Deploys:**
-- `init_admin` checks if data exists and skips creation if it does
-- **Your manually added data is preserved** across redeploys
-- If you want fresh sample data, manually delete via admin panel first
+2. **Run Application:**
+   ```bash
+   gunicorn config.wsgi:application --bind 0.0.0.0:8000
+   ```
 
-**Key Configuration Files:**
-- `backend/build.sh` — Build script (pip install → migrate → init_admin)
-- `backend/config/settings.py` — Production settings (DEBUG=False, STATICFILES_STORAGE, DRF JSON-only)
-- `backend/.env` — Environment variables (generated from `.env.example`)
+3. **Frontend:** Build React and deploy separately or use single-deployment approach with Django serving static files
 
-### Frontend Deployment
+### Common Configuration Issues
 
-When ready:
-1. **Frontend:** Netlify/Vercel → Set `VITE_API_URL` to production backend URL (e.g., `https://legalizedreams.onrender.com/api`)
-2. Deploy after backend is live
+**API responses return HTML instead of JSON:**
+- Verify `DEFAULT_RENDERER_CLASSES = ['rest_framework.renderers.JSONRenderer']` in `settings.py`
 
-### Common Issues & Fixes
+**CORS errors between frontend and backend:**
+- Check `CORS_ALLOWED_ORIGINS` matches your frontend domain exactly (including https://)
+- Verify `ALLOWED_HOSTS` includes your backend domain
 
-**"Not found" at domain root:**
-- Solution: Verify `backend/config/urls.py` has `api_root` view mapped to `''` path
+**Database connectivity errors:**
+- Verify `DATABASE_URL` environment variable is set correctly
+- Run `python manage.py migrate` to initialize schema
 
-**ALLOWED_HOSTS rejection (400 Bad Request):**
-- Solution: Add Render domain to `ALLOWED_HOSTS` in `.env` and redeploy
-
-**TemplateDoesNotExist in /api/products/:**
-- Solution: Verify `DEFAULT_RENDERER_CLASSES = ['rest_framework.renderers.JSONRenderer']` is set (DRF JSON-only mode)
-
-**Admin panel shows 500 error:**
-- Solution: Check Python version matches `runtime.txt` (Django 4.2 requires Python 3.12 or lower, not 3.14+)
-
-**Data disappears after redeployment:**
-- Solution: `init_admin` is idempotent — if database is empty, it seeds sample data. Manually added data is preserved as long as you don't delete the database.
+**Static files not loading:**
+- Run `python manage.py collectstatic --noinput` during deployment
+- Verify `STATIC_ROOT` and `STATIC_URL` settings match your server configuration
