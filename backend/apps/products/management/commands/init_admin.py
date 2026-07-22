@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 from apps.products.models import Category, Product
+from decouple import config
 
 
 class Command(BaseCommand):
@@ -10,12 +11,16 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS('\n=== Database Initialization ===\n'))
 
         if not User.objects.filter(is_superuser=True).exists():
+            username = config('DJANGO_SUPERUSER_USERNAME', default='admin')
+            password = config('DJANGO_SUPERUSER_PASSWORD', default='admin123')
+            email = config('DJANGO_SUPERUSER_EMAIL', default='admin@example.com')
+
             User.objects.create_superuser(
-                username='admin',
-                email='admin@example.com',
-                password='admin123'
+                username=username,
+                email=email,
+                password=password
             )
-            self.stdout.write(self.style.SUCCESS('[OK] Admin user created (admin/admin123)'))
+            self.stdout.write(self.style.SUCCESS(f'[OK] Admin user created ({username}/{password})'))
 
         # Create sample categories only if database is completely empty
         existing_categories = Category.objects.count()
