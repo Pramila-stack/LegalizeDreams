@@ -21,6 +21,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'cloudinary',
+    'cloudinary_storage',
     'apps.users',
     'apps.products',
     'apps.orders',
@@ -154,3 +156,19 @@ CSRF_TRUSTED_ORIGINS = [
     if origin
 ]
 
+
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': 'wr3j2qrw',
+#     'API_KEY': '344162392155162',
+#     'API_SECRET': 'LoXLSrAiZ3mVJEVh5fMw8ex0ydE',
+# }
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+import os
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
+}
