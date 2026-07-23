@@ -82,19 +82,6 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# For production environments with ephemeral storage, configure Cloudinary to persist uploads.
-# Leave empty for local development (uploads stored on disk).
-CLOUDINARY_CLOUD_NAME = config('CLOUDINARY_CLOUD_NAME', default='')
-
-if CLOUDINARY_CLOUD_NAME:
-    INSTALLED_APPS += ['cloudinary', 'cloudinary_storage']
-    CLOUDINARY_STORAGE = {
-        'CLOUD_NAME': CLOUDINARY_CLOUD_NAME,
-        'API_KEY': config('CLOUDINARY_API_KEY'),
-        'API_SECRET': config('CLOUDINARY_API_SECRET'),
-    }
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # REST Framework Configuration
@@ -131,24 +118,6 @@ if DEBUG:
 else:
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-# Production security settings for Render (HTTPS proxy)
-if not DEBUG:
-    # Render terminates TLS at proxy, so trust X-Forwarded-Proto header
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-    # Allow HTTPS requests to admin/API
-    CSRF_TRUSTED_ORIGINS = [
-        f"https://{host.strip()}"
-        for host in ALLOWED_HOSTS
-        if host.strip() not in ('localhost', '127.0.0.1', '*')
-    ]
-
-    # Additional security headers
-    SECURE_SSL_REDIRECT = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-
-# With DEBUG=False Django swallows tracebacks. Send them to stdout for visibility in deployment logs.
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
