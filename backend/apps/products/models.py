@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator
 import uuid
+from cloudinary_storage.storage import MediaCloudinaryStorage
 
 class Category(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -25,7 +26,9 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, related_name='products')
     stock = models.IntegerField(default=0, validators=[MinValueValidator(0)])
-    image = models.ImageField(upload_to='products/', null=True, blank=True)
+    image = models.ImageField(
+    upload_to="products/",
+    storage=MediaCloudinaryStorage())    
     rating = models.DecimalField(max_digits=3, decimal_places=1, default=0, validators=[MinValueValidator(0)])
     review_count = models.IntegerField(default=0)
     is_active = models.BooleanField(default=True)
