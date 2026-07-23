@@ -57,6 +57,7 @@ export default function Hero() {
   }, [])
 
   return (
+    
     <section className="relative bg-white">
       <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:py-24 lg:px-8">
         <div
@@ -134,6 +135,10 @@ export default function Hero() {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="bg-red-500 text-white p-10">
+        Tailwind Test
       </div>
     </section>
   )

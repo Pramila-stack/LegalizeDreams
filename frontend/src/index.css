@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@source "./components";
+@source "./pages";
+@source "./App.jsx";
+
 @theme {
   --font-sans: 'Poppins', system-ui, 'Segoe UI', Roboto, sans-serif;
   --font-display: 'Playfair Display', Georgia, serif;
