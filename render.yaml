@@ -7,6 +7,8 @@ services:
     region: oregon
     plan: free
     envVars:
+      - key: VITE_API_URL
+        value: "/api"
       - key: DEBUG
         value: "False"
       - key: SECRET_KEY
