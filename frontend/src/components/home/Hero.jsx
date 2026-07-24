@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState, useRef } from 'react'
 import { mediaUrl } from '../../utils/mediaUrl'
+import flowerBg from '../../assets/logo/flower.jpg'
 
 const VIDEOS = [
   {
@@ -63,7 +64,7 @@ export default function Hero() {
         <div
           className="relative"
           style={{
-            backgroundImage: `url(${mediaUrl('/media/logo/flower.jpg')})`,
+            backgroundImage: `url(${flowerBg})`,
             backgroundPosition: 'left center',
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',

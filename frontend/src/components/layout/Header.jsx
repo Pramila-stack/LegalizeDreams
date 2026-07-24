@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { api } from '../../services/api'
 import { useCart } from '../../context/CartContext'
-import { mediaUrl } from '../../utils/mediaUrl'
+import logo from '../../assets/logo/logo.png'
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -51,7 +51,7 @@ export default function Header() {
         <Link to="/" className="mr-2 flex items-center gap-2">
           <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-white overflow-hidden">
             <img
-              src={mediaUrl('/media/logo/logo.png')}
+              src={logo}
               alt="Legalize Dreams"
               className="h-8 w-8 object-cover"
             />
