@@ -18,6 +18,8 @@ import AdminLayout from './admin/AdminLayout'
 import AdminLogin from './admin/pages/AdminLogin'
 import Dashboard from './admin/pages/Dashboard'
 import CategoriesList from './admin/pages/CategoriesList'
+import ProductsList from './admin/pages/ProductsList'
+import ProductForm from './admin/pages/ProductForm'
 
 function App() {
   useEffect(() => {
@@ -49,6 +51,9 @@ function App() {
             <Route path="login" element={<AdminLogin />} />
             <Route element={<RequireAdmin><AdminLayout /></RequireAdmin>}>
               <Route index element={<Dashboard />} />
+              <Route path="products" element={<ProductsList />} />
+              <Route path="products/new" element={<ProductForm />} />
+              <Route path="products/:id/edit" element={<ProductForm />} />
               <Route path="categories" element={<CategoriesList />} />
             </Route>
           </Route>
