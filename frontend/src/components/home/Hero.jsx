@@ -1,42 +1,77 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState, useRef } from 'react'
 import { mediaUrl } from '../../utils/mediaUrl'
+import { api } from '../../services/api'
 import flowerBg from '../../assets/logo/flower.jpg'
 
-const VIDEOS = [
+// Used only until the admin adds hero videos / edits the CTA.
+const FALLBACK_VIDEOS = [
   {
-    id: 1,
+    id: 'fallback-1',
     src: mediaUrl('/media/products/army.MP4'),
     title: 'Army Collection',
   },
   {
-    id: 2,
+    id: 'fallback-2',
     src: mediaUrl('/media/products/lowrise.MP4'),
     title: 'Lowrise Collection',
   },
 ]
 
+const FALLBACK_CTA = { label: 'Shop New Arrivals', link: '/shop' }
+
 const VIDEO_DURATION = 5000 // 5 seconds per video
 
 export default function Hero() {
+  const [videos, setVideos] = useState(FALLBACK_VIDEOS)
+  const [cta, setCta] = useState(FALLBACK_CTA)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
   const [isVisible, setIsVisible] = useState(true)
   const videoRef = useRef(null)
+
+  // Load admin-managed hero content; keep fallbacks if empty or unreachable.
+  useEffect(() => {
+    let cancelled = false
+    api
+      .getHero()
+      .then((data) => {
+        if (cancelled) return
+        if (data?.videos?.length > 0) {
+          setVideos(
+            data.videos.map((v) => ({
+              id: v.id,
+              src: mediaUrl(v.src),
+              title: v.title || '',
+            }))
+          )
+          setCurrentIndex(0)
+        }
+        if (data?.cta?.label && data?.cta?.link) {
+          setCta({ label: data.cta.label, link: data.cta.link })
+        }
+      })
+      .catch((error) => {
+        console.error('Failed to load hero content:', error)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   useEffect(() => {
     const interval = setInterval(() => {
       if (isVisible) {
         setIsTransitioning(true)
         setTimeout(() => {
-          setCurrentIndex((prev) => (prev + 1) % VIDEOS.length)
+          setCurrentIndex((prev) => (prev + 1) % videos.length)
           setIsTransitioning(false)
         }, 500)
       }
     }, VIDEO_DURATION)
 
     return () => clearInterval(interval)
-  }, [isVisible])
+  }, [isVisible, videos.length])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -58,7 +93,6 @@ export default function Hero() {
   }, [])
 
   return (
-    
     <section className="relative bg-white">
       <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:py-24 lg:px-8">
         <div
@@ -80,10 +114,10 @@ export default function Hero() {
           </p>
           <div className="mt-8 flex gap-3 animate-slow-text" style={{animationDelay: '0.45s'}}>
             <Link
-              to="/shop"
+              to={cta.link}
               className="rounded-full bg-brand-900 px-7 py-3 text-sm font-medium text-white hover:bg-brand-800 transition-colors"
             >
-              Shop New Arrivals
+              {cta.label}
             </Link>
             <a
               href="#categories"
@@ -97,7 +131,7 @@ export default function Hero() {
         {/* Video Container */}
         <div ref={videoRef} className="relative mx-auto w-full max-w-md overflow-hidden rounded-[2rem] bg-gradient-to-br from-blush-100 to-brand-200 shadow-xl border-4 border-white/50 animate-slow-text" style={{animationDelay: '0.45s'}}>
           <div className={`relative aspect-square w-full bg-brand-900 ${isTransitioning ? 'video-transitioning' : ''}`}>
-            {VIDEOS.map((video, idx) => (
+            {videos.map((video, idx) => (
               <div
                 key={video.id}
                 className={`absolute inset-0 transition-opacity duration-500 ${
@@ -118,7 +152,7 @@ export default function Hero() {
 
             {/* Video Navigation Dots */}
             <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 pointer-events-auto z-20">
-              {VIDEOS.map((_, idx) => (
+              {videos.map((_, idx) => (
                 <button
                   key={idx}
                   onClick={() => {
