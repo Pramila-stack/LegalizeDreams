@@ -16,6 +16,8 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = [
     "legalizedreams-backend.onrender.com",
+    "localhost",
+    "127.0.0.1",
 ]
 
 
@@ -138,6 +140,15 @@ cloudinary.config(
     api_secret=config("CLOUDINARY_API_SECRET"),
 )
 
+# django-cloudinary-storage reads its credentials from this setting (not from
+# cloudinary.config above). Populated from .env locally and from real env vars
+# in production, so it works in both environments.
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": config("CLOUDINARY_CLOUD_NAME"),
+    "API_KEY": config("CLOUDINARY_API_KEY"),
+    "API_SECRET": config("CLOUDINARY_API_SECRET"),
+}
+
 STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
@@ -199,6 +210,8 @@ SIMPLE_JWT = {
 # CORS
 CORS_ALLOWED_ORIGINS = [
     "https://legalizedreamss.netlify.app",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
