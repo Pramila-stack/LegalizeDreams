@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'apps.products',
     'apps.orders',
     'apps.content',
+    'apps.dashboard',
 ]
 
 
