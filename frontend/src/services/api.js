@@ -57,6 +57,12 @@ export const api = {
     return await response.json()
   },
 
+  async getHero() {
+    const response = await fetch(`${API_BASE_URL}/hero/`)
+    if (!response.ok) throw new Error('Failed to fetch hero content')
+    return await response.json()
+  },
+
   async getRelatedProducts(product, limit = 4) {
     if (!product || !product.category) return []
 
