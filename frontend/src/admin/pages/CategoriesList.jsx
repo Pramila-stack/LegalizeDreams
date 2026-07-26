@@ -8,6 +8,7 @@ export default function CategoriesList() {
   const [editingId, setEditingId] = useState(null)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(true)
+  const [submitting, setSubmitting] = useState(false)
 
   async function load() {
     setLoading(true)
@@ -31,6 +32,7 @@ export default function CategoriesList() {
   async function handleSubmit(e) {
     e.preventDefault()
     setError('')
+    setSubmitting(true)
     try {
       if (editingId) {
         await adminApi.updateCategory(editingId, { name, description })
@@ -41,6 +43,8 @@ export default function CategoriesList() {
       await load()
     } catch (err) {
       setError(err.message)
+    } finally {
+      setSubmitting(false)
     }
   }
 
@@ -55,6 +59,7 @@ export default function CategoriesList() {
     setError('')
     try {
       await adminApi.deleteCategory(cat.id)
+      if (editingId === cat.id) resetForm()
       await load()
     } catch (err) {
       setError(err.message)
@@ -84,8 +89,8 @@ export default function CategoriesList() {
           />
         </div>
         <div className="mt-3 flex gap-2">
-          <button type="submit" className="rounded-lg bg-brand-900 px-4 py-2 text-sm font-medium text-white hover:bg-brand-800">
-            {editingId ? 'Save' : 'Add'}
+          <button type="submit" disabled={submitting} className="rounded-lg bg-brand-900 px-4 py-2 text-sm font-medium text-white hover:bg-brand-800 disabled:opacity-60">
+            {submitting ? 'Saving…' : (editingId ? 'Save' : 'Add')}
           </button>
           {editingId && (
             <button type="button" onClick={resetForm} className="rounded-lg border border-gray-300 px-4 py-2 text-sm text-gray-600 hover:bg-gray-50">

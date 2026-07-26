@@ -35,6 +35,12 @@ async function request(path, { method = 'GET', body, isForm = false } = {}) {
 
   const data = await res.json().catch(() => null)
   if (!res.ok) {
+    if (res.status === 401) {
+      clearAdminTokens()
+      if (!window.location.pathname.endsWith('/admin/login')) {
+        window.location.href = '/admin/login'
+      }
+    }
     let message = data?.detail || data?.error
     if (!message && data && typeof data === 'object') {
       message = Object.entries(data)
