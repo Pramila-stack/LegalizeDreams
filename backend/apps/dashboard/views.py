@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 from apps.products.models import Product, Category
 from apps.orders.models import Order
 from rest_framework import viewsets
-from .serializers import AdminCategorySerializer
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
+from .serializers import AdminCategorySerializer, AdminProductSerializer
 
 
 class AdminMeView(APIView):
@@ -41,3 +42,11 @@ class AdminCategoryViewSet(viewsets.ModelViewSet):
     serializer_class = AdminCategorySerializer
     permission_classes = [IsAdminUser]
     pagination_class = None
+
+
+class AdminProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all().order_by('-created_at')
+    serializer_class = AdminProductSerializer
+    permission_classes = [IsAdminUser]
+    pagination_class = None
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
