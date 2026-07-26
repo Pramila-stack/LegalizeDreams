@@ -64,3 +64,20 @@ class HeroAPITest(APITestCase):
 
         self.assertEqual(response.data['cta']['label'], 'Browse the Sale')
         self.assertEqual(response.data['cta']['link'], '/category/sale')
+
+
+from django.contrib.admin.sites import AdminSite
+from apps.content.admin import HeroSettingsAdmin
+
+
+class HeroSettingsAdminTest(TestCase):
+    def setUp(self):
+        self.admin = HeroSettingsAdmin(HeroSettings, AdminSite())
+
+    def test_add_allowed_only_when_no_row_exists(self):
+        self.assertTrue(self.admin.has_add_permission(request=None))
+        HeroSettings.load()
+        self.assertFalse(self.admin.has_add_permission(request=None))
+
+    def test_delete_never_allowed(self):
+        self.assertFalse(self.admin.has_delete_permission(request=None))
