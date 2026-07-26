@@ -4,6 +4,8 @@ from rest_framework.permissions import IsAdminUser
 from django.contrib.auth.models import User
 from apps.products.models import Product, Category
 from apps.orders.models import Order
+from rest_framework import viewsets
+from .serializers import AdminCategorySerializer
 
 
 class AdminMeView(APIView):
@@ -32,3 +34,10 @@ class AdminStatsView(APIView):
             'orders': Order.objects.count(),
             'users': User.objects.count(),
         })
+
+
+class AdminCategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all().order_by('name')
+    serializer_class = AdminCategorySerializer
+    permission_classes = [IsAdminUser]
+    pagination_class = None
