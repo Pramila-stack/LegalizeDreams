@@ -12,6 +12,7 @@ urlpatterns = [
     path('api/', include('apps.products.urls')),
     path('api/', include('apps.orders.urls')),
     path('api/', include('apps.content.urls')),
+    path('api/admin/', include('apps.dashboard.urls')),
 
     # Serve React app for all other routes (catch-all must be last)
     # Exclude: api, admin, static, media, assets (static file assets from React build)

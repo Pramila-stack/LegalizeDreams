@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
 import { useEffect } from 'react'
 import { CartProvider } from './context/CartContext'
 import ScrollToTop from './components/common/ScrollToTop'
@@ -12,6 +12,14 @@ import CheckoutPage from './pages/CheckoutPage'
 import CheckoutSuccessPage from './pages/CheckoutSuccessPage'
 import SearchPage from './pages/SearchPage'
 import NotFoundPage from './pages/NotFoundPage'
+import { AdminAuthProvider } from './admin/AdminAuthContext'
+import RequireAdmin from './admin/RequireAdmin'
+import AdminLayout from './admin/AdminLayout'
+import AdminLogin from './admin/pages/AdminLogin'
+import Dashboard from './admin/pages/Dashboard'
+import CategoriesList from './admin/pages/CategoriesList'
+import ProductsList from './admin/pages/ProductsList'
+import ProductForm from './admin/pages/ProductForm'
 
 function App() {
   useEffect(() => {
@@ -39,6 +47,16 @@ function App() {
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
+          <Route path="/admin" element={<AdminAuthProvider><Outlet /></AdminAuthProvider>}>
+            <Route path="login" element={<AdminLogin />} />
+            <Route element={<RequireAdmin><AdminLayout /></RequireAdmin>}>
+              <Route index element={<Dashboard />} />
+              <Route path="products" element={<ProductsList />} />
+              <Route path="products/new" element={<ProductForm />} />
+              <Route path="products/:id/edit" element={<ProductForm />} />
+              <Route path="categories" element={<CategoriesList />} />
+            </Route>
+          </Route>
           <Route element={<Layout />}>
             <Route index element={<HomePage />} />
             <Route path="shop" element={<ShopPage />} />
