@@ -3,6 +3,7 @@ import { useAdminAuth } from './AdminAuthContext'
 
 const NAV = [
   { to: '/admin', label: 'Dashboard', end: true },
+  { to: '/admin/categories', label: 'Categories' },
 ]
 
 export default function AdminLayout() {
