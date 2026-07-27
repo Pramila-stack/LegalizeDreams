@@ -4,10 +4,10 @@ from rest_framework.permissions import IsAdminUser
 from django.contrib.auth.models import User
 from apps.products.models import Product, Category
 from apps.orders.models import Order
-from apps.content.models import HeroSettings
+from apps.content.models import HeroSettings, HeroVideo
 from rest_framework import viewsets
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
-from .serializers import AdminCategorySerializer, AdminProductSerializer, AdminHeroSettingsSerializer
+from .serializers import AdminCategorySerializer, AdminProductSerializer, AdminHeroSettingsSerializer, AdminHeroVideoSerializer
 
 
 class AdminMeView(APIView):
@@ -66,3 +66,11 @@ class AdminHeroSettingsView(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
+
+
+class AdminHeroVideoViewSet(viewsets.ModelViewSet):
+    queryset = HeroVideo.objects.all()
+    serializer_class = AdminHeroVideoSerializer
+    permission_classes = [IsAdminUser]
+    pagination_class = None
+    parser_classes = [MultiPartParser, FormParser, JSONParser]

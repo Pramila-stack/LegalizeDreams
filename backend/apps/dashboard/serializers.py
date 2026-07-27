@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from apps.products.models import Category, Product
-from apps.content.models import HeroSettings
+from apps.content.models import HeroSettings, HeroVideo
 from .utils import unique_slug
 
 
@@ -41,3 +41,21 @@ class AdminHeroSettingsSerializer(serializers.ModelSerializer):
         model = HeroSettings
         fields = ['cta_label', 'cta_link', 'updated_at']
         read_only_fields = ['updated_at']
+
+
+class AdminHeroVideoSerializer(serializers.ModelSerializer):
+    src = serializers.SerializerMethodField()
+    video = serializers.FileField(write_only=True, required=False, allow_null=True)
+
+    class Meta:
+        model = HeroVideo
+        fields = ['id', 'title', 'video', 'src', 'order', 'is_active', 'created_at']
+        read_only_fields = ['id', 'src', 'created_at']
+
+    def get_src(self, obj):
+        return obj.video.url if obj.video else None
+
+    def validate(self, attrs):
+        if self.instance is None and not attrs.get('video'):
+            raise serializers.ValidationError({'video': 'A video file is required when adding a hero video.'})
+        return attrs
