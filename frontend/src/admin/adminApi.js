@@ -77,4 +77,10 @@ export const adminApi = {
   createProduct: (formData) => request('/admin/products/', { method: 'POST', body: formData, isForm: true }),
   updateProduct: (id, formData) => request(`/admin/products/${id}/`, { method: 'PATCH', body: formData, isForm: true }),
   deleteProduct: (id) => request(`/admin/products/${id}/`, { method: 'DELETE' }),
+  getHeroSettings: () => request('/admin/hero-settings/'),
+  updateHeroSettings: (body) => request('/admin/hero-settings/', { method: 'PATCH', body }),
+  listHeroVideos: () => request('/admin/hero-videos/'),
+  createHeroVideo: (formData) => request('/admin/hero-videos/', { method: 'POST', body: formData, isForm: true }),
+  updateHeroVideo: (id, formData) => request(`/admin/hero-videos/${id}/`, { method: 'PATCH', body: formData, isForm: true }),
+  deleteHeroVideo: (id) => request(`/admin/hero-videos/${id}/`, { method: 'DELETE' }),
 }

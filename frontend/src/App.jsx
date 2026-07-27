@@ -20,6 +20,7 @@ import Dashboard from './admin/pages/Dashboard'
 import CategoriesList from './admin/pages/CategoriesList'
 import ProductsList from './admin/pages/ProductsList'
 import ProductForm from './admin/pages/ProductForm'
+import HomepageSettings from './admin/pages/HomepageSettings'
 
 function App() {
   useEffect(() => {
@@ -51,6 +52,7 @@ function App() {
             <Route path="login" element={<AdminLogin />} />
             <Route element={<RequireAdmin><AdminLayout /></RequireAdmin>}>
               <Route index element={<Dashboard />} />
+              <Route path="homepage" element={<HomepageSettings />} />
               <Route path="products" element={<ProductsList />} />
               <Route path="products/new" element={<ProductForm />} />
               <Route path="products/:id/edit" element={<ProductForm />} />
