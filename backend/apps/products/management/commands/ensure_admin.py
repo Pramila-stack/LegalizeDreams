@@ -5,19 +5,24 @@ from decouple import config
 
 class Command(BaseCommand):
     help = (
-        "Create or update a staff superuser whose USERNAME equals ADMIN_EMAIL, so the "
-        "React admin dashboard (which authenticates by email) can log in. Reads "
-        "ADMIN_EMAIL and ADMIN_PASSWORD from the environment. Idempotent: safe to run "
-        "on every deploy. No-ops (with a warning) if the env vars are not set."
+        "Create or update a staff superuser whose USERNAME equals the admin email, so "
+        "the React admin dashboard (which authenticates by email) can log in. Reads "
+        "ADMIN_EMAIL / ADMIN_PASSWORD, falling back to DJANGO_SUPERUSER_EMAIL / "
+        "DJANGO_SUPERUSER_PASSWORD. Idempotent: safe to run on every deploy. No-ops "
+        "(with a warning) if neither pair is set."
     )
 
     def handle(self, *args, **options):
-        email = config('ADMIN_EMAIL', default='')
-        password = config('ADMIN_PASSWORD', default='')
+        # Prefer ADMIN_*, but reuse the existing DJANGO_SUPERUSER_* vars if that's
+        # all that's set. Note: the USERNAME is deliberately set to the EMAIL (not
+        # DJANGO_SUPERUSER_USERNAME), because the dashboard logs in by email.
+        email = config('ADMIN_EMAIL', default='') or config('DJANGO_SUPERUSER_EMAIL', default='')
+        password = config('ADMIN_PASSWORD', default='') or config('DJANGO_SUPERUSER_PASSWORD', default='')
 
         if not email or not password:
             self.stdout.write(self.style.WARNING(
-                'ensure_admin: ADMIN_EMAIL / ADMIN_PASSWORD not set - skipping.'
+                'ensure_admin: no admin email/password in env '
+                '(ADMIN_EMAIL/ADMIN_PASSWORD or DJANGO_SUPERUSER_EMAIL/DJANGO_SUPERUSER_PASSWORD) - skipping.'
             ))
             return
 
