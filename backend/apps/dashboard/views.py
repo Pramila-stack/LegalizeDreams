@@ -4,9 +4,10 @@ from rest_framework.permissions import IsAdminUser
 from django.contrib.auth.models import User
 from apps.products.models import Product, Category
 from apps.orders.models import Order
+from apps.content.models import HeroSettings
 from rest_framework import viewsets
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
-from .serializers import AdminCategorySerializer, AdminProductSerializer
+from .serializers import AdminCategorySerializer, AdminProductSerializer, AdminHeroSettingsSerializer
 
 
 class AdminMeView(APIView):
@@ -50,3 +51,18 @@ class AdminProductViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAdminUser]
     pagination_class = None
     parser_classes = [MultiPartParser, FormParser, JSONParser]
+
+
+class AdminHeroSettingsView(APIView):
+    """Read/update the singleton homepage CTA settings."""
+    permission_classes = [IsAdminUser]
+
+    def get(self, request):
+        return Response(AdminHeroSettingsSerializer(HeroSettings.load()).data)
+
+    def patch(self, request):
+        settings_obj = HeroSettings.load()
+        serializer = AdminHeroSettingsSerializer(settings_obj, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)

@@ -153,3 +153,32 @@ class AdminProductCRUDTest(APITestCase):
     def test_customer_forbidden(self):
         self.client.force_authenticate(self.customer)
         self.assertEqual(self.client.get('/api/admin/products/').status_code, 403)
+
+
+from apps.content.models import HeroSettings
+
+
+class AdminHeroSettingsTest(APITestCase):
+    def setUp(self):
+        self.staff = User.objects.create_user('admin@shop.com', 'admin@shop.com', 'pass12345', is_staff=True)
+        self.customer = User.objects.create_user('cust@shop.com', 'cust@shop.com', 'pass12345')
+
+    def test_denies_non_staff(self):
+        self.client.force_authenticate(self.customer)
+        self.assertEqual(self.client.get('/api/admin/hero-settings/').status_code, 403)
+
+    def test_get_returns_defaults(self):
+        self.client.force_authenticate(self.staff)
+        res = self.client.get('/api/admin/hero-settings/')
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.data['cta_label'], 'Shop New Arrivals')
+        self.assertEqual(res.data['cta_link'], '/shop')
+
+    def test_patch_updates_and_persists(self):
+        self.client.force_authenticate(self.staff)
+        res = self.client.patch('/api/admin/hero-settings/', {'cta_label': 'Browse the Sale', 'cta_link': '/category/sale'})
+        self.assertEqual(res.status_code, 200, res.data)
+        self.assertEqual(res.data['cta_label'], 'Browse the Sale')
+        reloaded = HeroSettings.load()
+        self.assertEqual(reloaded.cta_link, '/category/sale')
+        self.assertEqual(HeroSettings.objects.count(), 1)

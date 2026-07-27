@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from apps.products.models import Category, Product
+from apps.content.models import HeroSettings
 from .utils import unique_slug
 
 
@@ -33,3 +34,10 @@ class AdminProductSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data['slug'] = unique_slug(Product, validated_data['name'])
         return super().create(validated_data)
+
+
+class AdminHeroSettingsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HeroSettings
+        fields = ['cta_label', 'cta_link', 'updated_at']
+        read_only_fields = ['updated_at']
