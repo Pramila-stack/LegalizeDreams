@@ -164,7 +164,7 @@ export default function HomepageSettings() {
           {videos.map((v) => (
             <div key={v.id} className="rounded-xl border border-gray-200 bg-white p-4">
               {v.src ? (
-                <video src={mediaUrl(v.src)} muted className="mb-3 h-40 w-full rounded-lg bg-brand-900 object-cover" />
+                <video src={mediaUrl(v.src)} controls muted playsInline className="mb-3 h-40 w-full rounded-lg bg-brand-900 object-cover" />
               ) : (
                 <div className="mb-3 h-40 w-full rounded-lg bg-gray-100" />
               )}
