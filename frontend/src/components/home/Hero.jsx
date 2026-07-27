@@ -112,7 +112,7 @@ export default function Hero() {
           <p className="mt-4 max-w-md text-gray-700 animate-slow-text" style={{animationDelay: '0.3s'}}>
             Skincare, makeup and fashion accessories curated in one place — cute, considered, and made to be loved.
           </p>
-          <div className="mt-8 flex gap-3 animate-slow-text" style={{animationDelay: '0.45s'}}>
+          <div className="mt-8 flex flex-wrap gap-3 animate-slow-text" style={{animationDelay: '0.45s'}}>
             <Link
               to={cta.link}
               className="rounded-full bg-brand-900 px-7 py-3 text-sm font-medium text-white hover:bg-brand-800 transition-colors"
@@ -145,6 +145,9 @@ export default function Hero() {
                   src={video.src}
                   autoPlay
                   muted
+                  loop
+                  playsInline
+                  preload="auto"
                   className="h-full w-full object-cover"
                 />
               </div>
