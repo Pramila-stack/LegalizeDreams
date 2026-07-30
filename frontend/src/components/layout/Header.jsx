@@ -32,14 +32,14 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-brand-300 bg-brand-500/95 backdrop-blur">
-      <div className="bg-brand-600 py-1.5 text-center text-xs tracking-wide text-white">
+    <header className="sticky top-0 z-40 border-b border-brand-200 bg-brand-50/95 backdrop-blur">
+      <div className="bg-brand-800 py-1.5 text-center text-xs tracking-wide text-white">
         Free shipping on orders over Rs 3,000 · New arrivals every week
       </div>
 
       <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-4 sm:px-6 lg:px-8">
         <button
-          className="p-1 text-white lg:hidden"
+          className="p-1 text-brand-900 lg:hidden"
           onClick={() => setMobileOpen((v) => !v)}
           aria-label="Toggle menu"
         >
@@ -49,14 +49,14 @@ export default function Header() {
         </button>
 
         <Link to="/" className="mr-2 flex items-center gap-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-white overflow-hidden">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-brand-300 bg-white overflow-hidden">
             <img
               src={logo}
               alt="Legalize Dreams"
               className="h-8 w-8 object-cover"
             />
           </div>
-          <span className="hidden font-display text-lg font-semibold tracking-wide text-white sm:inline">LEGALIZE DREAMS</span>
+          <span className="hidden font-display text-lg font-semibold tracking-wide text-brand-900 sm:inline">LEGALIZE DREAMS</span>
         </Link>
 
         <nav className="hidden items-center gap-6 lg:flex">
@@ -64,7 +64,7 @@ export default function Header() {
             to="/"
             end
             className={({ isActive }) =>
-              `text-sm font-medium transition-colors ${isActive ? 'text-white font-bold' : 'text-blue-50 hover:text-white'}`
+              `text-sm font-medium transition-colors ${isActive ? 'text-brand-900 font-bold' : 'text-brand-800 hover:text-brand-600'}`
             }
           >
             Home
@@ -75,7 +75,7 @@ export default function Header() {
             onMouseEnter={() => setShopOpen(true)}
             onMouseLeave={() => setShopOpen(false)}
           >
-            <button className="flex items-center gap-1 text-sm font-medium text-blue-50 hover:text-white">
+            <button className="flex items-center gap-1 text-sm font-medium text-brand-800 hover:text-brand-600">
               Shop
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
@@ -99,7 +99,7 @@ export default function Header() {
           <NavLink
             to="/cart"
             className={({ isActive }) =>
-              `text-sm font-medium transition-colors ${isActive ? 'text-white font-bold' : 'text-blue-50 hover:text-white'}`
+              `text-sm font-medium transition-colors ${isActive ? 'text-brand-900 font-bold' : 'text-brand-800 hover:text-brand-600'}`
             }
           >
             Cart
@@ -112,13 +112,13 @@ export default function Header() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search products..."
-            className="w-full rounded-full border border-white/30 bg-white/20 px-4 py-2 text-sm text-white placeholder:text-blue-100 outline-none focus:border-white/50"
+            className="w-full rounded-full border border-brand-200 bg-white px-4 py-2 text-sm text-brand-900 placeholder:text-brand-400 outline-none focus:border-brand-400"
           />
         </form>
 
         <Link
           to="/cart"
-          className="relative ml-auto flex items-center justify-center rounded-full p-2 text-white hover:bg-brand-400/50 lg:ml-3"
+          className="relative ml-auto flex items-center justify-center rounded-full p-2 text-brand-900 hover:bg-brand-100 lg:ml-3"
           aria-label="View cart"
         >
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -135,30 +135,30 @@ export default function Header() {
       </div>
 
       {mobileOpen && (
-        <div className="border-t border-brand-400 bg-brand-500 px-4 pb-4 lg:hidden">
+        <div className="border-t border-brand-200 bg-brand-50 px-4 pb-4 lg:hidden">
           <form onSubmit={handleSearch} className="mt-3">
             <input
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search products..."
-              className="w-full rounded-full border border-white/30 bg-white/20 px-4 py-2 text-sm text-white placeholder:text-blue-100 outline-none focus:border-white/50"
+              className="w-full rounded-full border border-brand-200 bg-white px-4 py-2 text-sm text-brand-900 placeholder:text-brand-400 outline-none focus:border-brand-400"
             />
           </form>
           <nav className="mt-3 flex flex-col gap-1">
-            <Link to="/" onClick={() => setMobileOpen(false)} className="rounded-lg px-2 py-2 text-sm font-medium text-white hover:bg-brand-400">
+            <Link to="/" onClick={() => setMobileOpen(false)} className="rounded-lg px-2 py-2 text-sm font-medium text-brand-900 hover:bg-brand-100">
               Home
             </Link>
-            <Link to="/cart" onClick={() => setMobileOpen(false)} className="rounded-lg px-2 py-2 text-sm font-medium text-white hover:bg-brand-400">
+            <Link to="/cart" onClick={() => setMobileOpen(false)} className="rounded-lg px-2 py-2 text-sm font-medium text-brand-900 hover:bg-brand-100">
               Cart
             </Link>
-            <p className="mt-2 px-2 text-xs font-semibold uppercase tracking-wide text-blue-100">Shop by category</p>
+            <p className="mt-2 px-2 text-xs font-semibold uppercase tracking-wide text-brand-500">Shop by category</p>
             {categories.map((c) => (
               <Link
                 key={c.id}
                 to={`/category/${c.slug}`}
                 onClick={() => setMobileOpen(false)}
-                className="rounded-lg px-2 py-2 text-sm text-white hover:bg-brand-400"
+                className="rounded-lg px-2 py-2 text-sm text-brand-800 hover:bg-brand-100"
               >
                 {c.name}
               </Link>
