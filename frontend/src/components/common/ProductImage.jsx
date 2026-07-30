@@ -8,11 +8,11 @@ const sizeStyles = {
 }
 
 const defaultGradients = {
-  0: ['#eef5fb', '#b7d5ea'],
+  0: ['#fdf5f5', '#f2ccd3'],
   1: ['#fef3e0', '#fdd79d'],
-  2: ['#f0e5ff', '#d9a6ff'],
+  2: ['#fbf2f6', '#e7bad0'],
   3: ['#ffe5e5', '#ffb3b3'],
-  4: ['#e5f5ff', '#99d9ff'],
+  4: ['#fdf4f6', '#edb8c6'],
 }
 
 export default function ProductImage({ product, size = 'md', className = '' }) {
