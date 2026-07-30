@@ -23,7 +23,7 @@ export default function ProductCard({ product, index = 0, scrollTarget = null })
         <Price price={product.price} mrp={product.mrp} />
         <button
           onClick={() => addToCart(product, 1)}
-          className="mt-2 w-full rounded-full border border-brand-800 py-2 text-xs font-semibold uppercase tracking-wide text-brand-800 transition-colors hover:bg-brand-800 hover:text-white"
+          className="mt-2 w-full rounded-full bg-brand-500 py-2 text-xs font-semibold uppercase tracking-wide text-white transition-colors hover:bg-brand-600"
         >
           Add to Cart
         </button>
