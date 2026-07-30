@@ -126,7 +126,7 @@ export default function HomepageSettings() {
       <section className="mb-8 rounded-xl border border-gray-200 bg-white p-6">
         <h2 className="mb-3 text-sm font-semibold text-gray-700">{editingId ? 'Edit video' : 'Add video'}</h2>
         <form onSubmit={handleVideoSubmit} className="space-y-3">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
               <label className="text-sm font-medium text-gray-700">Title (optional)</label>
               <input value={form.title} onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))} className={inputClass} />

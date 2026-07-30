@@ -45,8 +45,8 @@ export default function ProductsList() {
       {loading ? (
         <p className="text-sm text-gray-500">Loading…</p>
       ) : (
-        <div className="overflow-hidden rounded-xl border border-gray-200 bg-white">
-          <table className="w-full text-sm">
+        <div className="overflow-x-auto rounded-xl border border-gray-200 bg-white">
+          <table className="w-full min-w-[720px] text-sm">
             <thead className="bg-gray-50 text-left text-gray-500">
               <tr>
                 <th className="px-4 py-3 font-medium">Image</th>

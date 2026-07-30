@@ -135,7 +135,7 @@ export default function Header() {
       </div>
 
       {mobileOpen && (
-        <div className="border-t border-brand-200 bg-brand-50 px-4 pb-4 lg:hidden">
+        <div className="border-t border-brand-700 bg-brand-800 px-4 pb-4 lg:hidden">
           <form onSubmit={handleSearch} className="mt-3">
             <input
               type="search"
@@ -146,19 +146,19 @@ export default function Header() {
             />
           </form>
           <nav className="mt-3 flex flex-col gap-1">
-            <Link to="/" onClick={() => setMobileOpen(false)} className="rounded-lg px-2 py-2 text-sm font-medium text-brand-900 hover:bg-brand-100">
+            <Link to="/" onClick={() => setMobileOpen(false)} className="rounded-lg px-2 py-2 text-sm font-medium text-white hover:bg-brand-700">
               Home
             </Link>
-            <Link to="/cart" onClick={() => setMobileOpen(false)} className="rounded-lg px-2 py-2 text-sm font-medium text-brand-900 hover:bg-brand-100">
+            <Link to="/cart" onClick={() => setMobileOpen(false)} className="rounded-lg px-2 py-2 text-sm font-medium text-white hover:bg-brand-700">
               Cart
             </Link>
-            <p className="mt-2 px-2 text-xs font-semibold uppercase tracking-wide text-brand-500">Shop by category</p>
+            <p className="mt-2 px-2 text-xs font-semibold uppercase tracking-wide text-brand-200">Shop by category</p>
             {categories.map((c) => (
               <Link
                 key={c.id}
                 to={`/category/${c.slug}`}
                 onClick={() => setMobileOpen(false)}
-                className="rounded-lg px-2 py-2 text-sm text-brand-800 hover:bg-brand-100"
+                className="rounded-lg px-2 py-2 text-sm text-brand-100 hover:bg-brand-700"
               >
                 {c.name}
               </Link>

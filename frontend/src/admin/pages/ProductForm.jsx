@@ -84,7 +84,7 @@ export default function ProductForm() {
           <label className="text-sm font-medium text-gray-700">Description</label>
           <textarea value={form.description} onChange={(e) => update('description', e.target.value)} rows="4" required className={inputClass} />
         </div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             <label className="text-sm font-medium text-gray-700">Price</label>
             <input type="number" step="0.01" min="0" value={form.price} onChange={(e) => update('price', e.target.value)} required className={inputClass} />
