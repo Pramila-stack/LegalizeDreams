@@ -44,7 +44,7 @@ export default function CategoryGrid() {
         <p className="text-sm font-semibold uppercase tracking-widest text-blush-400 animate-title" style={{animationDelay: '0s'}}>
           ✨ Explore
         </p>
-        <h2 className="font-display mt-3 text-3xl font-semibold text-black animate-title animate-underline" style={{animationDelay: '0.15s'}}>
+        <h2 className="font-display mt-3 text-3xl font-semibold text-brand-900 animate-title animate-underline" style={{animationDelay: '0.15s'}}>
           All Our Categories
         </h2>
         <p className="mt-4 text-sm text-brand-600 animate-slow-text" style={{animationDelay: '0.4s'}}>
@@ -153,7 +153,7 @@ export default function CategoryGrid() {
 
               {/* Category Name */}
               <div className="p-4 text-center group-hover:bg-brand-50 transition-colors duration-300">
-                <span className="text-sm font-medium text-black group-hover:text-brand-600 transition-colors duration-300">
+                <span className="text-sm font-medium text-brand-900 group-hover:text-brand-600 transition-colors duration-300">
                   {c.name}
                 </span>
               </div>

@@ -32,7 +32,7 @@ export default function FaqAccordion() {
 
   return (
     <section id="faq" className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 animate-on-scroll">
-      <h2 className="font-display text-center text-3xl font-semibold text-black animate-slow-text" style={{animationDelay: '0s'}}>Most Asked Questions</h2>
+      <h2 className="font-display text-center text-3xl font-semibold text-brand-900 animate-slow-text" style={{animationDelay: '0s'}}>Most Asked Questions</h2>
 
       <div className="mt-8 divide-y divide-brand-100 border-y border-brand-100">
         {faqs.map((item, i) => {
@@ -41,7 +41,7 @@ export default function FaqAccordion() {
             <div key={item.q} className="animate-slow-text" style={{animationDelay: `${0.15 + i * 0.1}s`}}>
               <button
                 onClick={() => setOpenIndex(isOpen ? null : i)}
-                className="flex w-full items-center justify-between gap-4 py-4 text-left text-sm font-medium text-black hover:text-brand-600 transition-colors"
+                className="flex w-full items-center justify-between gap-4 py-4 text-left text-sm font-medium text-brand-900 hover:text-brand-600 transition-colors"
                 aria-expanded={isOpen}
               >
                 {item.q}

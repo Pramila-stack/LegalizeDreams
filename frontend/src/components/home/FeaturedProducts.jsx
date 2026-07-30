@@ -26,7 +26,7 @@ export default function FeaturedProducts() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <p className="text-sm font-semibold uppercase tracking-widest text-blush-400 animate-slow-text" style={{animationDelay: '0s'}}>Customer Favorites</p>
-          <h2 className="font-display mt-2 text-3xl font-semibold text-black animate-slow-text" style={{animationDelay: '0.15s'}}>Most Loved</h2>
+          <h2 className="font-display mt-2 text-3xl font-semibold text-brand-900 animate-slow-text" style={{animationDelay: '0.15s'}}>Most Loved</h2>
           <p className="mt-2 text-sm text-brand-600 animate-slow-text" style={{animationDelay: '0.3s'}}>Bestselling picks from our community</p>
         </div>
 

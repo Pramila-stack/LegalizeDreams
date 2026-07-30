@@ -106,7 +106,7 @@ export default function Hero() {
           }}
         >
           <p className="text-sm font-semibold uppercase tracking-widest text-blush-400 animate-slow-text" style={{animationDelay: '0s'}}>New Season Edit</p>
-          <h1 className="font-display mt-3 text-4xl font-semibold leading-tight text-black sm:text-5xl animate-slow-text" style={{animationDelay: '0.15s'}}>
+          <h1 className="font-display mt-3 text-4xl font-semibold leading-tight text-brand-900 sm:text-5xl animate-slow-text" style={{animationDelay: '0.15s'}}>
             Little joys for your everyday glow
           </h1>
           <p className="mt-4 max-w-md text-gray-700 animate-slow-text" style={{animationDelay: '0.3s'}}>

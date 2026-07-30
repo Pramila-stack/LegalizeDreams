@@ -43,7 +43,7 @@ export default function ProductPage() {
   if (product === null) {
     return (
       <div className="mx-auto max-w-7xl px-4 py-24 text-center sm:px-6 lg:px-8">
-        <h1 className="font-display text-2xl font-semibold text-black">not found</h1>
+        <h1 className="font-display text-2xl font-semibold text-brand-900">not found</h1>
         <Link to="/" className="mt-4 inline-block text-sm font-medium text-brand-600 hover:text-brand-900">
           ← Back to home
         </Link>
@@ -83,7 +83,7 @@ export default function ProductPage() {
         <ProductImage product={product} size="lg" className="aspect-square w-full" />
 
         <div>
-          <h1 className="font-display text-3xl font-semibold text-black animate-slow-text">{product.name}</h1>
+          <h1 className="font-display text-3xl font-semibold text-brand-900 animate-slow-text">{product.name}</h1>
           <div className="mt-3 animate-slow-text" style={{animationDelay: '0.15s'}}>
             <StarRating rating={product.rating} reviews={product.reviews} size="md" />
           </div>
@@ -121,7 +121,7 @@ export default function ProductPage() {
 
       {related.length > 0 && (
         <section className="mt-20">
-          <h2 className="font-display text-2xl font-semibold text-black animate-on-load">You may also like</h2>
+          <h2 className="font-display text-2xl font-semibold text-brand-900 animate-on-load">You may also like</h2>
           <div className="mt-6 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
             {related.map((p, idx) => (
               <ProductCard key={p.id} product={p} index={idx} />

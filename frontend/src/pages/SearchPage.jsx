@@ -26,7 +26,7 @@ export default function SearchPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 animate-on-scroll">
-      <h1 className="font-display text-2xl font-semibold text-black animate-slow-text">
+      <h1 className="font-display text-2xl font-semibold text-brand-900 animate-slow-text">
         Search results for &quot;{query}&quot;
       </h1>
       <p className="mt-1 text-sm text-brand-500 animate-slow-text" style={{animationDelay: '0.2s'}}>
