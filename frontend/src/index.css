@@ -8,16 +8,18 @@
   --font-sans: 'Poppins', system-ui, 'Segoe UI', Roboto, sans-serif;
   --font-display: 'Playfair Display', Georgia, serif;
 
-  --color-brand-50: #f0f9ff;
-  --color-brand-100: #e0f4ff;
-  --color-brand-200: #bae6ff;
-  --color-brand-300: #7dd8ff;
-  --color-brand-400: #4a9eff;
-  --color-brand-500: #2196f3;
-  --color-brand-600: #1976d2;
-  --color-brand-700: #1565c0;
-  --color-brand-800: #0d47a1;
-  --color-brand-900: #0a3d91;
+  --color-brand-50: #fdf5f5;
+  --color-brand-100: #f9e7ea;
+  --color-brand-200: #f2ccd3;
+  --color-brand-300: #e3a7b1;
+  --color-brand-400: #cf8291;
+  --color-brand-500: #bd6476;
+  --color-brand-600: #a44e61;
+  --color-brand-700: #873d4f;
+  --color-brand-800: #5f2838;
+  --color-brand-900: #421b28;
+
+  --color-cream: #fdf9f6;
 
   --color-blush-50: #fdf1f4;
   --color-blush-100: #fbdfe6;
@@ -33,7 +35,7 @@ html {
 body {
   font-family: var(--font-sans);
   color: var(--color-brand-900);
-  background-color: #ffffff;
+  background-color: var(--color-cream);
 }
 
 .font-display {
@@ -201,7 +203,7 @@ body {
   bottom: -4px;
   left: 0;
   height: 3px;
-  background: linear-gradient(90deg, #2196f3, #1976d2);
+  background: linear-gradient(90deg, #bd6476, #421b28);
   animation: underlineExpand 0.9s ease-out forwards;
 }
 
