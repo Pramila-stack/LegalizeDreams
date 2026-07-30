@@ -93,7 +93,7 @@ export default function Hero() {
   }, [])
 
   return (
-    <section className="relative bg-white">
+    <section className="relative bg-gradient-to-br from-brand-200 via-brand-100 to-brand-50">
       <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:py-24 lg:px-8">
         <div
           className="relative"
@@ -115,13 +115,13 @@ export default function Hero() {
           <div className="mt-8 flex flex-wrap gap-3 animate-slow-text" style={{animationDelay: '0.45s'}}>
             <Link
               to={cta.link}
-              className="rounded-full bg-brand-900 px-7 py-3 text-sm font-medium text-white hover:bg-brand-800 transition-colors"
+              className="rounded-full bg-brand-600 px-7 py-3 text-sm font-medium text-white hover:bg-brand-700 transition-colors"
             >
               {cta.label}
             </Link>
             <a
               href="#categories"
-              className="rounded-full border border-brand-800 px-7 py-3 text-sm font-medium text-brand-800 hover:bg-white transition-colors"
+              className="rounded-full border border-brand-500 px-7 py-3 text-sm font-medium text-brand-700 hover:bg-white/60 transition-colors"
             >
               Browse Categories
             </a>
@@ -130,7 +130,7 @@ export default function Hero() {
 
         {/* Video Container */}
         <div ref={videoRef} className="relative mx-auto w-full max-w-md overflow-hidden rounded-[2rem] bg-gradient-to-br from-blush-100 to-brand-200 shadow-xl border-4 border-white/50 animate-slow-text" style={{animationDelay: '0.45s'}}>
-          <div className={`relative aspect-square w-full bg-brand-900 ${isTransitioning ? 'video-transitioning' : ''}`}>
+          <div className={`relative aspect-square w-full bg-brand-200 ${isTransitioning ? 'video-transitioning' : ''}`}>
             {videos.map((video, idx) => (
               <div
                 key={video.id}

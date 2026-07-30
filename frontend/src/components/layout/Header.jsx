@@ -33,7 +33,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-brand-200 bg-brand-50/95 backdrop-blur">
-      <div className="bg-brand-800 py-1.5 text-center text-xs tracking-wide text-white">
+      <div className="bg-brand-100 py-1.5 text-center text-xs tracking-wide text-brand-800">
         Free shipping on orders over Rs 3,000 · New arrivals every week
       </div>
 
