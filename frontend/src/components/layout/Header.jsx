@@ -32,14 +32,14 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-brand-200 bg-brand-50/95 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-brand-700 bg-brand-800/95 backdrop-blur">
       <div className="bg-brand-800 py-1.5 text-center text-xs tracking-wide text-white">
         Free shipping on orders over Rs 3,000 · New arrivals every week
       </div>
 
       <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-4 sm:px-6 lg:px-8">
         <button
-          className="p-1 text-brand-900 lg:hidden"
+          className="p-1 text-white lg:hidden"
           onClick={() => setMobileOpen((v) => !v)}
           aria-label="Toggle menu"
         >
@@ -56,7 +56,7 @@ export default function Header() {
               className="h-8 w-8 object-cover"
             />
           </div>
-          <span className="hidden font-display text-lg font-semibold tracking-wide text-brand-900 sm:inline">LEGALIZE DREAMS</span>
+          <span className="hidden font-display text-lg font-semibold tracking-wide text-white sm:inline">LEGALIZE DREAMS</span>
         </Link>
 
         <nav className="hidden items-center gap-6 lg:flex">
@@ -64,7 +64,7 @@ export default function Header() {
             to="/"
             end
             className={({ isActive }) =>
-              `text-sm font-medium transition-colors ${isActive ? 'text-brand-900 font-bold' : 'text-brand-800 hover:text-brand-600'}`
+              `text-sm font-medium transition-colors ${isActive ? 'text-white font-bold' : 'text-brand-100 hover:text-white'}`
             }
           >
             Home
@@ -75,7 +75,7 @@ export default function Header() {
             onMouseEnter={() => setShopOpen(true)}
             onMouseLeave={() => setShopOpen(false)}
           >
-            <button className="flex items-center gap-1 text-sm font-medium text-brand-800 hover:text-brand-600">
+            <button className="flex items-center gap-1 text-sm font-medium text-brand-100 hover:text-white">
               Shop
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
@@ -99,7 +99,7 @@ export default function Header() {
           <NavLink
             to="/cart"
             className={({ isActive }) =>
-              `text-sm font-medium transition-colors ${isActive ? 'text-brand-900 font-bold' : 'text-brand-800 hover:text-brand-600'}`
+              `text-sm font-medium transition-colors ${isActive ? 'text-white font-bold' : 'text-brand-100 hover:text-white'}`
             }
           >
             Cart
@@ -118,7 +118,7 @@ export default function Header() {
 
         <Link
           to="/cart"
-          className="relative ml-auto flex items-center justify-center rounded-full p-2 text-brand-900 hover:bg-brand-100 lg:ml-3"
+          className="relative ml-auto flex items-center justify-center rounded-full p-2 text-white hover:bg-brand-700 lg:ml-3"
           aria-label="View cart"
         >
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 export default function PromoBand() {
   return (
-    <section className="bg-brand-900 py-16 text-center animate-on-scroll">
+    <section className="bg-brand-800 py-16 text-center animate-on-scroll">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <p className="text-sm font-semibold uppercase tracking-widest text-brand-300">
           The New Season Edit
